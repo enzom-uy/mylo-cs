@@ -20,8 +20,9 @@
             }
         ],
         "paths": {
-            "@/*": ["./src/*"],
-            "@shad/*": ["./src/shad-components/*"]
+            "@components/*": ["./src/components/*"],
+            "@shad/*": ["./src/shad-components/*"],
+            "@/*": ["./src/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
