@@ -1,0 +1,190 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "5",
+  "dialect": "mysql",
+  "tables": {
+    "Map": {
+      "name": "Map",
+      "columns": {
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(191)",
+          "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {}
+    },
+    "Nade": {
+      "name": "Nade",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(191)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "description": {
+          "autoincrement": false,
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "map_id": {
+          "autoincrement": false,
+          "name": "map_id",
+          "type": "varchar(191)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "default": "'PENDING'",
+          "autoincrement": false,
+          "name": "status",
+          "type": "enum('APPROVED','PENDING','DECLINED')",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "author_id": {
+          "autoincrement": false,
+          "name": "author_id",
+          "type": "varchar(191)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "video_url": {
+          "autoincrement": false,
+          "name": "video_url",
+          "type": "varchar(191)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nadeTypeName": {
+          "autoincrement": false,
+          "name": "nadeTypeName",
+          "type": "varchar(191)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "default": "(CURRENT_TIMESTAMP(3))",
+          "autoincrement": false,
+          "name": "createdAt",
+          "type": "datetime(3)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "Nade_author_id_idx": {
+          "name": "Nade_author_id_idx",
+          "columns": [
+            "author_id"
+          ],
+          "isUnique": false
+        },
+        "Nade_map_id_idx": {
+          "name": "Nade_map_id_idx",
+          "columns": [
+            "map_id"
+          ],
+          "isUnique": false
+        },
+        "Nade_nadeTypeName_idx": {
+          "name": "Nade_nadeTypeName_idx",
+          "columns": [
+            "nadeTypeName"
+          ],
+          "isUnique": false
+        },
+        "Nade_video_url_key": {
+          "name": "Nade_video_url_key",
+          "columns": [
+            "video_url"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {}
+    },
+    "NadeType": {
+      "name": "NadeType",
+      "columns": {
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(191)",
+          "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {}
+    },
+    "User": {
+      "name": "User",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(191)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(191)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "discord_tag": {
+          "autoincrement": false,
+          "name": "discord_tag",
+          "type": "varchar(191)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "User_discord_tag_key": {
+          "name": "User_discord_tag_key",
+          "columns": [
+            "discord_tag"
+          ],
+          "isUnique": true
+        },
+        "User_name_key": {
+          "name": "User_name_key",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {}
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
