@@ -84,7 +84,7 @@ body {
 
 @layer base {
     * {
-        @apply border-border transition-all duration-300;
+        @apply border-border;
     }
 }
 
