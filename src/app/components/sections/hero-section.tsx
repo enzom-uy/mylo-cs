@@ -1,4 +1,4 @@
-import LoginDiscordButton from './login-discord-btn'
+import LoginDiscordButton from '../login-discord-btn'
 
 const Hero = () => {
     return (
