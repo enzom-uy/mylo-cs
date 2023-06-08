@@ -5,7 +5,7 @@ module.exports = {
         './src/pages/**/*.{ts,tsx}',
         './src/components/**/*.{ts,tsx}',
         './src/app/**/*.{ts,tsx}',
-        './src/shad-components/**/*.{ts,tsx}'
+        './src/shad-components/*.{ts,tsx}'
     ],
     theme: {
         container: {
