@@ -1,9 +1,14 @@
+import HeaderAvatar from '@/app/components/header-avatar'
+import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 
-const Header = () => {
+const Header = async () => {
+    const session = await getServerSession()
+    const userFirstTwoLetters = session?.user?.name?.slice(0, 2).toUpperCase()
+    console.log(session?.user)
     return (
         <header className="w-full border-b border-b-border-dark">
-            <nav className="px-3 py-[0.4rem] md:px-20 lg:px-40 2xl:px-72">
+            <nav className="flex items-center justify-between px-3 py-[0.4rem] md:px-20 lg:px-40 2xl:px-72">
                 <Link
                     href="/"
                     className="text-lg font-semibold text-accent-dark"
@@ -11,6 +16,10 @@ const Header = () => {
                     mylo
                     <span className="csgo">/csgo</span>
                 </Link>
+                <HeaderAvatar
+                    image={session?.user?.image as string}
+                    fallback={userFirstTwoLetters as string}
+                />
             </nav>
         </header>
     )
