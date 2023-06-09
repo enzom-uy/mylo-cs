@@ -47,7 +47,8 @@ const NadeCard: React.FC<Props> = ({ nade }) => {
                                     'play',
                                     'progress',
                                     'settings',
-                                    'volume'
+                                    'volume',
+                                    'fullscreen'
                                 ]
                             }}
                         />
