@@ -2,7 +2,7 @@ import { NextAuthOptions } from 'next-auth'
 import NextAuth from 'next-auth/next'
 import DiscordProvider from 'next-auth/providers/discord'
 
-const handler: NextAuthOptions = NextAuth({
+const handler = NextAuth({
     providers: [
         DiscordProvider({
             clientId: process.env.DISCORD_CLIENT_ID as string,
