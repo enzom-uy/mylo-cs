@@ -8,6 +8,7 @@ import {
     DropdownMenuTrigger
 } from '@shad/dropdown-menu'
 import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { MdGroupAdd } from 'react-icons/md'
 import HeaderAvatar from './header-avatar'
 
@@ -20,6 +21,8 @@ export default function HeaderMenu({
     avatarFallback: string
     userName: string
 }) {
+    const router = useRouter()
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="h-8 w-8">
@@ -28,7 +31,7 @@ export default function HeaderMenu({
             <DropdownMenuContent className="mr-2 md:mr-0">
                 <DropdownMenuLabel>{userName}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push('/create-server')}>
                     <MdGroupAdd /> Crear Servidor
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => signOut()}>

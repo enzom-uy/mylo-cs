@@ -86,6 +86,9 @@ body {
     * {
         @apply border-border;
     }
+    h1 {
+        @apply text-3xl;
+    }
 }
 
 @layer components {

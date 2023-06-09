@@ -1,4 +1,5 @@
 'use client'
+import { Toaster } from '@/shad-components/toaster'
 import { SessionProvider } from 'next-auth/react'
 import { ReactNode } from 'react'
 
@@ -7,7 +8,11 @@ interface Props {
 }
 
 const Provider: React.FC<Props> = ({ children }) => {
-    return <SessionProvider>{children}</SessionProvider>
+    return (
+        <SessionProvider>
+            {children} <Toaster />
+        </SessionProvider>
+    )
 }
 
 export default Provider
