@@ -33,6 +33,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-drizzle/0000_sleepy_longshot.sql
 .env
 drizzle.config.ts
