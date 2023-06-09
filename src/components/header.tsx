@@ -6,7 +6,7 @@ const Header = async () => {
     const session = await getServerSession()
     const userFirstTwoLetters = session?.user?.name?.slice(0, 2).toUpperCase()
     return (
-        <header className="w-full border-b border-b-border-dark">
+        <header className="fixed z-10 w-full border-b border-b-border-dark backdrop-blur-[3px]">
             <nav className="flex items-center justify-between px-3 py-[0.4rem] md:px-20 lg:px-40 2xl:px-72">
                 <Link
                     href="/"
