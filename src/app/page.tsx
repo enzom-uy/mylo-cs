@@ -1,4 +1,3 @@
-import { NextPage } from 'next'
 import { Suspense } from 'react'
 import Hero from './components/sections/hero-section'
 import SearchSection from './components/sections/search-section'
@@ -8,7 +7,6 @@ const Home = ({
 }: {
     searchParams: { [key: string]: string | string[] | undefined }
 }) => {
-    console.log(searchParams.query)
     return (
         <>
             <Hero />

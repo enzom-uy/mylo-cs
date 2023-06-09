@@ -1,4 +1,5 @@
 import { Nade } from '@/types/db'
+import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Badge } from '@shad/badge'
 import {
     Card,
@@ -29,21 +30,28 @@ const NadeCard: React.FC<Props> = ({ nade }) => {
             </CardHeader>
             <CardContent className="text-light">
                 <div className="overflow-hidden rounded-[0.25rem]">
-                    <Plyr
-                        source={{
-                            type: 'video',
-                            sources: [
-                                {
-                                    src: nade.videoUrl,
-                                    provider: 'html5'
-                                }
-                            ]
-                        }}
-                        muted
-                        options={{
-                            controls: ['play', 'progress', 'settings', 'volume']
-                        }}
-                    />
+                    <AspectRatio ratio={16 / 9}>
+                        <Plyr
+                            source={{
+                                type: 'video',
+                                sources: [
+                                    {
+                                        src: nade.videoUrl,
+                                        provider: 'html5'
+                                    }
+                                ]
+                            }}
+                            muted
+                            options={{
+                                controls: [
+                                    'play',
+                                    'progress',
+                                    'settings',
+                                    'volume'
+                                ]
+                            }}
+                        />
+                    </AspectRatio>
                 </div>
             </CardContent>
         </Card>
