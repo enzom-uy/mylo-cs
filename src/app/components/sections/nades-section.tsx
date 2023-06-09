@@ -36,9 +36,7 @@ const NadesSection: React.FC<Props> = ({ nades }) => {
 
     return (
         <section className="flex w-full flex-col gap-4">
-            {state.loading ? (
-                <p>Cargandooooooooooooo...</p>
-            ) : !state.loading && nades.length <= 0 ? (
+            {!state.loading && nades.length <= 0 ? (
                 <p>No se encontraron granadas.</p>
             ) : (
                 nades.map((nade) => <NadeCard key={nade.id} nade={nade} />)

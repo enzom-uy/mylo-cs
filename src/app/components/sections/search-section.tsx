@@ -1,5 +1,5 @@
 import { db } from '@/config/db'
-import { like } from 'drizzle-orm'
+import { like, or } from 'drizzle-orm'
 import React from 'react'
 import { nade } from '../../../../drizzle/schema'
 import SearchInput from '../search-input'
@@ -20,11 +20,18 @@ const SearchSection: any = async ({ query }: Props) => {
     }
 
     const getNades = async () => {
-        const queryWithSpaces = query.replaceAll('-', ' ')
+        const queryWithSpaces = `%${query.replaceAll('-', ' ')}%`
+
         const nades = await db
             .select()
             .from(nade)
-            .where(like(nade.title, `%${queryWithSpaces}%`))
+            .where(
+                or(
+                    like(nade.title, queryWithSpaces),
+                    like(nade.mapId, queryWithSpaces),
+                    like(nade.nadeTypeName, queryWithSpaces)
+                )
+            )
         return nades
     }
     const foundedNades = await getNades()
