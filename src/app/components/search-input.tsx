@@ -18,11 +18,10 @@ const SearchInput = () => {
         e.preventDefault()
         if (query === '') {
             setError('Este campo es obligatorio.')
-            router.push(``)
             return
         }
         const formattedQuery = query.replaceAll(' ', '-')
-        router.push(`/?query=${formattedQuery}`)
+        router.push(`/search?query=${formattedQuery}`)
     }
 
     return (

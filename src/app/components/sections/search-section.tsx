@@ -1,6 +1,7 @@
+import Loading from '@/app/search/loading'
 import { db } from '@/config/db'
 import { like, or } from 'drizzle-orm'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { nade } from '../../../../drizzle/schema'
 import SearchInput from '../search-input'
 import NadesSection from './nades-section'
@@ -39,8 +40,9 @@ const SearchSection = async ({ query }: Props) => {
 
     return (
         <section className="flex w-full flex-col gap-6 pt-6">
-            <SearchInput />
-            <NadesSection nades={foundedNades} />
+            <Suspense fallback={<Loading />}>
+                <NadesSection nades={foundedNades} />
+            </Suspense>
         </section>
     )
 }
