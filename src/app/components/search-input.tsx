@@ -21,7 +21,7 @@ const SearchInput = () => {
             return
         }
         const formattedQuery = query.replaceAll(' ', '-')
-        router.push(`/search?query=${formattedQuery}`)
+        router.push(`/?query=${formattedQuery}`)
     }
 
     return (

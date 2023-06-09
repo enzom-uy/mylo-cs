@@ -10,7 +10,7 @@ interface Props {
 
 const HeaderAvatar: React.FC<Props> = ({ image, fallback }) => {
     return (
-        <Avatar className="h-8 w-8 cursor-pointer">
+        <Avatar>
             <AvatarImage src={image} className="rounded-full" />
             <AvatarFallback className="flex h-[32px] w-[32px] items-center justify-center rounded-full bg-dark-secondary">
                 {fallback}
