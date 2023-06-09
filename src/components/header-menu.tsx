@@ -1,3 +1,4 @@
+'use client'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -6,6 +7,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from '@shad/dropdown-menu'
+import { signOut } from 'next-auth/react'
 import { MdGroupAdd } from 'react-icons/md'
 import HeaderAvatar from './header-avatar'
 
@@ -28,6 +30,9 @@ export default function HeaderMenu({
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                     <MdGroupAdd /> Crear Servidor
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => signOut()}>
+                    Cerrar sesión
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

@@ -20,11 +20,13 @@ const Header = async () => {
                     mylo
                     <span className="csgo">/csgo</span>
                 </Link>
-                <HeaderMenu
-                    avatarImage={avatarImage}
-                    avatarFallback={userFirstTwoLetters}
-                    userName={userName}
-                />
+                {session && (
+                    <HeaderMenu
+                        avatarImage={avatarImage}
+                        avatarFallback={userFirstTwoLetters}
+                        userName={userName}
+                    />
+                )}
             </nav>
         </header>
     )
