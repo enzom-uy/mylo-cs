@@ -5,7 +5,6 @@ import Link from 'next/link'
 const Header = async () => {
     const session = await getServerSession()
     const userFirstTwoLetters = session?.user?.name?.slice(0, 2).toUpperCase()
-    console.log(session?.user)
     return (
         <header className="w-full border-b border-b-border-dark">
             <nav className="flex items-center justify-between px-3 py-[0.4rem] md:px-20 lg:px-40 2xl:px-72">

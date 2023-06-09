@@ -2,6 +2,7 @@
 import { Nade } from '@/types/db'
 import { useEffect, useState } from 'react'
 import NadeCard from '../nade-card'
+import NadeCardSkeleton from '../nade-card-skeleton'
 
 interface Props {
     nades: Nade[]
@@ -36,6 +37,7 @@ const NadesSection: React.FC<Props> = ({ nades }) => {
 
     return (
         <section className="flex w-full flex-col gap-4">
+            {state.loading && <NadeCardSkeleton />}
             {!state.loading && nades.length <= 0 ? (
                 <p>No se encontraron granadas.</p>
             ) : (
