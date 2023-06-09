@@ -1,6 +1,7 @@
 import Header from '@/components/header'
 import Main from '@/components/main'
 import { Inter } from 'next/font/google'
+import Provider from './components/provider'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,8 +21,10 @@ export default function RootLayout({
             <body
                 className={`${inter.className} flex flex-col items-center text-light`}
             >
-                <Header />
-                <Main>{children}</Main>
+                <Provider>
+                    <Header />
+                    <Main>{children}</Main>
+                </Provider>
             </body>
         </html>
     )
