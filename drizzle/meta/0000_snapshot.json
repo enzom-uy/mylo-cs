@@ -86,6 +86,13 @@
           "type": "datetime(3)",
           "primaryKey": false,
           "notNull": true
+        },
+        "serverId": {
+          "autoincrement": false,
+          "name": "serverId",
+          "type": "varchar(191)",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "compositePrimaryKeys": {},
@@ -111,6 +118,13 @@
           ],
           "isUnique": false
         },
+        "Nade_serverId_idx": {
+          "name": "Nade_serverId_idx",
+          "columns": [
+            "serverId"
+          ],
+          "isUnique": false
+        },
         "Nade_video_url_key": {
           "name": "Nade_video_url_key",
           "columns": [
@@ -129,6 +143,28 @@
           "name": "name",
           "type": "varchar(191)",
           "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {}
+    },
+    "Server": {
+      "name": "Server",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(191)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(191)",
+          "primaryKey": false,
           "notNull": true
         }
       },
@@ -159,6 +195,20 @@
           "type": "varchar(191)",
           "primaryKey": false,
           "notNull": true
+        },
+        "serverAdminId": {
+          "autoincrement": false,
+          "name": "serverAdminId",
+          "type": "varchar(191)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "serverMemberId": {
+          "autoincrement": false,
+          "name": "serverMemberId",
+          "type": "varchar(191)",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "compositePrimaryKeys": {},
@@ -176,6 +226,20 @@
             "name"
           ],
           "isUnique": true
+        },
+        "User_serverAdminId_idx": {
+          "name": "User_serverAdminId_idx",
+          "columns": [
+            "serverAdminId"
+          ],
+          "isUnique": false
+        },
+        "User_serverMemberId_idx": {
+          "name": "User_serverMemberId_idx",
+          "columns": [
+            "serverMemberId"
+          ],
+          "isUnique": false
         }
       },
       "foreignKeys": {}

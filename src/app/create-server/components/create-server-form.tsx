@@ -1,5 +1,7 @@
 'use client'
+import { CreateServerApiResponse } from '@/app/api/create-server/route'
 import Terms from '@/app/components/terms'
+import { db } from '@/config/db'
 import { Button } from '@/shad-components/button'
 import { Checkbox } from '@/shad-components/checkbox'
 import {
@@ -14,39 +16,60 @@ import {
 import { useToast } from '@/shad-components/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@shad/input'
+import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
+import { server } from '../../../../drizzle/schema'
+import { dbCreateServer } from '../utils/create-server.utils'
 import Required from './required'
+import SubmitButton from './submit-button'
 
 const minServerNameLetters = 4
 
-const formSchema = z.object({
+export const createServerSchema = z.object({
     serverName: z.string().min(minServerNameLetters, {
         message: `El nombre del servidor debe contener al menos ${minServerNameLetters} caracteres.`
     }),
     serverId: z.string().min(15, {
         message: 'El ID del servidor debe contener al menos 15 caracteres.'
     }),
-    term: z.boolean().default(false)
+    terms: z.boolean().default(false)
 })
 
+const createServerHandler = async ({name, id, terms}: {name: string; id: string; terms: boolean}) => {
+    const newServer = await db.insert(server).values({
+        id, name
+    })
+    
+
+    return newServer
+}
+
 export default function CreateServerForm() {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof createServerSchema>>({
+        resolver: zodResolver(createServerSchema),
         defaultValues: {
             serverName: '',
             serverId: '',
-            term: false
+            terms: false
         }
     })
     const { toast } = useToast()
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log(values)
-        if (values.term === false)
+    const onSubmit = async (values: z.infer<typeof createServerSchema>) => {
+        const {serverId, serverName, terms} = values
+        if (values.terms === false) {
             toast({
                 title: 'Debes aceptar los términos y condiciones para continuar.'
             })
+        }
+
+        const response = await axios.post('/api/create-server', {
+            serverName: serverName,
+            serverId: serverId
+        }).then(res => res.data).catch(err => console.log(JSON.stringify(err)))
+        
+        console.log('API CALL:', response)
     }
     return (
         <Form {...form}>
@@ -96,7 +119,7 @@ export default function CreateServerForm() {
                 <Terms />
                 <FormField
                     control={form.control}
-                    name="term"
+                    name="terms"
                     render={({ field }) => (
                         <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                             <FormControl>
@@ -113,7 +136,7 @@ export default function CreateServerForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Crear</Button>
+                <Button type="submit" />
             </form>
         </Form>
     )
