@@ -9,7 +9,7 @@ import {
 } from '@shad/dropdown-menu'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { MdGroupAdd } from 'react-icons/md'
+import { MdGroupAdd, MdLogout, MdFace } from 'react-icons/md'
 import HeaderAvatar from './header-avatar'
 
 export default function HeaderMenu({
@@ -29,13 +29,15 @@ export default function HeaderMenu({
                 <HeaderAvatar image={avatarImage} fallback={avatarFallback} />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mr-2 md:mr-0">
-                <DropdownMenuLabel>{userName}</DropdownMenuLabel>
+                <DropdownMenuLabel className="flex items-center gap-2">
+                    <MdFace /> {userName}
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => router.push('/create-server')}>
                     <MdGroupAdd /> Crear Servidor
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => signOut()}>
-                    Cerrar sesión
+                    <MdLogout /> Cerrar sesión
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
