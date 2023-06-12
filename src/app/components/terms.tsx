@@ -49,7 +49,7 @@ export const accordion: Accordion[] = [
     }
 ]
 
-export default function AccordionComponent() {
+export default function Terms() {
     return (
         <>
             <Accordion type="single" collapsible className="w-full">

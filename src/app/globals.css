@@ -89,6 +89,9 @@ body {
     h1 {
         @apply text-3xl;
     }
+    label {
+        @apply flex items-center gap-2;
+    }
 }
 
 @layer components {
