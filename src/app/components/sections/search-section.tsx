@@ -1,6 +1,6 @@
 import { db } from '@/config/db'
 import { like, or } from 'drizzle-orm'
-import React, { Suspense } from 'react'
+import React from 'react'
 import { nade } from '../../../../drizzle/schema'
 import SearchInput from '../search-input'
 import NadesSection from './nades-section'

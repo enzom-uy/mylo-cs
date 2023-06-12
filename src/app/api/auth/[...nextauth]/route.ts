@@ -1,4 +1,3 @@
-import { NextAuthOptions } from 'next-auth'
 import NextAuth from 'next-auth/next'
 import DiscordProvider from 'next-auth/providers/discord'
 

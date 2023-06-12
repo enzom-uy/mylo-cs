@@ -1,7 +1,6 @@
 'use client'
-import { CreateServerApiResponse } from '@/app/api/create-server/route'
+
 import Terms from '@/app/components/terms'
-import { db } from '@/config/db'
 import { Button } from '@/shad-components/button'
 import { Checkbox } from '@/shad-components/checkbox'
 import {
@@ -19,10 +18,7 @@ import { Input } from '@shad/input'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
-import { server } from '../../../../drizzle/schema'
-import { dbCreateServer } from '../utils/create-server.utils'
 import Required from './required'
-import SubmitButton from './submit-button'
 
 const minServerNameLetters = 4
 
@@ -36,15 +32,6 @@ export const createServerSchema = z.object({
     terms: z.boolean().default(false)
 })
 
-const createServerHandler = async ({name, id, terms}: {name: string; id: string; terms: boolean}) => {
-    const newServer = await db.insert(server).values({
-        id, name
-    })
-    
-
-    return newServer
-}
-
 export default function CreateServerForm() {
     const form = useForm<z.infer<typeof createServerSchema>>({
         resolver: zodResolver(createServerSchema),
@@ -57,18 +44,21 @@ export default function CreateServerForm() {
     const { toast } = useToast()
 
     const onSubmit = async (values: z.infer<typeof createServerSchema>) => {
-        const {serverId, serverName, terms} = values
+        const { serverId, serverName } = values
         if (values.terms === false) {
             toast({
                 title: 'Debes aceptar los términos y condiciones para continuar.'
             })
         }
 
-        const response = await axios.post('/api/create-server', {
-            serverName: serverName,
-            serverId: serverId
-        }).then(res => res.data).catch(err => console.log(JSON.stringify(err)))
-        
+        const response = await axios
+            .post('/api/create-server', {
+                serverName: serverName,
+                serverId: serverId
+            })
+            .then((res) => res.data)
+            .catch((err) => console.log(JSON.stringify(err)))
+
         console.log('API CALL:', response)
     }
     return (
