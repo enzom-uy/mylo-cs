@@ -26,6 +26,7 @@ import {
     successMessage
 } from '@/app/api/create-server/utils'
 import { ServerApiResponse } from '@/app/api/create-server/route'
+import { useSession } from 'next-auth/react'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
@@ -38,6 +39,7 @@ export const createServerSchema = z.object({
 })
 
 export default function CreateServerForm() {
+    const session = useSession()
     const form = useForm<z.infer<typeof createServerSchema>>({
         resolver: zodResolver(createServerSchema),
         defaultValues: {
@@ -59,7 +61,8 @@ export default function CreateServerForm() {
         const response = (await axios
             .post('/api/create-server', {
                 serverName: serverName,
-                serverId: serverId
+                serverId: serverId,
+                ownerId: session?.data?.user?.name
             })
             .then((res) => res.data)
             .catch((err) => console.log(err))) as ServerApiResponse

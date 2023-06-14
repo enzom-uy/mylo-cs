@@ -10,6 +10,7 @@ import {
 export interface NewServerData {
     serverName: string
     serverId: string
+    ownerId: string
 }
 
 export interface ServerApiResponse {
@@ -21,7 +22,8 @@ export interface ServerApiResponse {
 export async function POST(req: NextRequest) {
     try {
         const body = (await req.json()) as NewServerData
-        const { serverName, serverId } = body
+        const { serverName, serverId, ownerId } = body
+        console.log(ownerId)
 
         if (serverName.length < serverNameMinLength) throw new Error()
         if (serverId.length < serverIdMinLength) throw new Error()

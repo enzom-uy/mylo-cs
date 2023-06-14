@@ -13,21 +13,22 @@ model Map {
 }
 
 model Nade {
-  id           String      @id
-  description  String?     @db.Text
-  map_id       String
-  status       Nade_status @default(PENDING)
-  author_id    String
-  video_url    String      @unique
-  title        String      @db.Text
-  nadeTypeName String
-  createdAt    DateTime    @default(now())
-  serverId     String?
+  id             String      @id
+  description    String?     @db.Text
+  status         Nade_status @default(PENDING)
+  video_url      String      @unique
+  title          String      @db.Text
+  createdAt      DateTime    @default(now())
+  serverId       String?
+  mapName        String
+  nade_type_name String
+  user_id        String
+  author         User        @relation(fields: [user_id], references: [id])
 
-  @@index([author_id])
-  @@index([map_id])
-  @@index([nadeTypeName])
   @@index([serverId])
+  @@index([mapName])
+  @@index([nade_type_name])
+  @@index([user_id])
 }
 
 model NadeType {
@@ -39,15 +40,52 @@ model Server {
   name String
 }
 
-model User {
-  id             String  @id
-  name           String  @unique
-  discord_tag    String  @unique
-  serverAdminId  String?
-  serverMemberId String?
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([serverAdminId])
-  @@index([serverMemberId])
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  Nade          Nade[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 enum Nade_status {
