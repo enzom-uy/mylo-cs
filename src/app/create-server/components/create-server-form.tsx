@@ -20,9 +20,12 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import Required from './required'
 import {
+    errorMessage,
     serverIdMinLength,
-    serverNameMinLength
+    serverNameMinLength,
+    successMessage
 } from '@/app/api/create-server/utils'
+import { ServerApiResponse } from '@/app/api/create-server/route'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
@@ -47,21 +50,31 @@ export default function CreateServerForm() {
 
     const onSubmit = async (values: z.infer<typeof createServerSchema>) => {
         const { serverId, serverName } = values
+
         if (values.terms === false) {
             toast({
                 title: 'Debes aceptar los términos y condiciones para continuar.'
             })
         }
-
-        const response = await axios
+        const response = (await axios
             .post('/api/create-server', {
                 serverName: serverName,
                 serverId: serverId
             })
             .then((res) => res.data)
-            .catch((err) => console.log(JSON.stringify(err)))
+            .catch((err) => console.log(err))) as ServerApiResponse
 
-        console.log('API CALL:', response)
+        if (response.result === 'error') {
+            toast({
+                title: errorMessage,
+                duration: 5000
+            })
+            return
+        }
+        return toast({
+            title: successMessage,
+            duration: 5000
+        })
     }
     return (
         <Form {...form}>
@@ -128,7 +141,7 @@ export default function CreateServerForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" />
+                <Button type="submit">Crear</Button>
             </form>
         </Form>
     )

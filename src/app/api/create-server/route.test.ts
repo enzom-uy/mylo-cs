@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { NewServerData } from './route'
+import { NewServerData, ServerApiResponse } from './route'
 import { errorMessage, successMessage } from './utils'
 
 axios.defaults.baseURL = 'http://localhost:3000/'
@@ -49,9 +49,10 @@ describe('server-related endpoints', () => {
     test('should be successful if all the data passed to create-server endpoint is correct', async () => {
         expect(
             await axiosCreateNewServer({ serverName, serverId })
-        ).toStrictEqual({
-            status: 200,
-            message: successMessage
+        ).toStrictEqual<ServerApiResponse>({
+            status: 201,
+            message: successMessage,
+            result: 'success'
         })
     })
 
@@ -61,9 +62,10 @@ describe('server-related endpoints', () => {
                 serverName: 'Syl',
                 serverId
             })
-        ).toStrictEqual({
+        ).toStrictEqual<ServerApiResponse>({
             status: 403,
-            message: errorMessage
+            message: errorMessage,
+            result: 'error'
         })
     })
 
@@ -73,9 +75,10 @@ describe('server-related endpoints', () => {
                 serverName: 'Sylphrena',
                 serverId: '12345678901234'
             })
-        ).toStrictEqual({
+        ).toStrictEqual<ServerApiResponse>({
             status: 403,
-            message: errorMessage
+            message: errorMessage,
+            result: 'error'
         })
     })
 })

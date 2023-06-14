@@ -7,8 +7,6 @@ import {
     serverNameMinLength,
     successMessage
 } from './utils'
-import { createServerSchema } from '@/app/create-server/components/create-server-form'
-import * as z from 'zod'
 
 export interface NewServerData {
     serverName: string
@@ -16,17 +14,15 @@ export interface NewServerData {
 }
 
 export interface ServerApiResponse {
-    status: number
+    status: 201 | 200 | 403
     message: string
+    result: 'error' | 'success'
 }
 
 export async function POST(req: NextRequest) {
     try {
         const body = (await req.json()) as NewServerData
         const { serverName, serverId } = body
-        console.log(
-            `El nombre ${serverName} tiene ${serverName.length} cantidad de letras.`
-        )
 
         if (serverName.length < serverNameMinLength) throw new Error()
         if (serverId.length < serverIdMinLength) throw new Error()
@@ -35,15 +31,17 @@ export async function POST(req: NextRequest) {
             name: serverName,
             id: serverId
         })
+
         return NextResponse.json<ServerApiResponse>({
-            status: 200,
-            message: successMessage
+            status: 201,
+            message: successMessage,
+            result: 'success'
         })
     } catch (error) {
-        console.log(error)
         return NextResponse.json<ServerApiResponse>({
             status: 403,
-            message: errorMessage
+            message: errorMessage,
+            result: 'error'
         })
     }
 }

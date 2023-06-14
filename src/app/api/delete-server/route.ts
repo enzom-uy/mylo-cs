@@ -6,23 +6,23 @@ import { eq } from 'drizzle-orm'
 
 export async function POST(req: NextRequest) {
     try {
-        console.log('Hola soy el delete server')
         const body = (await req.json()) as NewServerData
         const { serverName, serverId } = body
-        console.log(body)
 
         await db.delete(server).where(eq(server.name, serverName))
 
         return NextResponse.json<ServerApiResponse>({
             status: 200,
-            message: 'Se ha borrado el servidor exitosamente.'
+            message: 'Se ha borrado el servidor exitosamente.',
+            result: 'success'
         })
     } catch (error) {
         console.log(error)
         return NextResponse.json<ServerApiResponse>({
             status: 403,
             message:
-                'Ha ocurrido un error al intentar borrar el servidor. Inténtalo nuevamente.'
+                'Ha ocurrido un error al intentar borrar el servidor. Inténtalo nuevamente.',
+            result: 'error'
         })
     }
 }
