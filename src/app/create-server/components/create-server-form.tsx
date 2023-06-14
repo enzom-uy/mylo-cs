@@ -19,14 +19,16 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import Required from './required'
-
-const minServerNameLetters = 4
+import {
+    serverIdMinLength,
+    serverNameMinLength
+} from '@/app/api/create-server/utils'
 
 export const createServerSchema = z.object({
-    serverName: z.string().min(minServerNameLetters, {
-        message: `El nombre del servidor debe contener al menos ${minServerNameLetters} caracteres.`
+    serverName: z.string().min(serverNameMinLength, {
+        message: `El nombre del servidor debe contener al menos ${serverNameMinLength} caracteres.`
     }),
-    serverId: z.string().min(15, {
+    serverId: z.string().min(serverIdMinLength, {
         message: 'El ID del servidor debe contener al menos 15 caracteres.'
     }),
     terms: z.boolean().default(false)

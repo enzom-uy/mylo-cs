@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { NewServerData } from './route'
+import { errorMessage, successMessage } from './utils'
 
 axios.defaults.baseURL = 'http://localhost:3000/'
 
@@ -41,12 +42,16 @@ describe('server-related endpoints', () => {
         return await deleteTestServer()
     })
 
+    afterAll(async () => {
+        return await deleteTestServer()
+    })
+
     test('should be successful if all the data passed to create-server endpoint is correct', async () => {
         expect(
             await axiosCreateNewServer({ serverName, serverId })
         ).toStrictEqual({
             status: 200,
-            message: `Se ha creado el servidor exitosamente.`
+            message: successMessage
         })
     })
 
@@ -58,8 +63,19 @@ describe('server-related endpoints', () => {
             })
         ).toStrictEqual({
             status: 403,
-            message:
-                'Ha ocurrido un error al intentar crear el servidor. Inténtalo nuevamente.'
+            message: errorMessage
+        })
+    })
+
+    test('should return an error because serverId doesnt meet the min requirements (length 15)', async () => {
+        expect(
+            await axiosCreateNewServer({
+                serverName: 'Sylphrena',
+                serverId: '12345678901234'
+            })
+        ).toStrictEqual({
+            status: 403,
+            message: errorMessage
         })
     })
 })
