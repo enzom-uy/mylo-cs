@@ -21,7 +21,6 @@ const SearchSection = async ({ query }: Props) => {
 
     const getNades = async () => {
         const queryWithSpaces = `%${query.replaceAll('-', ' ')}%`
-
         const nades = await db
             .select()
             .from(nade)

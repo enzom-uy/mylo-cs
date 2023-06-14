@@ -7,10 +7,14 @@ export interface NewServerData {
     serverId: string
 }
 
-export interface CreateServerApiResponse {
+export interface ServerApiResponse {
     status: number
     message: string
 }
+
+const errorMessage =
+    'Ha ocurrido un error al intentar crear el servidor. Inténtalo nuevamente.'
+const successMessage = 'Se ha creado el servidor exitosamente.'
 
 export async function POST(req: NextRequest) {
     try {
@@ -21,16 +25,15 @@ export async function POST(req: NextRequest) {
             name: serverName,
             id: serverId
         })
-        return NextResponse.json<CreateServerApiResponse>({
+        return NextResponse.json<ServerApiResponse>({
             status: 200,
-            message: `Se ha creado el servidor exitosamente.`
+            message: successMessage
         })
     } catch (error) {
         console.log(error)
-        return NextResponse.json<CreateServerApiResponse>({
+        return NextResponse.json<ServerApiResponse>({
             status: 403,
-            message:
-                'Ha ocurrido un error al intentar crear el servidor. Inténtalo nuevamente.'
+            message: errorMessage
         })
     }
 }
