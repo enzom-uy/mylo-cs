@@ -71,6 +71,8 @@ export default function CreateServerForm() {
             })
             return
         }
+
+        form.reset()
         return toast({
             title: successMessage,
             duration: 5000
