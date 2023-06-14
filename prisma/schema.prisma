@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Map {
+  name String @id
+}
+
+model Nade {
+  id           String      @id
+  description  String?     @db.Text
+  map_id       String
+  status       Nade_status @default(PENDING)
+  author_id    String
+  video_url    String      @unique
+  title        String      @db.Text
+  nadeTypeName String
+  createdAt    DateTime    @default(now())
+  serverId     String?
+
+  @@index([author_id])
+  @@index([map_id])
+  @@index([nadeTypeName])
+  @@index([serverId])
+}
+
+model NadeType {
+  name String @id
+}
+
+model Server {
+  id   String @id
+  name String
+}
+
+model User {
+  id             String  @id
+  name           String  @unique
+  discord_tag    String  @unique
+  serverAdminId  String?
+  serverMemberId String?
+
+  @@index([serverAdminId])
+  @@index([serverMemberId])
+}
+
+enum Nade_status {
+  APPROVED
+  PENDING
+  DECLINED
+}

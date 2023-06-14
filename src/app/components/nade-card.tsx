@@ -1,4 +1,3 @@
-import { Nade } from '@/types/db'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Badge } from '@shad/badge'
 import {
@@ -11,20 +10,21 @@ import {
 
 import Plyr from 'plyr-react'
 import 'plyr-react/plyr.css'
+import { NadeWithAuthorAndNadeType } from './sections/nades-section'
 
 interface Props {
-    nade: Nade
+    nade: NadeWithAuthorAndNadeType
 }
 
 const NadeCard: React.FC<Props> = ({ nade }) => {
-    const author = nade.authorId.split('#')[0]
+    const author = nade.author_id.split('#')[0]
     return (
         <Card className="border-border-dark bg-dark">
             <CardHeader>
                 <CardTitle className="text-light">{nade.title}</CardTitle>
                 <CardDescription className="flex items-center gap-2 text-light-muted">
                     <Badge>{nade.nadeTypeName}</Badge>
-                    <Badge>{nade.mapId}</Badge>
+                    <Badge>{nade.map_id}</Badge>
                     <Badge>{author}</Badge>
                 </CardDescription>
             </CardHeader>
@@ -36,7 +36,7 @@ const NadeCard: React.FC<Props> = ({ nade }) => {
                                 type: 'video',
                                 sources: [
                                     {
-                                        src: nade.videoUrl,
+                                        src: nade.video_url,
                                         provider: 'html5'
                                     }
                                 ]

@@ -1,10 +1,15 @@
 'use client'
-import { Nade } from '@/types/db'
 import { useEffect, useState } from 'react'
 import NadeCard from '../nade-card'
+import { Nade } from '@prisma/client'
+
+export interface NadeWithAuthorAndNadeType extends Nade {
+    author_id: string
+    nadeTypeName: string
+}
 
 interface Props {
-    nades: Nade[]
+    nades: NadeWithAuthorAndNadeType[]
 }
 
 const NadesSection: React.FC<Props> = ({ nades }) => {

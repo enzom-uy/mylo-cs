@@ -1,6 +1,5 @@
 import { db } from '@/config/db'
 import { NextRequest, NextResponse } from 'next/server'
-import { server } from '../../../../drizzle/schema'
 import {
     errorMessage,
     serverIdMinLength,
@@ -27,9 +26,11 @@ export async function POST(req: NextRequest) {
         if (serverName.length < serverNameMinLength) throw new Error()
         if (serverId.length < serverIdMinLength) throw new Error()
 
-        await db.insert(server).values({
-            name: serverName,
-            id: serverId
+        await db.server.create({
+            data: {
+                id: serverId,
+                name: serverName
+            }
         })
 
         return NextResponse.json<ServerApiResponse>({

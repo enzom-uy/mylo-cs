@@ -1,15 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { NewServerData, ServerApiResponse } from '../create-server/route'
 import { db } from '@/config/db'
-import { server } from '../../../../drizzle/schema'
-import { eq } from 'drizzle-orm'
 
 export async function POST(req: NextRequest) {
     try {
         const body = (await req.json()) as NewServerData
         const { serverName, serverId } = body
 
-        await db.delete(server).where(eq(server.name, serverName))
+        await db.server.delete({
+            where: {
+                id: serverId
+            }
+        })
 
         return NextResponse.json<ServerApiResponse>({
             status: 200,
