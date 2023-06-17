@@ -22,6 +22,9 @@ export default function Identifier({ session }: { session: Session | null }) {
             title: 'Copiado al portapapeles.',
             duration: 2000
         })
+        setTimeout(() => {
+            setCopied(false)
+        }, 2000)
         return navigator.clipboard.writeText(id)
     }
     return (
@@ -54,7 +57,7 @@ export default function Identifier({ session }: { session: Session | null }) {
                         </Button>
                     </div>
                 </div>
-                <TooltipContent className="text-sm">
+                <TooltipContent className="border-none bg-dark text-sm text-light">
                     Clic para copiar
                 </TooltipContent>
             </Tooltip>
