@@ -1,7 +1,6 @@
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import Image from 'next/image'
-import Identifier from './components/identifier'
 
 export default async function ProfilePage() {
     const session = await getServerSession(authOptions)
@@ -24,7 +23,6 @@ export default async function ProfilePage() {
                     <span className="text-sm font-bold uppercase">nombre:</span>
                     <p>{session?.user.name}</p>
                 </div>
-                <Identifier session={session} />
             </div>
         </div>
     )

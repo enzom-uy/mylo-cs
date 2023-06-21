@@ -3,21 +3,42 @@ import DiscordProvider from 'next-auth/providers/discord'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { db } from '@/config/db'
 import { Adapter } from 'next-auth/adapters'
-import { PrismaClient } from '.prisma/client'
-import { NextAuthOptions, Session } from 'next-auth'
-
-const prisma = new PrismaClient()
-
-export interface UserSession extends Session {
-    userId?: string
-}
+import { NextAuthOptions } from 'next-auth'
 
 export const authOptions: NextAuthOptions = {
-    adapter: PrismaAdapter(prisma) as Adapter,
+    adapter: PrismaAdapter(db) as Adapter,
+    session: {
+        strategy: 'jwt',
+        maxAge: 30 * 24 * 60 * 60, // 30 days
+        updateAge: 24 * 60 * 60 // 24 hours
+    },
     callbacks: {
-        async session({ session, user, token }) {
-            session.user.id = user.id
+        async session({ token, session }) {
+            if (session) {
+                session.id = token.id as string
+                const updatedUser = await db.user.update({
+                    where: {
+                        email: session.user.email as string
+                    },
+                    data: {
+                        discordUserId: session.id
+                    }
+                })
+                console.log(updatedUser)
+            }
+
             return session
+        },
+        async signIn({ user, account }) {
+            console.log(user)
+            console.log(account)
+            return true
+        },
+        async jwt({ token, account }) {
+            if (account) {
+                token.id = account.providerAccountId
+            }
+            return token
         }
     },
     providers: [
