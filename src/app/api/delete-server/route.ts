@@ -5,7 +5,7 @@ import { db } from '@/config/db'
 export async function POST(req: NextRequest) {
     try {
         const body = (await req.json()) as NewServerData
-        const { serverName, serverId } = body
+        const { serverId } = body
 
         await db.server.delete({
             where: {

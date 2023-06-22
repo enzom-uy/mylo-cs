@@ -6,6 +6,13 @@ axios.defaults.baseURL = 'http://localhost:3000/'
 
 const serverName = 'Jest Test Server Name'
 const serverId = '123456789012345'
+const ownerId = 'clj652wiq000agia32hbqghe3'
+
+interface ApiParams {
+    serverName: string
+    serverId: string
+    ownerId: string
+}
 
 const apiUrls = {
     create: 'api/create-server',
@@ -15,13 +22,16 @@ const apiUrls = {
 // Utils
 const axiosCreateNewServer = async ({
     serverName,
-    serverId
+    serverId,
+    ownerId
 }: NewServerData) => {
+    const postServerBody: ApiParams = {
+        serverName,
+        serverId,
+        ownerId
+    }
     const response = await axios
-        .post(apiUrls.create, {
-            serverName,
-            serverId
-        })
+        .post(apiUrls.create, postServerBody)
         .then((res) => res.data)
     return response
 }
@@ -48,7 +58,7 @@ describe('server-related endpoints', () => {
 
     test('should be successful if all the data passed to create-server endpoint is correct', async () => {
         expect(
-            await axiosCreateNewServer({ serverName, serverId })
+            await axiosCreateNewServer({ serverName, serverId, ownerId })
         ).toStrictEqual<ServerApiResponse>({
             status: 201,
             message: successMessage,
@@ -60,7 +70,8 @@ describe('server-related endpoints', () => {
         expect(
             await axiosCreateNewServer({
                 serverName: 'Syl',
-                serverId
+                serverId,
+                ownerId
             })
         ).toStrictEqual<ServerApiResponse>({
             status: 403,
@@ -73,7 +84,8 @@ describe('server-related endpoints', () => {
         expect(
             await axiosCreateNewServer({
                 serverName: 'Sylphrena',
-                serverId: '12345678901234'
+                serverId: '12345678901234',
+                ownerId
             })
         ).toStrictEqual<ServerApiResponse>({
             status: 403,

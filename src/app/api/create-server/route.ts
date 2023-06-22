@@ -27,12 +27,33 @@ export async function POST(req: NextRequest) {
         if (serverName.length < serverNameMinLength) throw new Error()
         if (serverId.length < serverIdMinLength) throw new Error()
 
-        await db.server.create({
+        const newServer = await db.server.create({
             data: {
                 id: serverId,
-                name: serverName
+                name: serverName,
+                admins: {
+                    connect: {
+                        id: ownerId
+                    }
+                },
+                members: {
+                    connect: {
+                        id: ownerId
+                    }
+                },
+                UserServerRole: {
+                    create: {
+                        user: {
+                            connect: {
+                                id: ownerId
+                            }
+                        },
+                        role: 'OWNER'
+                    }
+                }
             }
         })
+        console.log(newServer)
 
         return NextResponse.json<ServerApiResponse>({
             status: 201,
@@ -40,6 +61,7 @@ export async function POST(req: NextRequest) {
             result: 'success'
         })
     } catch (error) {
+        console.log('ERROR: ', error)
         return NextResponse.json<ServerApiResponse>({
             status: 403,
             message: errorMessage,
