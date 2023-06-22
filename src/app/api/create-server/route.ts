@@ -17,6 +17,7 @@ export interface ServerApiResponse {
     status: 201 | 200 | 403
     message: string
     result: 'error' | 'success'
+    serverId?: string
 }
 
 export async function POST(req: NextRequest) {
@@ -58,7 +59,8 @@ export async function POST(req: NextRequest) {
         return NextResponse.json<ServerApiResponse>({
             status: 201,
             message: successMessage,
-            result: 'success'
+            result: 'success',
+            serverId: newServer.id
         })
     } catch (error) {
         console.log('ERROR: ', error)

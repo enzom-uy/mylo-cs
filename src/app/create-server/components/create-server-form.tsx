@@ -26,7 +26,8 @@ import {
     successMessage
 } from '@/app/api/create-server/utils'
 import { ServerApiResponse } from '@/app/api/create-server/route'
-import { useSession } from 'next-auth/react'
+import { Session } from 'next-auth'
+import { useRouter } from 'next/navigation'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
@@ -38,8 +39,8 @@ export const createServerSchema = z.object({
     terms: z.boolean().default(false)
 })
 
-export default function CreateServerForm() {
-    const session = useSession()
+export default function CreateServerForm({ session }: { session: Session }) {
+    const router = useRouter()
     const form = useForm<z.infer<typeof createServerSchema>>({
         resolver: zodResolver(createServerSchema),
         defaultValues: {
@@ -62,7 +63,7 @@ export default function CreateServerForm() {
             .post('/api/create-server', {
                 serverName: serverName,
                 serverId: serverId,
-                ownerId: session?.data?.user?.name
+                ownerId: session.id
             })
             .then((res) => res.data)
             .catch((err) => console.log(err))) as ServerApiResponse
@@ -76,6 +77,7 @@ export default function CreateServerForm() {
         }
 
         form.reset()
+        router.push(`/server/${response.serverId}`)
         return toast({
             title: successMessage,
             duration: 5000

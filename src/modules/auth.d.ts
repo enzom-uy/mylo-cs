@@ -9,4 +9,6 @@ declare module 'next-auth' {
     interface Token {
         id: string
     }
+
+    interface User {}
 }

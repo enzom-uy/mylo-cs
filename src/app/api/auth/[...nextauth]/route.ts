@@ -13,25 +13,22 @@ export const authOptions: NextAuthOptions = {
         updateAge: 24 * 60 * 60 // 24 hours
     },
     callbacks: {
-        async session({ token, session }) {
+        async session({ token, session, user }) {
             if (session) {
                 session.id = token.id as string
-                const updatedUser = await db.user.update({
+                await db.user.update({
                     where: {
                         email: session.user.email as string
                     },
                     data: {
-                        discordUserId: session.id
+                        id: session.id
                     }
                 })
-                console.log(updatedUser)
             }
 
             return session
         },
         async signIn({ user, account }) {
-            console.log(user)
-            console.log(account)
             return true
         },
         async jwt({ token, account }) {

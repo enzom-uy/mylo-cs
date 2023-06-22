@@ -9,7 +9,7 @@ export default async function CreateServerPage() {
     return (
         <section>
             <h1 className="mb-4">Crear un nuevo servidor</h1>
-            <CreateServerForm />
+            <CreateServerForm session={session} />
         </section>
     )
 }

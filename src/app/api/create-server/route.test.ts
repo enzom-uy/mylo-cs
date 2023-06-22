@@ -62,7 +62,8 @@ describe('server-related endpoints', () => {
         ).toStrictEqual<ServerApiResponse>({
             status: 201,
             message: successMessage,
-            result: 'success'
+            result: 'success',
+            serverId
         })
     })
 
