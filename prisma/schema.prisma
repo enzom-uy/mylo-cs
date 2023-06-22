@@ -32,11 +32,14 @@ model Nade {
     author         User        @relation(fields: [user_id], references: [id])
     map            Map         @relation(fields: [map_name], references: [name])
     nade_type      NadeType    @relation(fields: [nade_type_name], references: [name])
+    Server         Server?     @relation(fields: [serverId], references: [id])
+    serverId       String?
 
     @@index([nade_type_name])
     @@index([map_name])
     @@index([user_id])
     @@index([server_id])
+    @@index([serverId])
 }
 
 model Account {
@@ -74,6 +77,7 @@ model Server {
     members        User[]           @relation("ServerMembers")
     admins         User[]
     UserServerRole UserServerRole[]
+    nades          Nade[]
 }
 
 model ServerRole {
@@ -95,7 +99,7 @@ model UserServerRole {
 
 model User {
     id                String           @id @default(cuid())
-    name              String?
+    name              String
     email             String?          @unique
     emailVerified     DateTime?
     image             String?
