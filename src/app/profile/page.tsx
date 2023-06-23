@@ -1,10 +1,9 @@
 import { getServerSession } from 'next-auth'
-import { authOptions } from '../api/auth/[...nextauth]/route'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 
 export default async function ProfilePage() {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession()
     if (!session) redirect('/')
     return (
         <div className="flex w-full items-center gap-4 rounded-md bg-dark-secondary p-4">

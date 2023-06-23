@@ -1,10 +1,9 @@
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import CreateServerForm from './components/create-server-form'
-import { authOptions } from '../api/auth/[...nextauth]/route'
 
 export default async function CreateServerPage() {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession()
     if (!session) redirect('/')
     return (
         <section>

@@ -1,11 +1,10 @@
 import { db } from '@/config/db'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '../api/auth/[...nextauth]/route'
 import React from 'react'
 import ServerCard from './components/server-card'
 
 export default async function ServersPage() {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession()
     const userServers = await db.user.findFirst({
         where: {
             id: session?.id
