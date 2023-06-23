@@ -15,6 +15,7 @@ import {
 import { useToast } from '@/shad-components/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@shad/input'
+import { Textarea } from '@shad/textarea'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -33,6 +34,7 @@ export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
         message: `El nombre del servidor debe contener al menos ${serverNameMinLength} caracteres.`
     }),
+    serverDescription: z.string().optional(),
     serverId: z.string().min(serverIdMinLength, {
         message: 'El ID del servidor debe contener al menos 15 caracteres.'
     }),
@@ -46,6 +48,7 @@ export default function CreateServerForm({ session }: { session: Session }) {
         defaultValues: {
             serverName: '',
             serverId: '',
+            serverDescription: '',
             terms: false
         }
     })
@@ -89,6 +92,7 @@ export default function CreateServerForm({ session }: { session: Session }) {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="mb-4 w-full space-y-4"
             >
+                {/* Server name */}
                 <FormField
                     control={form.control}
                     name="serverName"
@@ -107,12 +111,31 @@ export default function CreateServerForm({ session }: { session: Session }) {
                         </FormItem>
                     )}
                 />
+
+                <FormField
+                    control={form.control}
+                    name="serverDescription"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel htmlFor="serverDescription">
+                                Descripción del servidor
+                            </FormLabel>
+                            <FormControl>
+                                <Textarea {...field} />
+                            </FormControl>
+                            <FormDescription>
+                                Descripción para mostrar en la página.
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
                 <FormField
                     control={form.control}
                     name="serverId"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>
+                            <FormLabel htmlFor="serverId">
                                 Id del Servidor <Required />
                             </FormLabel>
                             <FormControl>

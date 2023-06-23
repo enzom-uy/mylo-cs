@@ -28,21 +28,35 @@ const SearchSection = async ({ query }: Props) => {
                         }
                     },
                     {
-                        nadeTypeName: {
+                        nade_type_name: {
                             contains: queryWithSpaces
                         }
                     },
                     {
-                        author_id: {
-                            contains: queryWithSpaces
+                        author: {
+                            name: {
+                                contains: queryWithSpaces
+                            }
                         }
                     },
                     {
-                        map_id: {
+                        map_name: {
                             contains: queryWithSpaces
                         }
                     }
                 ]
+            },
+            include: {
+                author: {
+                    select: {
+                        name: true
+                    }
+                },
+                map: {
+                    select: {
+                        name: true
+                    }
+                }
             }
         })
         console.log(nades)

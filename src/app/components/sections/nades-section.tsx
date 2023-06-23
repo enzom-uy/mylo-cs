@@ -4,8 +4,12 @@ import NadeCard from '../nade-card'
 import { Nade } from '@prisma/client'
 
 export interface NadeWithAuthorAndNadeType extends Nade {
-    author_id: string
-    nadeTypeName: string
+    author: {
+        name: string
+    }
+    map: {
+        name: string
+    }
 }
 
 interface Props {

@@ -29,11 +29,11 @@ model Nade {
     map_name       String
     user_id        String
     server_id      String?
+    serverId       String?
     author         User        @relation(fields: [user_id], references: [id])
     map            Map         @relation(fields: [map_name], references: [name])
     nade_type      NadeType    @relation(fields: [nade_type_name], references: [name])
     Server         Server?     @relation(fields: [serverId], references: [id])
-    serverId       String?
 
     @@index([nade_type_name])
     @@index([map_name])
@@ -74,6 +74,7 @@ model Session {
 model Server {
     id             String           @id @default(cuid())
     name           String
+    description    String?          @db.Text
     members        User[]           @relation("ServerMembers")
     admins         User[]
     UserServerRole UserServerRole[]
@@ -130,12 +131,4 @@ enum Server_Role {
     OWNER
     ADMIN
     USER
-}
-
-enum ServerRoleToUser_A {
-    OWNER
-    ADMIN
-    USER
-
-    @@map("_ServerRoleToUser_A")
 }

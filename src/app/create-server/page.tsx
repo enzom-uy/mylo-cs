@@ -8,7 +8,7 @@ export default async function CreateServerPage() {
     if (!session) redirect('/')
     return (
         <section>
-            <h1 className="mb-4">Crear un nuevo servidor</h1>
+            <h1>Crear un nuevo servidor</h1>
             <CreateServerForm session={session} />
         </section>
     )

@@ -3,7 +3,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from '@shad/dropdown-menu'
@@ -11,6 +10,7 @@ import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { MdGroupAdd, MdLogout, MdFace } from 'react-icons/md'
 import HeaderAvatar from './header-avatar'
+import { LogOut, PlusSquare, UserCircle, Users } from 'lucide-react'
 
 export default function HeaderMenu({
     avatarImage,
@@ -29,15 +29,21 @@ export default function HeaderMenu({
                 <HeaderAvatar image={avatarImage} fallback={avatarFallback} />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mr-2 md:mr-0">
-                <DropdownMenuLabel className="flex items-center gap-2">
-                    <MdFace /> {userName}
-                </DropdownMenuLabel>
+                <DropdownMenuItem
+                    className="flex items-center gap-2"
+                    onClick={() => router.push('/profile')}
+                >
+                    <UserCircle className="w-4" /> {userName}
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => router.push('/servers')}>
+                    <Users className="w-4" /> Mis Servidores
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => router.push('/create-server')}>
-                    <MdGroupAdd /> Crear Servidor
+                    <PlusSquare className="w-4" /> Crear Servidor
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => signOut()}>
-                    <MdLogout /> Cerrar sesión
+                    <LogOut className="w-4" /> Cerrar sesión
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

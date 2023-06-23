@@ -87,7 +87,7 @@ body {
         @apply border-border;
     }
     h1 {
-        @apply text-3xl;
+        @apply mb-4 w-full text-3xl;
     }
     label {
         @apply flex items-center gap-2;
