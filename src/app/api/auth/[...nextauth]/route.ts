@@ -4,8 +4,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import { db } from '@/config/db'
 import { Adapter } from 'next-auth/adapters'
 import { NextAuthOptions } from 'next-auth'
-import axios, { AxiosError } from 'axios'
-import { axiosCreateNewServer } from '../../create-server/utils'
+import axios from 'axios'
 
 type Guild = {
     id: string
@@ -66,54 +65,76 @@ export const authOptions: NextAuthOptions = {
         })
     ],
     events: {
-        async createUser(message) {
-            console.log('userId:', userId)
-            console.log('userGuilds:', userGuilds)
-            console.log(message)
-            /* await db.user.update({ */
-            /*     where: { */
-            /*         email: user.email as string */
-            /*     }, */
-            /*     data: { */
-            /*         id: userId */
-            /*     } */
-            /* }) */
+        async createUser({ user }) {
+            console.log(user.id)
+            await db.user.update({
+                where: {
+                    email: user.email as string
+                },
+                data: {
+                    id: userId
+                }
+            })
 
-            /* try { */
-            /*     for (const guild of userGuilds) { */
-            /*         const serverName = guild.name */
-            /*         const serverId = guild.id */
-            /*         const ownerId = userId */
-            /*         await db.server.create({ */
-            /*             data: { */
-            /*                 id: serverId, */
-            /*                 name: serverName, */
-            /*                 admins: { */
-            /*                     connect: { */
-            /*                         id: ownerId */
-            /*                     } */
-            /*                 }, */
-            /*                 members: { */
-            /*                     connect: { */
-            /*                         id: ownerId */
-            /*                     } */
-            /*                 }, */
-            /*                 UserServerRole: { */
-            /*                     create: { */
-            /*                         user: { */
-            /*                             connect: { */
-            /*                                 id: ownerId */
-            /*                             } */
-            /*                         }, */
-            /*                         role: 'OWNER' */
-            /*                     } */
-            /*                 } */
-            /*             } */
-            /*         }) */
-            /*     } */
-            /* } catch (e) { */
-            /*     console.log('No se pudieron crear los servidores, lol.') */
-            /* } */
+            try {
+                for (const guild of userGuilds) {
+                    const serverName = guild.name
+                    const serverId = guild.id
+                    const ownerId = userId
+                    await db.server.create({
+                        data: {
+                            id: serverId,
+                            name: serverName,
+                            admins: {
+                                connect: {
+                                    id: ownerId
+                                }
+                            },
+                            members: {
+                                connect: {
+                                    id: ownerId
+                                }
+                            },
+                            UserServerRole: {
+                                create: {
+                                    user: {
+                                        connect: {
+                                            id: ownerId
+                                        }
+                                    },
+                                    role: 'OWNER'
+                                }
+                            }
+                        }
+                    })
+                }
+            } catch (e) {
+                throw new Error('No pudimos crear los servidores.')
+            }
+        },
+        async signIn({ isNewUser }) {
+            if (!isNewUser) {
+                console.log('Account and user already updated.')
+                return
+            }
+            console.log('Account is not already updated.')
+            const userAccount = await db.account.findFirst({
+                where: {
+                    providerAccountId: userId
+                }
+            })
+            const updatedAccount = await db.account.update({
+                where: {
+                    id: userAccount?.id
+                },
+                data: {
+                    userId: userId,
+                    id: userId,
+                    providerAccountId: userId
+                }
+            })
+
+            console.log(updatedAccount)
         }
     }
 }
