@@ -1,8 +1,9 @@
 import { getServerSession } from 'next-auth'
 import LoginDiscordButton from '../login-discord-btn'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
 const Hero = async () => {
-    const session = await getServerSession()
+    const session = await getServerSession(authOptions)
     return (
         <section className="border-b border-b-border-dark pb-6">
             <div className="flex flex-col gap-3">

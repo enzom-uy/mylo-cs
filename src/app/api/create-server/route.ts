@@ -10,7 +10,7 @@ import {
 export interface NewServerData {
     serverName: string
     serverId: string
-    serverDescription: string | null
+    serverDescription: string | null | undefined
     ownerId: string
 }
 
@@ -46,12 +46,13 @@ export async function POST(req: NextRequest) {
                 },
                 UserServerRole: {
                     create: {
+                        role: 'OWNER',
+                        id: serverId,
                         user: {
                             connect: {
                                 id: ownerId
                             }
-                        },
-                        role: 'OWNER'
+                        }
                     }
                 }
             }

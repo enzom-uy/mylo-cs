@@ -26,9 +26,10 @@ import {
     serverNameMinLength,
     successMessage
 } from '@/app/api/create-server/utils'
-import { ServerApiResponse } from '@/app/api/create-server/route'
+import { NewServerData, ServerApiResponse } from '@/app/api/create-server/route'
 import { Session } from 'next-auth'
 import { useRouter } from 'next/navigation'
+import { Guild } from '../utils/getUserGuilds'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
@@ -41,7 +42,14 @@ export const createServerSchema = z.object({
     terms: z.boolean().default(false)
 })
 
-export default function CreateServerForm({ session }: { session: Session }) {
+export default function CreateServerForm({
+    session,
+    userGuilds
+}: {
+    session: Session
+    userGuilds: Guild[]
+}) {
+    console.log(userGuilds)
     const router = useRouter()
     const form = useForm<z.infer<typeof createServerSchema>>({
         resolver: zodResolver(createServerSchema),
@@ -55,19 +63,22 @@ export default function CreateServerForm({ session }: { session: Session }) {
     const { toast } = useToast()
 
     const onSubmit = async (values: z.infer<typeof createServerSchema>) => {
-        const { serverId, serverName } = values
+        const { serverId, serverName, serverDescription } = values
 
         if (values.terms === false) {
             toast({
                 title: 'Debes aceptar los términos y condiciones para continuar.'
             })
         }
+
+        const axiosBody: NewServerData = {
+            ownerId: session.id,
+            serverName,
+            serverId,
+            serverDescription
+        }
         const response = (await axios
-            .post('/api/create-server', {
-                serverName: serverName,
-                serverId: serverId,
-                ownerId: session.id
-            })
+            .post('/api/create-server', axiosBody)
             .then((res) => res.data)
             .catch((err) => console.log(err))) as ServerApiResponse
 
