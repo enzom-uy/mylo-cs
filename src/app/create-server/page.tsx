@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation'
 import CreateServerForm from './components/create-server-form'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import { getUserGuilds } from './utils/getUserGuilds'
+import PrevFormUserServers from './components/prev-form-user-servers'
+import PrevFormSelectPath from './components/prev-form-select-path'
 
 export default async function CreateServerPage() {
     const session = await getServerSession(authOptions)
@@ -13,8 +15,13 @@ export default async function CreateServerPage() {
     console.log(userGuilds)
     return (
         <section>
-            <h1>Crear un nuevo servidor</h1>
-            <CreateServerForm session={session} userGuilds={userGuilds} />
+            {userGuilds ? (
+                <PrevFormSelectPath userGuilds={userGuilds} />
+            ) : (
+                <CreateServerForm session={session} />
+            )}
+            {/* <PrevFormUserServers /> */}
+            {/* <CreateServerForm session={session} userGuilds={userGuilds} /> */}
         </section>
     )
 }

@@ -8,17 +8,8 @@ interface Props {
 }
 
 const SearchSection = async ({ query }: Props) => {
-    if (!query) {
-        return (
-            <section className="flex w-full flex-col gap-6 pt-6">
-                <SearchInput />
-                <p>Haz una búsqueda para ver las granadas.</p>
-            </section>
-        )
-    }
-
     const getNades = async () => {
-        const queryWithSpaces = `%${query.replaceAll('-', ' ')}%`
+        const queryWithSpaces = query && `%${query.replaceAll('-', ' ')}%`
         const nades = await db.nade.findMany({
             where: {
                 OR: [
@@ -59,15 +50,15 @@ const SearchSection = async ({ query }: Props) => {
                 }
             }
         })
-        console.log(nades)
         return nades
     }
     const foundedNades = await getNades()
 
     return (
-        <section className="flex w-full flex-col gap-6 pt-6">
+        <section className="flex w-full flex-col items-center gap-6 pt-6">
             <SearchInput />
-            <NadesSection nades={foundedNades} />
+            {!query && <p>Haz una búsqueda para ver las granadas.</p>}
+            {query && <NadesSection nades={foundedNades} />}
         </section>
     )
 }

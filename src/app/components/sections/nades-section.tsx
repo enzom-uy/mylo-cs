@@ -42,10 +42,13 @@ const NadesSection: React.FC<Props> = ({ nades }) => {
             }))
         }
     }, [nades])
+    console.log(nades)
 
     return (
-        <section className="flex w-full flex-col gap-4">
-            {!state.loading && nades.length <= 0 ? (
+        <section className="flex w-full flex-col items-center gap-4">
+            {!nades ? (
+                <p>Haz una búsqueda para ver las granadas.</p>
+            ) : !state.loading && nades.length <= 0 ? (
                 <p>No se encontraron granadas.</p>
             ) : (
                 nades.map((nade) => <NadeCard key={nade.id} nade={nade} />)

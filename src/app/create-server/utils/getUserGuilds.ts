@@ -1,4 +1,5 @@
 import axios from 'axios'
+import axiosRetry from 'axios-retry'
 
 export type Guild = {
     id: string
@@ -15,15 +16,25 @@ interface GetUserGuildsProps {
 }
 
 export const getUserGuilds = async ({ access_token }: GetUserGuildsProps) => {
-    const userGuilds = await axios
-        .get('https://discordapp.com/api/users/@me/guilds', {
-            headers: {
-                Authorization: 'Bearer ' + access_token
+    try {
+        axiosRetry(axios, { retries: 5 })
+        axiosRetry(axios, {
+            retryDelay: (retryCount) => {
+                return retryCount * 1200
             }
         })
-        .then((res) => {
-            const guilds = res.data as Guild[]
-            return guilds.filter((guild) => guild.owner === true)
-        })
-    return userGuilds
+        const userGuilds = await axios
+            .get('https://discordapp.com/api/users/@me/guilds', {
+                headers: {
+                    Authorization: 'Bearer ' + access_token
+                }
+            })
+            .then((res) => {
+                const guilds = res.data as Guild[]
+                return guilds.filter((guild) => guild.owner === true)
+            })
+        return userGuilds
+    } catch (error) {
+        console.error(error)
+    }
 }

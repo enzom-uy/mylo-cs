@@ -89,8 +89,18 @@ body {
     h1 {
         @apply mb-4 w-full text-3xl;
     }
+    h2 {
+        @apply mb-4 w-full text-2xl;
+    }
+
+    h3 {
+        @apply mb-4 w-full text-xl;
+    }
     label {
         @apply flex items-center gap-2;
+    }
+    section {
+        @apply w-full;
     }
 }
 

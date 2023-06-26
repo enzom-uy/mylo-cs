@@ -30,6 +30,13 @@ import { NewServerData, ServerApiResponse } from '@/app/api/create-server/route'
 import { Session } from 'next-auth'
 import { useRouter } from 'next/navigation'
 import { Guild } from '../utils/getUserGuilds'
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue
+} from '@/shad-components/select'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
@@ -47,7 +54,7 @@ export default function CreateServerForm({
     userGuilds
 }: {
     session: Session
-    userGuilds: Guild[]
+    userGuilds?: Guild[]
 }) {
     console.log(userGuilds)
     const router = useRouter()
@@ -98,92 +105,94 @@ export default function CreateServerForm({
         })
     }
     return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="mb-4 w-full space-y-4"
-            >
-                {/* Server name */}
-                <FormField
-                    control={form.control}
-                    name="serverName"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>
-                                Nombre del Servidor <Required />
-                            </FormLabel>
-                            <FormControl>
-                                <Input {...field} required />
-                            </FormControl>
-                            <FormDescription>
-                                Nombre público para mostrar en la página.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="serverDescription"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel htmlFor="serverDescription">
-                                Descripción del servidor
-                            </FormLabel>
-                            <FormControl>
-                                <Textarea {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                Descripción para mostrar en la página.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="serverId"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel htmlFor="serverId">
-                                Id del Servidor <Required />
-                            </FormLabel>
-                            <FormControl>
-                                <Input {...field} required />
-                            </FormControl>
-                            <FormDescription>
-                                En Discord: Configuración {'>'} Avanzado {'>'}{' '}
-                                Modo desarrollador {'>'} Click derecho en tu
-                                servidor {'>'} Copiar ID del servidor.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <Terms />
-                <FormField
-                    control={form.control}
-                    name="terms"
-                    render={({ field }) => (
-                        <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                            <FormControl>
-                                <Checkbox
-                                    checked={field.value}
-                                    onCheckedChange={field.onChange}
-                                />
-                            </FormControl>
-                            <div className="space-y-1 leading-none">
+        <>
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="mb-4 w-full space-y-4"
+                >
+                    {/* Server name */}
+                    <FormField
+                        control={form.control}
+                        name="serverName"
+                        render={({ field }) => (
+                            <FormItem>
                                 <FormLabel>
-                                    Acepto los términos y condiciones.
+                                    Nombre del Servidor <Required />
                                 </FormLabel>
-                            </div>
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit">Crear</Button>
-            </form>
-        </Form>
+                                <FormControl>
+                                    <Input {...field} required />
+                                </FormControl>
+                                <FormDescription>
+                                    Nombre público para mostrar en la página.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="serverDescription"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel htmlFor="serverDescription">
+                                    Descripción del servidor
+                                </FormLabel>
+                                <FormControl>
+                                    <Textarea {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    Descripción para mostrar en la página.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="serverId"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel htmlFor="serverId">
+                                    Id del Servidor <Required />
+                                </FormLabel>
+                                <FormControl>
+                                    <Input {...field} required />
+                                </FormControl>
+                                <FormDescription>
+                                    En Discord: Configuración {'>'} Avanzado{' '}
+                                    {'>'} Modo desarrollador {'>'} Click derecho
+                                    en tu servidor {'>'} Copiar ID del servidor.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <Terms />
+                    <FormField
+                        control={form.control}
+                        name="terms"
+                        render={({ field }) => (
+                            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                                <FormControl>
+                                    <Checkbox
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <div className="space-y-1 leading-none">
+                                    <FormLabel>
+                                        Acepto los términos y condiciones.
+                                    </FormLabel>
+                                </div>
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit">Crear</Button>
+                </form>
+            </Form>
+        </>
     )
 }
