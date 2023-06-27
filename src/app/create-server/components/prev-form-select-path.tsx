@@ -9,11 +9,11 @@ export default function PrevFormSelectPath({
 }) {
     return (
         <div className="flex justify-center">
-            <div className="flex w-full flex-col items-center justify-center gap-4 md:flex-row">
-                <div className="flex w-full flex-col gap-2">
+            <div className="flex w-full flex-col items-center justify-center gap-4">
+                <div className="flex w-full flex-col items-center gap-2">
+                    Crear uno de estos servidores:
                     <PrevFormUserServers userGuilds={userGuilds} />
                 </div>
-                o
                 <Button className="p-2 text-start">
                     Crear un servidor manualmente
                 </Button>

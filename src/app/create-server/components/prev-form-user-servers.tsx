@@ -57,21 +57,23 @@ export default function PrevFormUserServers({
                     </li>
                 ))}
             </ul>
-            <div className="flex w-full justify-between">
-                <button
-                    onClick={() => goToPage(prevPage as number)}
-                    disabled={!prevPage && true}
-                >
-                    <ArrowLeft />
-                </button>
-                <span>{currentPage}</span>
-                <button
-                    onClick={() => goToPage(nextPage as number)}
-                    disabled={!nextPage && true}
-                >
-                    <ArrowRight />
-                </button>
-            </div>
+            {totalPages > 1 && (
+                <div className="flex w-full justify-between">
+                    <button
+                        onClick={() => goToPage(prevPage as number)}
+                        disabled={!prevPage && true}
+                    >
+                        <ArrowLeft />
+                    </button>
+                    <span>{currentPage}</span>
+                    <button
+                        onClick={() => goToPage(nextPage as number)}
+                        disabled={!nextPage && true}
+                    >
+                        <ArrowRight />
+                    </button>
+                </div>
+            )}
         </>
     )
 }
