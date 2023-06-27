@@ -27,16 +27,11 @@ import {
     successMessage
 } from '@/app/api/create-server/utils'
 import { NewServerData, ServerApiResponse } from '@/app/api/create-server/route'
-import { Session } from 'next-auth'
 import { useRouter } from 'next/navigation'
 import { Guild } from '../utils/getUserGuilds'
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue
-} from '@/shad-components/select'
+import { useSession } from 'next-auth/react'
+import { useContext } from 'react'
+import { CreateServerContext } from '../context/create-server-context'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
@@ -49,20 +44,18 @@ export const createServerSchema = z.object({
     terms: z.boolean().default(false)
 })
 
-export default function CreateServerForm({
-    session,
-    userGuilds
-}: {
-    session: Session
-    userGuilds?: Guild[]
-}) {
-    console.log(userGuilds)
+export default function CreateServerForm() {
+    const { data: session } = useSession()
+    const { selectedGuild } = useContext(CreateServerContext)
+    const userSelectedGuildPrev = !!selectedGuild
+    const { id: serverId, name: serverName } = selectedGuild!
+    console.log(selectedGuild)
     const router = useRouter()
     const form = useForm<z.infer<typeof createServerSchema>>({
         resolver: zodResolver(createServerSchema),
         defaultValues: {
-            serverName: '',
-            serverId: '',
+            serverName: userSelectedGuildPrev ? serverName : '',
+            serverId: userSelectedGuildPrev ? serverId : '',
             serverDescription: '',
             terms: false
         }
@@ -79,7 +72,7 @@ export default function CreateServerForm({
         }
 
         const axiosBody: NewServerData = {
-            ownerId: session.id,
+            ownerId: session?.id as string,
             serverName,
             serverId,
             serverDescription
@@ -158,7 +151,11 @@ export default function CreateServerForm({
                                     Id del Servidor <Required />
                                 </FormLabel>
                                 <FormControl>
-                                    <Input {...field} required />
+                                    <Input
+                                        {...field}
+                                        required
+                                        disabled={userSelectedGuildPrev && true}
+                                    />
                                 </FormControl>
                                 <FormDescription>
                                     En Discord: Configuración {'>'} Avanzado{' '}
