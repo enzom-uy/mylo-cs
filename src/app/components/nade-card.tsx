@@ -17,21 +17,26 @@ interface Props {
 }
 
 const NadeCard: React.FC<Props> = ({ nade }) => {
-    const author = nade.author_id.split('#')[0]
+    const author = nade.author.name
     return (
-        <Card className="border-border-dark bg-dark">
+        <Card className="w-full max-w-lg border-border-dark bg-dark">
             <CardHeader>
                 <CardTitle className="text-light">{nade.title}</CardTitle>
-                <CardDescription className="flex items-center gap-2 text-light-muted">
-                    <Badge>{nade.nadeTypeName}</Badge>
-                    <Badge>{nade.map_id}</Badge>
-                    <Badge>{author}</Badge>
-                </CardDescription>
+                <div className="flex flex-wrap items-center gap-2 text-light-muted">
+                    <Badge>{nade.nade_type_name}</Badge>
+                    <Badge>{nade.map_name}</Badge>
+                    <Badge>
+                        <p className="max-w-[9ch] overflow-hidden text-ellipsis whitespace-nowrap ">
+                            {author}
+                        </p>
+                    </Badge>
+                </div>
             </CardHeader>
             <CardContent className="text-light">
-                <div className="overflow-hidden rounded-[0.25rem]">
-                    <AspectRatio ratio={16 / 9}>
+                <div className="flex max-w-md justify-center rounded-[0.25rem]">
+                    <AspectRatio ratio={16 / 12} className="overflow-hidden">
                         <Plyr
+                            style={{ padding: '0' }}
                             source={{
                                 type: 'video',
                                 sources: [
