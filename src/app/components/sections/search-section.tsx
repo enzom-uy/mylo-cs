@@ -5,13 +5,21 @@ import NadesSection from './nades-section'
 
 interface Props {
     query?: string
+    userId: string
 }
 
-const SearchSection = async ({ query }: Props) => {
+const SearchSection = async ({ query, userId }: Props) => {
     const getNades = async () => {
         const queryWithSpaces = query && `%${query.replaceAll('-', ' ')}%`
         const nades = await db.nade.findMany({
             where: {
+                Server: {
+                    members: {
+                        some: {
+                            id: userId
+                        }
+                    }
+                },
                 OR: [
                     {
                         title: {

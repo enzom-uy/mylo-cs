@@ -1,17 +1,28 @@
+import { getServerSession } from 'next-auth'
 import Hero from './components/sections/hero-section'
 import SearchSection from './components/sections/search-section'
+import { authOptions } from './api/auth/[...nextauth]/route'
 
-const Home = ({
+const Home = async ({
     searchParams
 }: {
     searchParams: { [key: string]: string | string[] | undefined }
 }) => {
+    const session = await getServerSession(authOptions)
     return (
         <>
             <Hero />
-            <SearchSection
-                query={searchParams.query && (searchParams.query as string)}
-            />
+            {session ? (
+                <SearchSection
+                    query={searchParams.query && (searchParams.query as string)}
+                    userId={session?.id}
+                />
+            ) : (
+                <p>
+                    Debes iniciar sesión y estar en un servidor para buscar
+                    granadas.
+                </p>
+            )}{' '}
         </>
     )
 }
