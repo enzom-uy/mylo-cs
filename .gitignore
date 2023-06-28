@@ -36,3 +36,8 @@ next-env.d.ts
 .env
 drizzle.config.ts
 supabase
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
