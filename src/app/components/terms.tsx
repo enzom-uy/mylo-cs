@@ -54,8 +54,12 @@ export default function Terms() {
         <>
             <Accordion type="single" collapsible className="w-full">
                 {accordion.map((item) => (
-                    <AccordionItem key={item.value} value={item.value}>
-                        <AccordionTrigger className="text-start">
+                    <AccordionItem
+                        key={item.value}
+                        value={item.value}
+                        className="m-0"
+                    >
+                        <AccordionTrigger className="p-1 text-start text-sm">
                             {item.trigger}
                         </AccordionTrigger>
                         <AccordionContent>

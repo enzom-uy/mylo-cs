@@ -4,9 +4,7 @@ import { Guild } from '../utils/getUserGuilds'
 import DiscordPlaceholder from '@/app/components/discord-placeholder-svg'
 import usePagination from '@/hooks/usePagination'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { useContext } from 'react'
-import { CreateServerContext } from '../context/create-server-context'
-import CreateServerForm from './create-server-form'
+import { useRouter } from 'next/navigation'
 
 const COLORS = ['#5d64f4', '#ed4545', '#fca31d', '#3da45c', '#ed459c']
 const randomColor = COLORS[Math.floor(Math.random() * COLORS.length)]
@@ -16,8 +14,7 @@ export default function PrevFormUserServers({
 }: {
     userGuilds: Guild[]
 }) {
-    const { handleUserSelectGuild, selectedGuild } =
-        useContext(CreateServerContext)
+    const router = useRouter()
     const itemsPerPage = 5
     const { totalPages, currentPage, prevPage, nextPage, goToPage } =
         usePagination(userGuilds, itemsPerPage)
@@ -25,8 +22,10 @@ export default function PrevFormUserServers({
     const startIndex = (currentPage - 1) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
     const currentPageItems = userGuilds.slice(startIndex, endIndex)
-    if (selectedGuild !== undefined) {
-        return <CreateServerForm />
+
+    const handleSelectServer = (g: Guild) => {
+        localStorage.setItem('selectedGuild', JSON.stringify(g))
+        router.push('/create-server/form')
     }
 
     return (
@@ -36,7 +35,7 @@ export default function PrevFormUserServers({
                     <li
                         key={g.id}
                         className="flex w-full cursor-pointer items-center gap-2 border-b border-b-border-dark p-2 text-sm transition-colors duration-150 hover:bg-dark-secondary"
-                        onClick={() => handleUserSelectGuild!({ guild: g })}
+                        onClick={() => handleSelectServer(g)}
                     >
                         {g.icon ? (
                             <Image

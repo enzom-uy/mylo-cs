@@ -28,10 +28,8 @@ import {
 } from '@/app/api/create-server/utils'
 import { NewServerData, ServerApiResponse } from '@/app/api/create-server/route'
 import { useRouter } from 'next/navigation'
-import { Guild } from '../utils/getUserGuilds'
 import { useSession } from 'next-auth/react'
-import { useContext } from 'react'
-import { CreateServerContext } from '../context/create-server-context'
+import { Guild } from '../utils/getUserGuilds'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
@@ -46,16 +44,17 @@ export const createServerSchema = z.object({
 
 export default function CreateServerForm() {
     const { data: session } = useSession()
-    const { selectedGuild } = useContext(CreateServerContext)
+    const selectedGuild = localStorage.getItem('selectedGuild')
+    const guild = selectedGuild
+        ? (JSON.parse(selectedGuild!) as Guild | null)
+        : undefined
     const userSelectedGuildPrev = !!selectedGuild
-    const { id: serverId, name: serverName } = selectedGuild!
-    console.log(selectedGuild)
     const router = useRouter()
     const form = useForm<z.infer<typeof createServerSchema>>({
         resolver: zodResolver(createServerSchema),
         defaultValues: {
-            serverName: userSelectedGuildPrev ? serverName : '',
-            serverId: userSelectedGuildPrev ? serverId : '',
+            serverName: userSelectedGuildPrev ? guild?.name : '',
+            serverId: userSelectedGuildPrev ? guild?.id : '',
             serverDescription: '',
             terms: false
         }
@@ -69,6 +68,7 @@ export default function CreateServerForm() {
             toast({
                 title: 'Debes aceptar los términos y condiciones para continuar.'
             })
+            return
         }
 
         const axiosBody: NewServerData = {
