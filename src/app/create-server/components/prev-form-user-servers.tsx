@@ -1,9 +1,9 @@
 'use client'
+
 import Image from 'next/image'
-import { Guild } from '../utils/getUserGuilds'
+import { Guild } from '@/utils/getUserGuilds'
 import DiscordPlaceholder from '@/app/components/discord-placeholder-svg'
 import usePagination from '@/hooks/usePagination'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import PaginationNavigation from '@/app/components/pagination-navigation'
 
@@ -27,7 +27,7 @@ export default function PrevFormUserServers({
     } = usePagination(userGuilds, itemsPerPage)
 
     const handleSelectServer = (g: Guild) => {
-        localStorage.setItem('selectedGuild', JSON.stringify(g))
+        // localStorage.setItem('selectedGuild', JSON.stringify(g))
         router.push('/create-server/form')
     }
 

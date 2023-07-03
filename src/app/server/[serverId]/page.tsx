@@ -1,4 +1,4 @@
-import { getServer } from '@/app/utils/getServer'
+import { getServer } from '@/utils/getServer'
 import { redirect } from 'next/navigation'
 
 export default async function ServerPage({

@@ -34,7 +34,7 @@ export default function ServersList({
                 ))}
             </ul>
 
-            {totalPages > 0 && (
+            {totalPages > 1 && (
                 <PaginationNavigation
                     goToPage={goToPage}
                     nextPage={nextPage}

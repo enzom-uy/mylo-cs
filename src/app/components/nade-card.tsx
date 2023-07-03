@@ -1,16 +1,10 @@
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Badge } from '@shad/badge'
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle
-} from '@shad/card'
-
-import Plyr from 'plyr-react'
-import 'plyr-react/plyr.css'
+import { Card, CardContent, CardHeader, CardTitle } from '@shad/card'
 import { NadeWithAuthorAndNadeType } from './sections/nades-section'
+import VideoPlayer from './video-player'
+
+import 'plyr-react/plyr.css'
 
 interface Props {
     nade: NadeWithAuthorAndNadeType
@@ -35,28 +29,7 @@ const NadeCard: React.FC<Props> = ({ nade }) => {
             <CardContent className="text-light">
                 <div className="flex max-w-md justify-center rounded-[0.25rem]">
                     <AspectRatio ratio={16 / 12} className="overflow-hidden">
-                        <Plyr
-                            style={{ padding: '0' }}
-                            source={{
-                                type: 'video',
-                                sources: [
-                                    {
-                                        src: nade.video_url,
-                                        provider: 'html5'
-                                    }
-                                ]
-                            }}
-                            muted
-                            options={{
-                                controls: [
-                                    'play',
-                                    'progress',
-                                    'settings',
-                                    'volume',
-                                    'fullscreen'
-                                ]
-                            }}
-                        />
+                        <VideoPlayer url={nade.video_url} />
                     </AspectRatio>
                 </div>
             </CardContent>

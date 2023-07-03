@@ -5,7 +5,7 @@ import { db } from '@/config/db'
 import { Adapter } from 'next-auth/adapters'
 import { AuthOptions } from 'next-auth'
 import axios from 'axios'
-import { Guild } from '@/app/utils/getUserGuilds'
+import { Guild } from '@/utils/getUserGuilds'
 
 let userId: string
 let newUser: boolean

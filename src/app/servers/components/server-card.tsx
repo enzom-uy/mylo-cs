@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 interface ServerCardProps {
     name: string
     description: string | null
-    members: number
+    members?: number
     id: string
 }
 
@@ -26,9 +26,11 @@ const ServerCard: React.FC<ServerCardProps> = ({
             <Link href={serverUrl}>
                 <div className="flex w-full items-center justify-between">
                     <span>{name}</span>
-                    <span className="flex items-center gap-2 text-muted-foreground">
-                        <Users className="w-4" /> {members}
-                    </span>
+                    {members && (
+                        <span className="flex items-center gap-2 text-muted-foreground">
+                            <Users className="w-4" /> {members}
+                        </span>
+                    )}
                 </div>
                 <p className="text-muted-foreground">
                     {description

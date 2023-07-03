@@ -1,9 +1,8 @@
 import { getServerSession } from 'next-auth'
-import React from 'react'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import { User, UserServerRole } from '@prisma/client'
 import ServersList from './components/servers-list'
-import { getUserServers } from '../utils/getUserServers'
+import { getUserServers } from '@/utils/getUserServers'
 
 export interface UserServers {
     servers_is_member: {

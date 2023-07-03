@@ -108,4 +108,7 @@ body {
     .csgo {
         @apply bg-gradient-csgo bg-clip-text text-transparent;
     }
+    .transparent-card {
+        @apply flex flex-grow flex-col items-start gap-2 rounded-md border border-border-dark p-4;
+    }
 }

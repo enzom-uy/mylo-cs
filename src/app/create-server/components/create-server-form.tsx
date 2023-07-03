@@ -29,7 +29,8 @@ import {
 import { NewServerData, ServerApiResponse } from '@/app/api/create-server/route'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { Guild } from '@/app/utils/getUserGuilds'
+import { useEffect, useState } from 'react'
+import { Guild } from '@/utils/getUserGuilds'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
@@ -44,17 +45,19 @@ export const createServerSchema = z.object({
 
 export default function CreateServerForm() {
     const { data: session } = useSession()
-    const selectedGuild = localStorage.getItem('selectedGuild')
-    const guild = selectedGuild
-        ? (JSON.parse(selectedGuild!) as Guild | null)
-        : undefined
+    const [selectedGuild, setSelectedGuild] = useState<Guild | undefined>()
+    useEffect(() => {
+        const guild = localStorage.getItem('selectedGuild')
+        const g = JSON.parse(guild!) as Guild
+        setSelectedGuild(g)
+    }, [])
     const userSelectedGuildPrev = !!selectedGuild
     const router = useRouter()
     const form = useForm<z.infer<typeof createServerSchema>>({
         resolver: zodResolver(createServerSchema),
         defaultValues: {
-            serverName: userSelectedGuildPrev ? guild?.name : '',
-            serverId: userSelectedGuildPrev ? guild?.id : '',
+            serverName: userSelectedGuildPrev ? selectedGuild?.name : '',
+            serverId: userSelectedGuildPrev ? selectedGuild?.id : '',
             serverDescription: '',
             terms: false
         }

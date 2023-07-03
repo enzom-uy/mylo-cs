@@ -1,7 +1,7 @@
 import React from 'react'
 import SearchInput from '../search-input'
 import NadesSection from './nades-section'
-import { getNadesQuery } from '@/app/utils/getNadesQuery'
+import { getNadesQuery } from '@/utils/getNadesQuery'
 
 interface Props {
     query?: string
