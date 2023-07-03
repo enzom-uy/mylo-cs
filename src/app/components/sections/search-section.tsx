@@ -1,7 +1,7 @@
-import { db } from '@/config/db'
 import React from 'react'
 import SearchInput from '../search-input'
 import NadesSection from './nades-section'
+import { getNadesQuery } from '@/app/utils/getNadesQuery'
 
 interface Props {
     query?: string
@@ -9,58 +9,7 @@ interface Props {
 }
 
 const SearchSection = async ({ query, userId }: Props) => {
-    const getNades = async () => {
-        const queryWithSpaces = query && `%${query.replaceAll('-', ' ')}%`
-        const nades = await db.nade.findMany({
-            where: {
-                Server: {
-                    members: {
-                        some: {
-                            id: userId
-                        }
-                    }
-                },
-                OR: [
-                    {
-                        title: {
-                            contains: queryWithSpaces
-                        }
-                    },
-                    {
-                        nade_type_name: {
-                            contains: queryWithSpaces
-                        }
-                    },
-                    {
-                        author: {
-                            name: {
-                                contains: queryWithSpaces
-                            }
-                        }
-                    },
-                    {
-                        map_name: {
-                            contains: queryWithSpaces
-                        }
-                    }
-                ]
-            },
-            include: {
-                author: {
-                    select: {
-                        name: true
-                    }
-                },
-                map: {
-                    select: {
-                        name: true
-                    }
-                }
-            }
-        })
-        return nades
-    }
-    const foundedNades = await getNades()
+    const foundedNades = await getNadesQuery({ query, userId })
 
     return (
         <section className="flex w-full flex-col items-center gap-6 pt-6">

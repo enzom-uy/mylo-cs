@@ -1,24 +1,9 @@
-import { db } from '@/config/db'
 import { getServerSession } from 'next-auth'
 import React from 'react'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import { User, UserServerRole } from '@prisma/client'
 import ServersList from './components/servers-list'
-
-// export interface UserServers {
-//     servers_is_member: {
-//         name: string
-//         description: string | null
-//         UserServerRole: {
-//             id: string
-//             user_id: string
-//             server_id: string
-//             role: Server_Role
-//         }[]
-//         members: []
-//         id: string
-//     }[]
-// }
+import { getUserServers } from '../utils/getUserServers'
 
 export interface UserServers {
     servers_is_member: {
@@ -32,22 +17,7 @@ export interface UserServers {
 
 export default async function ServersPage() {
     const session = await getServerSession(authOptions)
-    const userServers = await db.user.findFirst({
-        where: {
-            id: session?.id
-        },
-        select: {
-            servers_is_member: {
-                select: {
-                    name: true,
-                    description: true,
-                    UserServerRole: true,
-                    members: true,
-                    id: true
-                }
-            }
-        }
-    })
+    const userServers = await getUserServers({ session: session })
     return (
         <>
             <h1>Mis servidores</h1>

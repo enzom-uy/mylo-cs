@@ -29,7 +29,7 @@ import {
 import { NewServerData, ServerApiResponse } from '@/app/api/create-server/route'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { Guild } from '../utils/getUserGuilds'
+import { Guild } from '@/app/utils/getUserGuilds'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {

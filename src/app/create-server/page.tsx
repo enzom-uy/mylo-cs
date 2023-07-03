@@ -3,7 +3,7 @@ import { authOptions } from '../api/auth/[...nextauth]/route'
 import { getUserGuilds } from './utils/getUserGuilds'
 import PrevFormSelectPath from './components/prev-form-select-path'
 import { redirect } from 'next/navigation'
-import { db } from '@/config/db'
+import { checkIfUserGuildsExist } from './utils/checkIfUserGuildsExists'
 
 export default async function CreateServerPage() {
     const session = await getServerSession(authOptions)
@@ -12,13 +12,7 @@ export default async function CreateServerPage() {
         access_token: session.access_token
     })
     if (!userGuilds) redirect('/create-server/form')
-    const guildsId = userGuilds?.map((g) => ({ id: { contains: g.id } }))
-
-    const existingServers = await db.server.findMany({
-        where: {
-            OR: guildsId
-        }
-    })
+    const existingServers = await checkIfUserGuildsExist({ userGuilds })
     const serversNotCreated = userGuilds.filter(
         (g) => !existingServers.some((s) => s.id === g.id)
     )

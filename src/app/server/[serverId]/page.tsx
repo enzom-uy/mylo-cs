@@ -1,4 +1,4 @@
-import { db } from '@/config/db'
+import { getServer } from '@/app/utils/getServer'
 import { redirect } from 'next/navigation'
 
 export default async function ServerPage({
@@ -6,11 +6,7 @@ export default async function ServerPage({
 }: {
     params: { serverId: string }
 }) {
-    const server = await db.server.findFirst({
-        where: {
-            id: params.serverId
-        }
-    })
+    const server = await getServer({ params })
     if (!server) {
         redirect('/')
     }

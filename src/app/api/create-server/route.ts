@@ -1,7 +1,7 @@
-import { db } from '@/config/db'
 import { NextRequest, NextResponse } from 'next/server'
 import {
     errorMessage,
+    prismaCreateServer,
     serverIdMinLength,
     serverNameMinLength,
     successMessage
@@ -29,33 +29,11 @@ export async function POST(req: NextRequest) {
         if (serverName.length < serverNameMinLength) throw new Error()
         if (serverId.length < serverIdMinLength) throw new Error()
 
-        const newServer = await db.server.create({
-            data: {
-                id: serverId,
-                name: serverName,
-                description: serverDescription ? serverDescription : null,
-                admins: {
-                    connect: {
-                        id: ownerId
-                    }
-                },
-                members: {
-                    connect: {
-                        id: ownerId
-                    }
-                },
-                UserServerRole: {
-                    create: {
-                        role: 'OWNER',
-                        id: serverId,
-                        user: {
-                            connect: {
-                                id: ownerId
-                            }
-                        }
-                    }
-                }
-            }
+        const newServer = await prismaCreateServer({
+            ownerId,
+            serverName,
+            serverDescription,
+            serverId
         })
         console.log(newServer)
 
