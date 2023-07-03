@@ -3,7 +3,6 @@
 import usePagination from '@/hooks/usePagination'
 import { UserServers } from '../page'
 import ServerCard from './server-card'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
 import PaginationNavigation from '@/app/components/pagination-navigation'
 
 export default function ServersList({

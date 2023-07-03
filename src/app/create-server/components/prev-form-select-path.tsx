@@ -21,6 +21,7 @@ export default function PrevFormSelectPath({
                     Crear uno de estos servidores:
                     <PrevFormUserServers userGuilds={userGuilds} />
                 </div>
+                o
                 <Button
                     className="p-2 text-start"
                     onClick={handleCreateManually}
