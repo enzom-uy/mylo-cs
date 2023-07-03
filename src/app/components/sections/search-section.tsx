@@ -1,3 +1,4 @@
+import { db } from '@/config/db'
 import React from 'react'
 import SearchInput from '../search-input'
 import NadesSection from './nades-section'

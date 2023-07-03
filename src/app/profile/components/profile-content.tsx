@@ -12,7 +12,7 @@ export default function ProfileContent({
     })
     return (
         <section>
-            <div className="flex gap-2">
+            <div className="flex max-h-72 gap-2">
                 <UserLastNade url={lastNade?.video_url as string} />
                 <UserServers servers={user?.servers_is_member} />
             </div>

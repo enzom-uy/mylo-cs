@@ -16,7 +16,7 @@ export interface UserServers {
 
 export default async function ServersPage() {
     const session = await getServerSession(authOptions)
-    const userServers = await getUserServers({ session: session })
+    const userServers = await getUserServers({ session })
     return (
         <>
             <h1>Mis servidores</h1>

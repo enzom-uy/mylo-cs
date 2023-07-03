@@ -27,7 +27,7 @@ export default function PrevFormUserServers({
     } = usePagination(userGuilds, itemsPerPage)
 
     const handleSelectServer = (g: Guild) => {
-        // localStorage.setItem('selectedGuild', JSON.stringify(g))
+        localStorage.setItem('selectedGuild', JSON.stringify(g))
         router.push('/create-server/form')
     }
 

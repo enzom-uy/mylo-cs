@@ -11,7 +11,7 @@ export default async function ProfilePage() {
     if (!session) redirect('/')
     const user = await getUser({ id: session.id })
     return (
-        <div className="flex w-full flex-col items-center gap-4 rounded-md p-4">
+        <div className="flex w-full flex-col items-center gap-4 rounded-md border border-border-dark p-4">
             <ProfileHeader user={user} />
             <Separator />
             <ProfileContent user={user} />

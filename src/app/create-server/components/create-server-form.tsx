@@ -45,13 +45,11 @@ export const createServerSchema = z.object({
 
 export default function CreateServerForm() {
     const { data: session } = useSession()
-    const [selectedGuild, setSelectedGuild] = useState<Guild | undefined>()
-    useEffect(() => {
-        const guild = localStorage.getItem('selectedGuild')
-        const g = JSON.parse(guild!) as Guild
-        setSelectedGuild(g)
-    }, [])
+    const selectedGuild = JSON.parse(
+        localStorage.getItem('selectedGuild') as string
+    )
     const userSelectedGuildPrev = !!selectedGuild
+    console.log(selectedGuild?.id)
     const router = useRouter()
     const form = useForm<z.infer<typeof createServerSchema>>({
         resolver: zodResolver(createServerSchema),
