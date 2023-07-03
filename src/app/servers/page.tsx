@@ -1,8 +1,34 @@
 import { db } from '@/config/db'
 import { getServerSession } from 'next-auth'
 import React from 'react'
-import ServerCard from './components/server-card'
 import { authOptions } from '../api/auth/[...nextauth]/route'
+import { User, UserServerRole } from '@prisma/client'
+import ServersList from './components/servers-list'
+
+// export interface UserServers {
+//     servers_is_member: {
+//         name: string
+//         description: string | null
+//         UserServerRole: {
+//             id: string
+//             user_id: string
+//             server_id: string
+//             role: Server_Role
+//         }[]
+//         members: []
+//         id: string
+//     }[]
+// }
+
+export interface UserServers {
+    servers_is_member: {
+        name: string
+        description: string | null
+        UserServerRole: UserServerRole[]
+        members: User[]
+        id: string
+    }[]
+}
 
 export default async function ServersPage() {
     const session = await getServerSession(authOptions)
@@ -26,17 +52,11 @@ export default async function ServersPage() {
         <>
             <h1>Mis servidores</h1>
             <section className="w-full">
-                <ul>
-                    {userServers?.servers_is_member.map((server) => (
-                        <ServerCard
-                            key={server.name}
-                            name={server.name}
-                            description={server.description}
-                            members={server.members.length}
-                            id={server.id}
-                        />
-                    ))}
-                </ul>
+                {!!userServers ? (
+                    <ServersList userServers={userServers} />
+                ) : (
+                    'Nada'
+                )}
             </section>
         </>
     )

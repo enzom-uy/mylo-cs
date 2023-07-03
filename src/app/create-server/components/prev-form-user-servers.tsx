@@ -5,6 +5,7 @@ import DiscordPlaceholder from '@/app/components/discord-placeholder-svg'
 import usePagination from '@/hooks/usePagination'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import PaginationNavigation from '@/app/components/pagination-navigation'
 
 const COLORS = ['#5d64f4', '#ed4545', '#fca31d', '#3da45c', '#ed459c']
 const randomColor = COLORS[Math.floor(Math.random() * COLORS.length)]
@@ -16,12 +17,14 @@ export default function PrevFormUserServers({
 }) {
     const router = useRouter()
     const itemsPerPage = 5
-    const { totalPages, currentPage, prevPage, nextPage, goToPage } =
-        usePagination(userGuilds, itemsPerPage)
-
-    const startIndex = (currentPage - 1) * itemsPerPage
-    const endIndex = startIndex + itemsPerPage
-    const currentPageItems = userGuilds.slice(startIndex, endIndex)
+    const {
+        totalPages,
+        currentPage,
+        prevPage,
+        nextPage,
+        goToPage,
+        currentPageItems
+    } = usePagination(userGuilds, itemsPerPage)
 
     const handleSelectServer = (g: Guild) => {
         localStorage.setItem('selectedGuild', JSON.stringify(g))
@@ -60,21 +63,12 @@ export default function PrevFormUserServers({
                 ))}
             </ul>
             {totalPages > 1 && (
-                <div className="flex w-full justify-between">
-                    <button
-                        onClick={() => goToPage(prevPage as number)}
-                        disabled={!prevPage && true}
-                    >
-                        <ArrowLeft />
-                    </button>
-                    <span>{currentPage}</span>
-                    <button
-                        onClick={() => goToPage(nextPage as number)}
-                        disabled={!nextPage && true}
-                    >
-                        <ArrowRight />
-                    </button>
-                </div>
+                <PaginationNavigation
+                    goToPage={goToPage}
+                    nextPage={nextPage}
+                    prevPage={prevPage}
+                    currentPage={currentPage}
+                />
             )}
         </>
     )

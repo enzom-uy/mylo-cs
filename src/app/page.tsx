@@ -18,7 +18,7 @@ const Home = async ({
                     userId={session?.id}
                 />
             ) : (
-                <p>
+                <p className="mt-6">
                     Debes iniciar sesión y estar en un servidor para buscar
                     granadas.
                 </p>

@@ -9,6 +9,9 @@ type PaginationHook<T> = {
     nextPage: number | null
     goToPage: (page: number) => void
     pageNumbers: number[]
+    startIndex: number
+    endIndex: number
+    currentPageItems: T[]
 }
 
 const usePagination = <T,>(
@@ -31,13 +34,20 @@ const usePagination = <T,>(
         (_, index) => index + 1
     )
 
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    const currentPageItems = items.slice(startIndex, endIndex)
+
     return {
         totalPages,
         currentPage,
         prevPage,
         nextPage,
         goToPage,
-        pageNumbers
+        pageNumbers,
+        startIndex,
+        endIndex,
+        currentPageItems
     }
 }
 
