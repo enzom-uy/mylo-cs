@@ -12,7 +12,7 @@ export default async function ProfilePage() {
     const user = await getUser({ id: session.id })
     return (
         <div className="flex w-full flex-col items-center gap-4 rounded-md border border-border-dark p-4">
-            <ProfileHeader user={user} />
+            <ProfileHeader user={user} session={session} />
             <Separator />
             <ProfileContent user={user} />
         </div>
