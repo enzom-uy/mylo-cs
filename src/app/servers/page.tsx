@@ -3,6 +3,7 @@ import { authOptions } from '../api/auth/[...nextauth]/route'
 import { User, UserServerRole } from '@prisma/client'
 import ServersList from './components/servers-list'
 import { getUserServers } from '@/utils/getUserServers'
+import { redirect } from 'next/navigation'
 
 export interface UserServers {
     servers_is_member: {
@@ -16,6 +17,7 @@ export interface UserServers {
 
 export default async function ServersPage() {
     const session = await getServerSession(authOptions)
+    if (!session) redirect('/')
     const userServers = await getUserServers({ session })
     return (
         <>

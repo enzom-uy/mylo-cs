@@ -10,9 +10,15 @@ export default function UserLastNade({ url }: { url: string }) {
                 última granada subida
             </span>
 
-            <AspectRatio ratio={16 / 12} className="rounded-sm">
-                <VideoPlayer url={url} />
-            </AspectRatio>
+            {url ? (
+                <AspectRatio ratio={16 / 12} className="rounded-sm">
+                    <VideoPlayer url={url} />
+                </AspectRatio>
+            ) : (
+                <p className="font-semibold text-muted-foreground">
+                    Todavía no has subido ninguna granada.
+                </p>
+            )}
         </div>
     )
 }

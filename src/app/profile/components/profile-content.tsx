@@ -7,9 +7,12 @@ export default function ProfileContent({
 }: {
     user: UserWithNadesAndServers | null
 }) {
-    const lastNade = user?.nades.reduce((prev, current) => {
-        return current.created_at > prev.created_at ? current : prev
-    })
+    let lastNade
+    if (!!user?.nades.length) {
+        lastNade = user?.nades.reduce((prev, current) => {
+            return current.created_at > prev.created_at ? current : prev
+        })
+    }
     return (
         <section>
             <div className="flex max-h-72 gap-2">
