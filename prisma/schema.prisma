@@ -29,15 +29,17 @@ model Nade {
     map_name       String
     user_id        String
     server_id      String?
+    serverId       String?
     author         User        @relation(fields: [user_id], references: [id])
     map            Map         @relation(fields: [map_name], references: [name])
     nade_type      NadeType    @relation(fields: [nade_type_name], references: [name])
-    Server         Server?     @relation(fields: [server_id], references: [id])
+    Server         Server?     @relation(fields: [serverId], references: [id])
 
     @@index([nade_type_name])
     @@index([map_name])
     @@index([user_id])
     @@index([server_id])
+    @@index([serverId])
 }
 
 model Account {
@@ -119,33 +121,6 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
-model ServerMembers {
-    A String
-    B String
-
-    @@unique([A, B], map: "_ServerMembers_AB_unique")
-    @@index([B], map: "_ServerMembers_B_index")
-    @@map("_ServerMembers")
-}
-
-model ServerRoleToUser {
-    A ServerRoleToUser_A
-    B String
-
-    @@unique([A, B], map: "_ServerRoleToUser_AB_unique")
-    @@index([B], map: "_ServerRoleToUser_B_index")
-    @@map("_ServerRoleToUser")
-}
-
-model ServerToUser {
-    A String
-    B String
-
-    @@unique([A, B], map: "_ServerToUser_AB_unique")
-    @@index([B], map: "_ServerToUser_B_index")
-    @@map("_ServerToUser")
-}
-
 enum Nade_status {
     APPROVED
     PENDING
@@ -156,12 +131,4 @@ enum Server_Role {
     OWNER
     ADMIN
     USER
-}
-
-enum ServerRoleToUser_A {
-    OWNER
-    ADMIN
-    USER
-
-    @@map("_ServerRoleToUser_A")
 }
