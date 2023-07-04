@@ -29,8 +29,7 @@ import {
 import { NewServerData, ServerApiResponse } from '@/app/api/create-server/route'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
-import { Guild } from '@/utils/getUserGuilds'
+import { CheckedState } from '@radix-ui/react-checkbox'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
@@ -177,7 +176,11 @@ export default function CreateServerForm() {
                                 <FormControl>
                                     <Checkbox
                                         checked={field.value}
-                                        onCheckedChange={field.onChange}
+                                        onCheckedChange={
+                                            field.onChange as unknown as (
+                                                checked: CheckedState
+                                            ) => void
+                                        }
                                     />
                                 </FormControl>
                                 <div className="space-y-1 leading-none">
