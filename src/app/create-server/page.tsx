@@ -11,12 +11,12 @@ export default async function CreateServerPage() {
     const userGuilds = await getUserGuilds({
         access_token: session.access_token
     })
-    if (!userGuilds) redirect('/')
     const existingServers = await checkIfUserGuildsExist({ userGuilds })
-    const serversNotCreated = userGuilds.filter(
+    const serversNotCreated = userGuilds?.filter(
         (g) => !existingServers.some((s) => s.id === g.id)
     )
-    console.log(serversNotCreated)
+    console.log('User guilds: ', userGuilds)
+    console.log('Servers not created: ', serversNotCreated)
     return (
         <section>
             <PrevFormSelectPath userGuilds={serversNotCreated} />

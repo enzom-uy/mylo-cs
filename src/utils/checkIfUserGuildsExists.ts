@@ -4,7 +4,7 @@ import { Guild } from './getUserGuilds'
 export const checkIfUserGuildsExist = async ({
     userGuilds
 }: {
-    userGuilds: Guild[]
+    userGuilds: Guild[] | undefined
 }) => {
     const guildsId = userGuilds?.map((g) => ({ id: { contains: g.id } }))
     const existingServers = await db.server.findMany({
