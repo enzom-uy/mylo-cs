@@ -28,7 +28,7 @@ export default function UserServers({
                         <li
                             onClick={() => router.push(`/server/${s.id}`)}
                             key={s.id}
-                            className="w-full rounded-sm bg-dark-secondary p-2 transition-transform duration-150 hover:translate-x-1"
+                            className="w-full cursor-pointer rounded-sm bg-dark-secondary p-2 transition-transform duration-150 hover:translate-x-1"
                         >
                             <p className="max-w-[30ch] truncate">{s.name}</p>
                         </li>
