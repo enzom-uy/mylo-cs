@@ -17,7 +17,7 @@ export default function PrevFormSelectPath({
                             <PrevFormUserServers userGuilds={userGuilds} />
                         </>
                     ) : (
-                        <div className="flex h-[40vh] items-center gap-2 text-lg">
+                        <div className="flex h-[40vh] flex-col items-center gap-2 text-center text-lg md:flex-row">
                             <AlertCircle />
                             No hay ningún servidor del que seas dueño o todos ya
                             han sido creados.
