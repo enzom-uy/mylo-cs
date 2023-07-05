@@ -3,6 +3,7 @@ import { DataItem } from './user-data-item'
 import { UserWithNadesAndServers } from '@/utils/getUser'
 import { Session } from 'next-auth'
 import UserJoinServers from './user-join-servers'
+import UserServerDataBadges from '@/app/components/user-server-data-badges'
 
 export default function ProfileHeader({
     user,
@@ -12,9 +13,9 @@ export default function ProfileHeader({
     session: Session
 }) {
     return (
-        <div className="flex w-full flex-col flex-wrap items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex max-w-full flex-wrap items-center justify-center gap-4 sm:justify-start sm:gap-0">
-                <div className="mr-3">
+        <div className="flex w-full flex-col flex-wrap items-center gap-1 sm:flex-row sm:items-start sm:gap-4">
+            <div className="flex max-w-full flex-wrap items-start justify-center sm:justify-start">
+                <div>
                     <Image
                         src={user?.image as string}
                         alt="User profile picture"
@@ -24,21 +25,13 @@ export default function ProfileHeader({
                         className="rounded-sm"
                     />
                 </div>
-                <div className="flex flex-col justify-center overflow-hidden">
-                    <DataItem title="nombre:" content={user?.name as string} />
-                    <DataItem
-                        title="granadas subidas:"
-                        content={
-                            user?.nades && user.nades.length > 900
-                                ? '+900'
-                                : String(user?.nades?.length)
-                        }
-                    />
-                    <DataItem
-                        title="servidores:"
-                        content={String(user?.servers_is_member.length)}
-                    />
-                </div>
+            </div>
+            <div className="flex flex-col items-center overflow-hidden">
+                <p className="mb-1 max-w-[25ch] truncate">{user?.name}</p>
+                <UserServerDataBadges
+                    nades={user?.nades.length}
+                    servers={user?.servers_is_member.length}
+                />
             </div>
         </div>
     )

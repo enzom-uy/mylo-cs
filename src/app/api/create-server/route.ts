@@ -12,6 +12,7 @@ export interface NewServerData {
     serverId: string
     serverDescription: string | null | undefined
     ownerId: string
+    serverIcon?: string
 }
 
 export interface ServerApiResponse {
@@ -24,7 +25,8 @@ export interface ServerApiResponse {
 export async function POST(req: NextRequest) {
     try {
         const body = (await req.json()) as NewServerData
-        const { serverName, serverId, serverDescription, ownerId } = body
+        const { serverName, serverId, serverDescription, ownerId, serverIcon } =
+            body
 
         if (serverName.length < serverNameMinLength) throw new Error()
         if (serverId.length < serverIdMinLength) throw new Error()
@@ -34,6 +36,7 @@ export async function POST(req: NextRequest) {
                 id: serverId,
                 name: serverName,
                 description: serverDescription ? serverDescription : null,
+                server_icon: serverIcon ? serverIcon : null,
                 admins: {
                     connect: {
                         id: ownerId

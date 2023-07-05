@@ -6,9 +6,7 @@ import DiscordPlaceholder from '@/app/components/discord-placeholder-svg'
 import usePagination from '@/hooks/usePagination'
 import { useRouter } from 'next/navigation'
 import PaginationNavigation from '@/app/components/pagination-navigation'
-
-const COLORS = ['#5d64f4', '#ed4545', '#fca31d', '#3da45c', '#ed459c']
-const randomColor = COLORS[Math.floor(Math.random() * COLORS.length)]
+import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
 
 export default function PrevFormUserServers({
     userGuilds
@@ -51,7 +49,10 @@ export default function PrevFormUserServers({
                         ) : (
                             <div
                                 className={`h-full max-h-[34px] w-full max-w-[34px] rounded-sm p-[2px]`}
-                                style={{ backgroundColor: randomColor }}
+                                style={{
+                                    backgroundColor:
+                                        randomDiscordPlaceholderColor
+                                }}
                             >
                                 <DiscordPlaceholder />
                             </div>

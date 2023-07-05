@@ -8,6 +8,11 @@ export const getServer = async ({
     const server = await db.server.findFirst({
         where: {
             id: params.serverId
+        },
+        include: {
+            admins: true,
+            members: true,
+            nades: true
         }
     })
 

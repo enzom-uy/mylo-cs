@@ -109,13 +109,16 @@ body {
         @apply bg-gradient-csgo bg-clip-text text-transparent;
     }
     .transparent-card {
-        @apply flex flex-grow flex-col items-start gap-2 rounded-md border border-border-dark p-4;
+        @apply flex w-full flex-grow flex-col items-start gap-2 rounded-md border border-border-dark p-4;
     }
     .btn {
         @apply flex w-fit items-center gap-2 bg-dark-secondary text-sm;
     }
     .fake-btn {
         @apply flex w-fit cursor-pointer items-center gap-2 rounded-md bg-dark-secondary px-4 py-2 text-sm hover:bg-primary/90;
+    }
+    .server-badge {
+        @apply flex max-h-6 w-fit items-center gap-2 text-sm;
     }
 }
 

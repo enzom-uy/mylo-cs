@@ -44,6 +44,7 @@ model Server {
     id             String           @id
     name           String
     description    String?          @db.Text
+    server_icon    String?
     members        User[]           @relation("ServerMembers")
     admins         User[]
     UserServerRole UserServerRole[]

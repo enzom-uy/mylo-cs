@@ -30,12 +30,13 @@ import { NewServerData, ServerApiResponse } from '@/app/api/create-server/route'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { CheckedState } from '@radix-ui/react-checkbox'
+import { Guild } from '../utils/getUserGuilds'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
         message: `El nombre del servidor debe contener al menos ${serverNameMinLength} caracteres.`
     }),
-    serverDescription: z.string().optional(),
+    serverDescription: z.string().max(200).optional(),
     serverId: z.string().min(serverIdMinLength, {
         message: 'El ID del servidor debe contener al menos 15 caracteres.'
     }),
@@ -46,7 +47,7 @@ export default function CreateServerForm() {
     const { data: session } = useSession()
     const selectedGuild = JSON.parse(
         localStorage.getItem('selectedGuild') as string
-    )
+    ) as Guild
     const userSelectedGuildPrev = !!selectedGuild
     console.log(selectedGuild?.id)
     const router = useRouter()
@@ -75,7 +76,10 @@ export default function CreateServerForm() {
             ownerId: session?.id as string,
             serverName,
             serverId,
-            serverDescription
+            serverDescription,
+            serverIcon: selectedGuild.icon
+                ? `https://cdn.discordapp.com/icons/${selectedGuild.id}/${selectedGuild.icon}.png`
+                : undefined
         }
         const response = (await axios
             .post('/api/create-server', axiosBody)
