@@ -1,8 +1,6 @@
 import Image from 'next/image'
-import { DataItem } from './user-data-item'
 import { UserWithNadesAndServers } from '@/utils/getUser'
 import { Session } from 'next-auth'
-import UserJoinServers from './user-join-servers'
 import UserServerDataBadges from '@/app/components/user-server-data-badges'
 
 export default function ProfileHeader({
@@ -26,7 +24,7 @@ export default function ProfileHeader({
                     />
                 </div>
             </div>
-            <div className="flex flex-col items-center overflow-hidden">
+            <div className="flex flex-col items-center overflow-hidden md:items-start">
                 <p className="mb-1 max-w-[25ch] truncate">{user?.name}</p>
                 <UserServerDataBadges
                     nades={user?.nades.length}
