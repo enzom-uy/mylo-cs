@@ -1,13 +1,16 @@
+'use client'
+
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Badge } from '@shad/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@shad/card'
-import { NadeWithAuthorAndNadeType } from './sections/nades-section'
+import { NadeWithAuthorAndMap } from './sections/nades-section'
 import VideoPlayer from './video-player'
 
 import 'plyr-react/plyr.css'
+import { NadeAuthorNadeType } from '@/utils/getServer'
 
 interface Props {
-    nade: NadeWithAuthorAndNadeType
+    nade: NadeWithAuthorAndMap | NadeAuthorNadeType
 }
 
 const NadeCard: React.FC<Props> = ({ nade }) => {

@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import { Separator } from '@/shad-components/separator'
 import UserServerDataBadges from '@/app/components/user-server-data-badges'
+import ServerNades from '../components/server-nades'
 
 export default async function ServerPage({
     params
@@ -22,7 +23,7 @@ export default async function ServerPage({
     const userIsMember = members.some((member) => member.id === session?.id)
     return (
         <>
-            <div className="mb-4 flex w-full flex-col items-center gap-2 md:flex-row md:items-start md:justify-start">
+            <div className="mb-4 flex w-full flex-col items-center gap-4 md:flex-row md:items-start md:justify-start">
                 {server_icon ? (
                     <Image
                         className="rounded-md"
@@ -50,7 +51,8 @@ export default async function ServerPage({
                     />
                 </div>
             </div>
-            <Separator />
+            <Separator className="mb-4" />
+            <ServerNades nades={nades} />
         </>
     )
 }

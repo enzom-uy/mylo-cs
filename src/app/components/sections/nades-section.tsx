@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import NadeCard from '../nade-card'
 import { Nade } from '@prisma/client'
 
-export interface NadeWithAuthorAndNadeType extends Nade {
+export interface NadeWithAuthorAndMap extends Nade {
     author: {
         name: string
     }
@@ -13,7 +13,7 @@ export interface NadeWithAuthorAndNadeType extends Nade {
 }
 
 interface Props {
-    nades: NadeWithAuthorAndNadeType[]
+    nades: NadeWithAuthorAndMap[]
 }
 
 const NadesSection: React.FC<Props> = ({ nades }) => {
@@ -42,8 +42,6 @@ const NadesSection: React.FC<Props> = ({ nades }) => {
             }))
         }
     }, [nades])
-    console.log(nades)
-
     return (
         <section className="flex w-full flex-col items-center gap-4">
             {!nades ? (
