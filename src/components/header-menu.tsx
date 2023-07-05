@@ -36,9 +36,6 @@ export default function HeaderMenu({
                     <UserCircle className="w-4" /> {userName}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => router.push('/servers')}>
-                    <Users className="w-4" /> Mis Servidores
-                </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => router.push('/create-server')}>
                     <PlusSquare className="w-4" /> Crear Servidor
                 </DropdownMenuItem>

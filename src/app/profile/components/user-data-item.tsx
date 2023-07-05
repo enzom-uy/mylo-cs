@@ -6,9 +6,9 @@ export const DataItem = ({
     content: string
 }) => {
     return (
-        <div className="flex items-center gap-1">
+        <div className="flex max-w-[200px] items-center gap-1 sm:max-w-[300px]">
             <p className="text-sm font-bold uppercase">{title}</p>
-            <span>{content}</span>
+            <span className="truncate">{content}</span>
         </div>
     )
 }

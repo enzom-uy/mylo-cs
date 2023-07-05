@@ -14,7 +14,7 @@ export default async function ProfilePage() {
         <div className="flex w-full flex-col items-center gap-4 rounded-md border border-border-dark p-4">
             <ProfileHeader user={user} session={session} />
             <Separator />
-            <ProfileContent user={user} />
+            <ProfileContent user={user} session={session} />
         </div>
     )
 }

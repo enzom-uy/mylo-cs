@@ -12,8 +12,8 @@ export default function ProfileHeader({
     session: Session
 }) {
     return (
-        <div className="flex w-full flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-start sm:gap-0">
+        <div className="flex w-full flex-col flex-wrap items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex max-w-full flex-wrap items-center justify-center gap-4 sm:justify-start sm:gap-0">
                 <div className="mr-3">
                     <Image
                         src={user?.image as string}
@@ -24,23 +24,21 @@ export default function ProfileHeader({
                         className="rounded-sm"
                     />
                 </div>
-                <div className="flex flex-col justify-center">
+                <div className="flex flex-col justify-center overflow-hidden">
                     <DataItem title="nombre:" content={user?.name as string} />
                     <DataItem
                         title="granadas subidas:"
-                        content={String(user?.nades.length)}
+                        content={
+                            user?.nades && user.nades.length > 900
+                                ? '+900'
+                                : String(user?.nades?.length)
+                        }
                     />
                     <DataItem
                         title="servidores:"
                         content={String(user?.servers_is_member.length)}
                     />
                 </div>
-            </div>
-            <div className="flex w-full justify-center min-[374px]:w-fit min-[374px]:justify-end">
-                <UserJoinServers
-                    id={session.id}
-                    access_token={session.access_token}
-                />
             </div>
         </div>
     )

@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth'
 import LoginDiscordButton from '../login-discord-btn'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import InviteBot from '@/components/invite-bot'
 
 const Hero = async () => {
     const session = await getServerSession(authOptions)
@@ -20,7 +21,10 @@ const Hero = async () => {
                         al siguiente nivel.
                     </p>
                 </div>
-                {!session && <LoginDiscordButton />}
+                <div className="flex flex-wrap items-center gap-4">
+                    {!session && <LoginDiscordButton />}
+                    <InviteBot />
+                </div>
             </div>
         </section>
     )
