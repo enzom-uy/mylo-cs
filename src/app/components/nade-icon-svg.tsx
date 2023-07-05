@@ -5,8 +5,6 @@ export default function NadeIconSvg(props: SVGProps<SVGSVGElement>) {
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
-            // style="height: 512px; width: 512px;"
-            // style={{ height: '513px', width: '512px' }}
             {...props}
         >
             <g transform="translate(0,0)">
@@ -16,7 +14,7 @@ export default function NadeIconSvg(props: SVGProps<SVGSVGElement>) {
                     fillOpacity="0"
                     stroke="#F8FAFC"
                     strokeOpacity="1"
-                    strokeWidth="15"
+                    strokeWidth="25"
                 ></path>
             </g>
         </svg>
