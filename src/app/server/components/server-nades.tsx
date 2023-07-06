@@ -2,49 +2,32 @@
 
 import NadeCard from '@/app/components/nade-card'
 import { NadeAuthorNadeType } from '@/services/getServer'
-import { Input } from '@/shad-components/input'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import ServerNadesInput from './server-nades-input'
 
 interface Props {
     nades: NadeAuthorNadeType[]
+    serverId: string
+    userId: string
 }
 
-export default function ServerNades({ nades }: Props) {
-    const [search, setSearch] = useState<string>('')
-    const [filteredNades, setFilteredNades] = useState<
-        NadeAuthorNadeType[] | null
-    >(null)
-    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-        setSearch(value)
-
-        const normalizedSearch = search.trim().toLowerCase()
-        const filtered = nades?.filter(
-            (nade) =>
-                nade.title.toLowerCase().includes(normalizedSearch) ||
-                nade.author.name.toLowerCase().includes(normalizedSearch) ||
-                nade.map_name.toLowerCase().includes(normalizedSearch) ||
-                nade.nade_type.name.toLowerCase().includes(normalizedSearch)
-        )
-        setFilteredNades(search === '' ? null : filtered)
+export default function ServerNades({ serverId, userId }: Props) {
+    const [nades, setNades] = useState<NadeAuthorNadeType[] | undefined>()
+    const getNades = (fetchedNades: NadeAuthorNadeType[]) => {
+        return setNades(fetchedNades)
     }
-    useEffect(() => {
-        if (search === '') setFilteredNades(null)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search])
-
     return (
         <div className="flex w-full flex-col gap-2">
             <div>
                 <h2 className="text-lg font-semibold uppercase">granadas</h2>
-                <Input
-                    onChange={handleSearchChange}
-                    value={search}
-                    className="mb-4"
+                <ServerNadesInput
+                    userId={userId}
+                    serverId={serverId}
+                    getNades={getNades}
                 />
             </div>
             <div className="flex w-full flex-wrap justify-center gap-2">
-                {filteredNades?.map((nade) => (
+                {nades?.map((nade) => (
                     <div
                         key={nade.id}
                         className="flex w-full max-w-xs justify-start"

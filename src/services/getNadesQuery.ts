@@ -2,10 +2,12 @@ import { db } from '@/config/db'
 
 export const getNadesQuery = async ({
     query,
-    userId
+    userId,
+    serverId
 }: {
     query?: string
     userId: string
+    serverId?: string
 }) => {
     const queryWithSpaces = query && `%${query.replaceAll('-', ' ')}%`
     const nades = await db.nade.findMany({
@@ -13,9 +15,11 @@ export const getNadesQuery = async ({
             Server: {
                 members: {
                     some: {
-                        id: userId
+                        // I don't want users to see nades of other servers if they're searching for nades in a specific server page
+                        id: serverId ? undefined : userId
                     }
-                }
+                },
+                id: serverId ? serverId : undefined
             },
             OR: [
                 {

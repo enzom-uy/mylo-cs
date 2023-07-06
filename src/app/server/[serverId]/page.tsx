@@ -29,7 +29,11 @@ export default async function ServerPage({
                 description={description}
             />
             <Separator className="mb-4" />
-            <ServerNades nades={nades} />
+            <ServerNades
+                nades={nades}
+                serverId={server.id}
+                userId={session!.id}
+            />
         </>
     )
 }
