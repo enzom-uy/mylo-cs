@@ -29,19 +29,27 @@ export default function ServerNades({ nades }: Props) {
     }
     useEffect(() => {
         if (search === '') setFilteredNades(nades)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search])
-    console.log(search)
+
     return (
-        <div className="flex w-full max-w-sm flex-col justify-center">
-            <h2 className="text-lg font-semibold uppercase">granadas</h2>
-            <Input
-                onChange={handleSearchChange}
-                value={search}
-                className="mb-4"
-            />
-            <div className=" flex flex-col gap-4">
+        <div className="flex w-full flex-col gap-2">
+            <div>
+                <h2 className="text-lg font-semibold uppercase">granadas</h2>
+                <Input
+                    onChange={handleSearchChange}
+                    value={search}
+                    className="mb-4"
+                />
+            </div>
+            <div className="flex w-full flex-wrap justify-center gap-2">
                 {filteredNades.map((nade) => (
-                    <NadeCard nade={nade} key={nade.id} />
+                    <div
+                        key={nade.id}
+                        className="flex w-full max-w-xs justify-start"
+                    >
+                        <NadeCard nade={nade} key={nade.id} />
+                    </div>
                 ))}
             </div>
         </div>
