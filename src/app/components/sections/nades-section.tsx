@@ -43,7 +43,7 @@ const NadesSection: React.FC<Props> = ({ nades }) => {
         }
     }, [nades])
     return (
-        <section className="flex w-full flex-col items-center gap-4">
+        <section className="flex w-full flex-wrap justify-center gap-4">
             {!nades ? (
                 <p>Haz una búsqueda para ver las granadas.</p>
             ) : !state.loading && nades.length <= 0 ? (

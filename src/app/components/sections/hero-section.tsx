@@ -6,7 +6,7 @@ import InviteBot from '@/app/components/invite-bot'
 const Hero = async () => {
     const session = await getServerSession(authOptions)
     return (
-        <section className="w-fit border-b border-b-border-dark pb-6">
+        <section className="flex w-full justify-center border-b border-b-border-dark px-10 pb-6">
             <div className="flex flex-col gap-3">
                 <h1 className="text-3xl font-semibold">
                     Mejora tu juego con granadas útiles.

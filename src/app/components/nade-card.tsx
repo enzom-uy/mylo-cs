@@ -18,7 +18,7 @@ const NadeCard: React.FC<Props> = ({ nade }) => {
     const author = nade.author.name
     const title = uppercaseFirstLetter(nade.title)
     return (
-        <Card className="w-full max-w-lg border-border-dark bg-dark">
+        <Card className="w-full max-w-lg border-border-dark bg-dark md:max-w-md">
             <CardHeader>
                 <CardTitle className="m-0 text-light">{title}</CardTitle>
                 <div className="flex flex-wrap items-center gap-2 text-light-muted">
