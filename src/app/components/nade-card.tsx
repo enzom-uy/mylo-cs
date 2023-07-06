@@ -1,13 +1,14 @@
 'use client'
 
-import VideoPlayer from './video-player'
+import { NadeAuthorNadeType } from '@/services/getServer'
+import { uppercaseFirstLetter } from '@/utils/uppercaseFirstLetter'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Badge } from '@shad/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@shad/card'
 import { NadeWithAuthorAndMap } from './sections/nades-section'
-import { NadeAuthorNadeType } from '@/services/getServer'
-import { uppercaseFirstLetter } from '@/utils/uppercaseFirstLetter'
+import VideoPlayer from './video-player'
 
+import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
 import 'plyr-react/plyr.css'
 
 interface Props {
@@ -17,8 +18,11 @@ interface Props {
 const NadeCard: React.FC<Props> = ({ nade }) => {
     const author = nade.author.name
     const title = uppercaseFirstLetter(nade.title)
+    const color = randomDiscordPlaceholderColor
     return (
-        <Card className="w-full max-w-lg border-border-dark bg-dark md:max-w-md">
+        <Card
+            className={`w-full max-w-lg border-border-dark bg-dark hover:shadow-hover-accent md:max-w-md`}
+        >
             <CardHeader>
                 <CardTitle className="m-0 text-light">{title}</CardTitle>
                 <div className="flex flex-wrap items-center gap-2 text-light-muted">

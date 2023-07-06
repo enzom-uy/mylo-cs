@@ -66,6 +66,9 @@ module.exports = {
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)'
             },
+            boxShadow: {
+                'hover-accent': '-14px 0 0 0 rgba(56, 189, 248, 1)'
+            },
             keyframes: {
                 'accordion-down': {
                     from: { height: 0 },
