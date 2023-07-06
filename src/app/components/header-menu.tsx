@@ -24,7 +24,7 @@ export default function HeaderMenu({
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger className="h-8 w-8">
+            <DropdownMenuTrigger className="h-8 w-8" aria-label="Trigger menu">
                 <HeaderAvatar image={avatarImage} fallback={avatarFallback} />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mr-2 md:mr-0">
