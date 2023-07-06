@@ -5,7 +5,6 @@ export default function VideoPlayer({ url }: { url: string }) {
     return (
         <>
             <Plyr
-                style={{ padding: '0' }}
                 source={{
                     type: 'video',
                     sources: [
@@ -15,7 +14,7 @@ export default function VideoPlayer({ url }: { url: string }) {
                         }
                     ]
                 }}
-                muted
+                muted={true}
                 options={{
                     controls: [
                         'play',

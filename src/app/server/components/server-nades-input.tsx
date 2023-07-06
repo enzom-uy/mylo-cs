@@ -7,12 +7,14 @@ interface Props {
     serverId: string
     userId: string
     getNades: (fetchedNades: NadeAuthorNadeType[]) => void
+    isLoading: (loading: boolean) => void
 }
 
 export default function ServerNadesInput({
     serverId,
     userId,
-    getNades
+    getNades,
+    isLoading
 }: Props) {
     const [search, setSearch] = useState<string>('')
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +22,7 @@ export default function ServerNadesInput({
         setSearch(value)
     }
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        isLoading(true)
         e.preventDefault()
         const response = await axios
             .get('/api/get-nades', {
@@ -30,6 +33,7 @@ export default function ServerNadesInput({
                 }
             })
             .then((res) => res.data)
+        isLoading(false)
         getNades(response.nades)
     }
 

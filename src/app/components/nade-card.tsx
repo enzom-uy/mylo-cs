@@ -32,11 +32,14 @@ const NadeCard: React.FC<Props> = ({ nade }) => {
                 </div>
             </CardHeader>
             <CardContent className="text-light">
-                <div className="flex max-w-md justify-center rounded-[0.25rem]">
-                    <AspectRatio ratio={16 / 12} className="overflow-hidden">
+                <AspectRatio
+                    ratio={16 / 9}
+                    className="relative overflow-hidden"
+                >
+                    <div className="absolute left-0 top-0 aspect-video w-full rounded-[0.25rem] bg-black">
                         <VideoPlayer url={nade.video_url} />
-                    </AspectRatio>
-                </div>
+                    </div>
+                </AspectRatio>
             </CardContent>
         </Card>
     )

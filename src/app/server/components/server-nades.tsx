@@ -4,6 +4,7 @@ import NadeCard from '@/app/components/nade-card'
 import { NadeAuthorNadeType } from '@/services/getServer'
 import { useState } from 'react'
 import ServerNadesInput from './server-nades-input'
+import { Loader2 } from 'lucide-react'
 
 interface Props {
     nades: NadeAuthorNadeType[]
@@ -13,8 +14,12 @@ interface Props {
 
 export default function ServerNades({ serverId, userId }: Props) {
     const [nades, setNades] = useState<NadeAuthorNadeType[] | undefined>()
+    const [loading, setLoading] = useState<boolean>(false)
     const getNades = (fetchedNades: NadeAuthorNadeType[]) => {
         return setNades(fetchedNades)
+    }
+    const isLoading = (loading: boolean) => {
+        return setLoading(loading)
     }
     return (
         <div className="flex w-full flex-col gap-2">
@@ -24,18 +29,26 @@ export default function ServerNades({ serverId, userId }: Props) {
                     userId={userId}
                     serverId={serverId}
                     getNades={getNades}
+                    isLoading={isLoading}
                 />
             </div>
-            <div className="flex w-full flex-wrap justify-center gap-2">
-                {nades?.map((nade) => (
-                    <div
-                        key={nade.id}
-                        className="flex w-full max-w-xs justify-start"
-                    >
-                        <NadeCard nade={nade} key={nade.id} />
-                    </div>
-                ))}
-            </div>
+            {loading && (
+                <div className="flex w-full justify-center pt-4">
+                    <Loader2 className="animate-spin" />
+                </div>
+            )}
+            {!loading && (
+                <div className="flex w-full flex-wrap justify-center gap-2">
+                    {nades?.map((nade) => (
+                        <div
+                            key={nade.id}
+                            className="flex w-full max-w-xs justify-start"
+                        >
+                            <NadeCard nade={nade} key={nade.id} />
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     )
 }
