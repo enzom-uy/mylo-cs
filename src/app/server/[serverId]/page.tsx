@@ -18,6 +18,7 @@ export default async function ServerPage({
     const session = await getServerSession(authOptions)
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
     const userIsMember = members.some((member) => member.id === session?.id)
+    console.log('rerender desde server page')
     return (
         <>
             <ServerHeader

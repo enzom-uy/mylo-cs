@@ -8,7 +8,6 @@ import {
 } from '@shad/dropdown-menu'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { MdGroupAdd, MdLogout, MdFace } from 'react-icons/md'
 import HeaderAvatar from './header-avatar'
 import { LogOut, PlusSquare, UserCircle, Users } from 'lucide-react'
 
