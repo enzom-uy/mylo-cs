@@ -14,19 +14,19 @@ export default function UserServerDataBadges({
     const formattedNumber = (number: number) => (number > 900 ? '+900' : number)
     return (
         <div className="flex items-center gap-2">
-            {members && (
+            {members !== undefined && (
                 <Badge className="server-badge">
                     <Users className="w-4" />
                     {formattedNumber(members)}
                 </Badge>
             )}
-            {nades && (
+            {nades !== undefined && (
                 <Badge className="server-badge">
                     <NadeIconSvg className="w-4" />
                     {formattedNumber(nades)}
                 </Badge>
             )}
-            {servers && (
+            {servers !== undefined && (
                 <Badge className="server-badge">
                     <Server className="w-4" />
                     {formattedNumber(servers)}

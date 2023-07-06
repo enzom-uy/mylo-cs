@@ -11,24 +11,25 @@ interface Props {
 
 export default function ServerNades({ nades }: Props) {
     const [search, setSearch] = useState<string>('')
-    const [filteredNades, setFilteredNades] =
-        useState<NadeAuthorNadeType[]>(nades)
+    const [filteredNades, setFilteredNades] = useState<
+        NadeAuthorNadeType[] | null
+    >(null)
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         setSearch(value)
 
         const normalizedSearch = search.trim().toLowerCase()
-        const filtered = filteredNades.filter(
+        const filtered = nades?.filter(
             (nade) =>
                 nade.title.toLowerCase().includes(normalizedSearch) ||
                 nade.author.name.toLowerCase().includes(normalizedSearch) ||
                 nade.map_name.toLowerCase().includes(normalizedSearch) ||
                 nade.nade_type.name.toLowerCase().includes(normalizedSearch)
         )
-        setFilteredNades(search === '' ? nades : filtered)
+        setFilteredNades(search === '' ? null : filtered)
     }
     useEffect(() => {
-        if (search === '') setFilteredNades(nades)
+        if (search === '') setFilteredNades(null)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search])
 
@@ -43,7 +44,7 @@ export default function ServerNades({ nades }: Props) {
                 />
             </div>
             <div className="flex w-full flex-wrap justify-center gap-2">
-                {filteredNades.map((nade) => (
+                {filteredNades?.map((nade) => (
                     <div
                         key={nade.id}
                         className="flex w-full max-w-xs justify-start"
