@@ -1,4 +1,4 @@
-import { UserWithNadesAndServers } from '@/utils/getUser'
+import { UserWithNadesAndServers } from '@/services/getUser'
 import UserLastNade from './user-last-nade'
 import UserServers from './user-servers'
 import { Session } from 'next-auth'

@@ -1,4 +1,4 @@
-import { Guild } from '@/utils/getUserGuilds'
+import { Guild } from '@/services/getUserGuilds'
 import PrevFormUserServers from './prev-form-user-servers'
 import { AlertCircle } from 'lucide-react'
 

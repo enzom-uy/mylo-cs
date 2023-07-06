@@ -4,7 +4,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import { db } from '@/config/db'
 import { Adapter } from 'next-auth/adapters'
 import { AuthOptions } from 'next-auth'
-import { addUserToExistingServers } from '@/utils/addUserToExistingServers'
+import { addUserToExistingServers } from '@/services/addUserToExistingServers'
 
 let userId: string
 let newUser: boolean

@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth'
 import LoginDiscordButton from '../login-discord-btn'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import InviteBot from '@/components/invite-bot'
+import InviteBot from '@/app/components/invite-bot'
 
 const Hero = async () => {
     const session = await getServerSession(authOptions)

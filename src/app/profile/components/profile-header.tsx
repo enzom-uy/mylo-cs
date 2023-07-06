@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { UserWithNadesAndServers } from '@/utils/getUser'
+import { UserWithNadesAndServers } from '@/services/getUser'
 import { Session } from 'next-auth'
 import UserServerDataBadges from '@/app/components/user-server-data-badges'
 

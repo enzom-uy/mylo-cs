@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Guild } from '@/utils/getUserGuilds'
+import { Guild } from '@/services/getUserGuilds'
 import DiscordPlaceholder from '@/app/components/discord-placeholder-svg'
 import usePagination from '@/hooks/usePagination'
 import { useRouter } from 'next/navigation'

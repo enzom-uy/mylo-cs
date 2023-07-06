@@ -1,5 +1,5 @@
 import NadeCard from '@/app/components/nade-card'
-import { NadeAuthorNadeType } from '@/utils/getServer'
+import { NadeAuthorNadeType } from '@/services/getServer'
 
 interface Props {
     nades: NadeAuthorNadeType[]

@@ -1,13 +1,14 @@
 'use client'
 
+import VideoPlayer from './video-player'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Badge } from '@shad/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@shad/card'
 import { NadeWithAuthorAndMap } from './sections/nades-section'
-import VideoPlayer from './video-player'
+import { NadeAuthorNadeType } from '@/services/getServer'
+import { uppercaseFirstLetter } from '@/utils/uppercaseFirstLetter'
 
 import 'plyr-react/plyr.css'
-import { NadeAuthorNadeType } from '@/utils/getServer'
 
 interface Props {
     nade: NadeWithAuthorAndMap | NadeAuthorNadeType
@@ -15,10 +16,11 @@ interface Props {
 
 const NadeCard: React.FC<Props> = ({ nade }) => {
     const author = nade.author.name
+    const title = uppercaseFirstLetter(nade.title)
     return (
         <Card className="w-full max-w-lg border-border-dark bg-dark">
             <CardHeader>
-                <CardTitle className="text-light">{nade.title}</CardTitle>
+                <CardTitle className="m-0 text-light">{title}</CardTitle>
                 <div className="flex flex-wrap items-center gap-2 text-light-muted">
                     <Badge>{nade.nade_type_name}</Badge>
                     <Badge>{nade.map_name}</Badge>

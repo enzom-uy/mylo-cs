@@ -1,13 +1,10 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import DiscordPlaceholder from '@/app/components/discord-placeholder-svg'
-import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
-import { getServer } from '@/utils/getServer'
+import { getServer } from '@/services/getServer'
 import { getServerSession } from 'next-auth'
-import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import { Separator } from '@/shad-components/separator'
-import UserServerDataBadges from '@/app/components/user-server-data-badges'
 import ServerNades from '../components/server-nades'
+import ServerHeader from './components/server-header'
 
 export default async function ServerPage({
     params
@@ -23,34 +20,13 @@ export default async function ServerPage({
     const userIsMember = members.some((member) => member.id === session?.id)
     return (
         <>
-            <div className="mb-4 flex w-full flex-col items-center gap-4 md:flex-row md:items-start md:justify-start">
-                {server_icon ? (
-                    <Image
-                        className="rounded-md"
-                        src={server_icon}
-                        alt="Server icon"
-                        width={100}
-                        height={100}
-                    />
-                ) : (
-                    <div
-                        className="h-fit w-[100px] rounded-md p-2"
-                        style={{
-                            backgroundColor: randomDiscordPlaceholderColor
-                        }}
-                    >
-                        <DiscordPlaceholder />
-                    </div>
-                )}
-
-                <div className="flex flex-col items-center gap-1 md:items-start">
-                    <h1 className="m-0 w-fit text-center">{name}</h1>
-                    <UserServerDataBadges
-                        members={members.length}
-                        nades={nades.length}
-                    />
-                </div>
-            </div>
+            <ServerHeader
+                name={name}
+                server_icon={server_icon}
+                nades={nades}
+                members={members}
+                description={description}
+            />
             <Separator className="mb-4" />
             <ServerNades nades={nades} />
         </>

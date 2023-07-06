@@ -1,8 +1,7 @@
-import { db } from '@/config/db'
 import React from 'react'
 import SearchInput from '../search-input'
 import NadesSection from './nades-section'
-import { getNadesQuery } from '@/utils/getNadesQuery'
+import { getNadesQuery } from '@/services/getNadesQuery'
 
 interface Props {
     query?: string

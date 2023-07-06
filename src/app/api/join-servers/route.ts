@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { addUserToExistingServers } from '@/utils/addUserToExistingServers'
+import { addUserToExistingServers } from '@/services/addUserToExistingServers'
 import { ServerApiResponse } from '../create-server/route'
 
 interface Body {
