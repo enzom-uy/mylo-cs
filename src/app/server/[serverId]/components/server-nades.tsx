@@ -5,6 +5,7 @@ import { NadeAuthorNadeType } from '@/services/getServer'
 import { useState } from 'react'
 import ServerNadesInput from './server-nades-input'
 import { Loader2 } from 'lucide-react'
+import UserServerDataBadges from '@/app/components/user-server-data-badges'
 
 interface Props {
     nades: NadeAuthorNadeType[]
@@ -12,19 +13,26 @@ interface Props {
     userId: string
 }
 
-export default function ServerNades({ serverId, userId }: Props) {
-    const [nades, setNades] = useState<NadeAuthorNadeType[] | undefined>()
+export default function ServerNades({ serverId, userId, nades }: Props) {
+    const [foundedNades, setFoundedNades] = useState<
+        NadeAuthorNadeType[] | undefined
+    >()
     const [loading, setLoading] = useState<boolean>(false)
     const getNades = (fetchedNades: NadeAuthorNadeType[]) => {
-        return setNades(fetchedNades)
+        return setFoundedNades(fetchedNades)
     }
     const isLoading = (loading: boolean) => {
         return setLoading(loading)
     }
     return (
-        <div className="flex w-full flex-col gap-2">
+        <section className="flex w-full flex-col gap-2">
             <div>
-                <h2 className="text-lg font-semibold uppercase">granadas</h2>
+                <div className="mb-2 flex flex-wrap items-center gap-2">
+                    <h2 className="m-0 w-fit text-lg font-semibold uppercase">
+                        granadas
+                    </h2>
+                    <UserServerDataBadges nades={nades?.length} />
+                </div>
                 <ServerNadesInput
                     userId={userId}
                     serverId={serverId}
@@ -39,7 +47,7 @@ export default function ServerNades({ serverId, userId }: Props) {
             )}
             {!loading && (
                 <div className="flex w-full flex-wrap justify-center gap-2">
-                    {nades?.map((nade) => (
+                    {foundedNades?.map((nade) => (
                         <div
                             key={nade.id}
                             className="flex w-full max-w-xs justify-start"
@@ -49,6 +57,6 @@ export default function ServerNades({ serverId, userId }: Props) {
                     ))}
                 </div>
             )}
-        </div>
+        </section>
     )
 }
