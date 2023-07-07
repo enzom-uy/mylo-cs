@@ -8,13 +8,17 @@ interface Props {
     userId: string
     getNades: (fetchedNades: NadeAuthorNadeType[]) => void
     isLoading: (loading: boolean) => void
+    isAdmin?: boolean
+    nades?: NadeAuthorNadeType[]
 }
 
 export default function ServerNadesInput({
     serverId,
     userId,
     getNades,
-    isLoading
+    isLoading,
+    isAdmin,
+    nades
 }: Props) {
     const [search, setSearch] = useState<string>('')
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,17 +28,39 @@ export default function ServerNadesInput({
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         isLoading(true)
         e.preventDefault()
-        const response = await axios
-            .get('/api/get-nades', {
-                params: {
-                    serverId,
-                    query: search,
-                    userId
-                }
-            })
-            .then((res) => res.data)
-        isLoading(false)
-        getNades(response.nades)
+        switch (isAdmin) {
+            case true:
+                const normalizedSearch = search.trim().toLowerCase()
+                const filtered = nades?.filter(
+                    (nade) =>
+                        nade.title.toLowerCase().includes(normalizedSearch) ||
+                        nade.author.name
+                            .toLowerCase()
+                            .includes(normalizedSearch) ||
+                        nade.map_name
+                            .toLowerCase()
+                            .includes(normalizedSearch) ||
+                        nade.nade_type.name
+                            .toLowerCase()
+                            .includes(normalizedSearch)
+                )
+                isLoading(false)
+                getNades(filtered!)
+                break
+            default:
+                const response = await axios
+                    .get('/api/get-nades', {
+                        params: {
+                            serverId,
+                            query: search,
+                            userId
+                        }
+                    })
+                    .then((res) => res.data)
+                isLoading(false)
+                getNades(response.nades)
+                break
+        }
     }
 
     return (

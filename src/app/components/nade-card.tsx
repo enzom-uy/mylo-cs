@@ -7,28 +7,34 @@ import { Badge } from '@shad/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@shad/card'
 import { NadeWithAuthorAndMap } from './sections/nades-section'
 import VideoPlayer from './video-player'
-
-import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
-import 'plyr-react/plyr.css'
+import AdminControlsDropdown from '../server/[serverId]/admin/components/admin-controls-dropdown'
 
 interface Props {
     nade: NadeWithAuthorAndMap | NadeAuthorNadeType
+    isAdmin?: boolean
 }
 
-const NadeCard: React.FC<Props> = ({ nade }) => {
+const NadeCard: React.FC<Props> = ({ nade, isAdmin }) => {
+    const { nade_type_name, map_name, status, video_url } = nade
     const author = nade.author.name
     const title = uppercaseFirstLetter(nade.title)
-    const color = randomDiscordPlaceholderColor
+    const isPending = status === 'PENDING'
+
     return (
         <Card
-            className={`w-full max-w-lg border-border-dark bg-dark hover:shadow-hover-accent md:max-w-md`}
+            className={`w-full max-w-lg border-border-dark bg-dark md:max-w-md`}
         >
             <CardHeader>
-                <CardTitle className="m-0 text-light">{title}</CardTitle>
-                <div className="flex flex-wrap items-center gap-2 text-light-muted">
-                    <Badge>{nade.nade_type_name}</Badge>
-                    <Badge>{nade.map_name}</Badge>
-                    <Badge>
+                <div className="flex items-center">
+                    <CardTitle className="m-0 text-light">{title}</CardTitle>
+                    {isAdmin && <AdminControlsDropdown isPending={isPending} />}
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                    <Badge className="text-muted-foreground">
+                        {nade_type_name}
+                    </Badge>
+                    <Badge className="text-muted-foreground">{map_name}</Badge>
+                    <Badge className="text-muted-foreground">
                         <p className="max-w-[9ch] overflow-hidden text-ellipsis whitespace-nowrap ">
                             {author}
                         </p>
@@ -41,7 +47,7 @@ const NadeCard: React.FC<Props> = ({ nade }) => {
                     className="relative overflow-hidden"
                 >
                     <div className="absolute left-0 top-0 aspect-video w-full rounded-[0.25rem] bg-black">
-                        <VideoPlayer url={nade.video_url} />
+                        <VideoPlayer url={video_url} />
                     </div>
                 </AspectRatio>
             </CardContent>

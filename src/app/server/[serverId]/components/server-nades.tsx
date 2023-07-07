@@ -11,16 +11,24 @@ interface Props {
     nades: NadeAuthorNadeType[]
     serverId: string
     userId: string
+    isAdmin?: boolean
 }
 
-export default function ServerNades({ serverId, userId, nades }: Props) {
+export default function ServerNades({
+    serverId,
+    userId,
+    nades,
+    isAdmin
+}: Props) {
     const [foundedNades, setFoundedNades] = useState<
         NadeAuthorNadeType[] | undefined
-    >()
+    >(isAdmin ? nades : undefined)
     const [loading, setLoading] = useState<boolean>(false)
+
     const getNades = (fetchedNades: NadeAuthorNadeType[]) => {
         return setFoundedNades(fetchedNades)
     }
+
     const isLoading = (loading: boolean) => {
         return setLoading(loading)
     }
@@ -38,21 +46,24 @@ export default function ServerNades({ serverId, userId, nades }: Props) {
                     serverId={serverId}
                     getNades={getNades}
                     isLoading={isLoading}
+                    isAdmin={isAdmin}
+                    nades={isAdmin ? nades : undefined}
                 />
             </div>
             {loading && (
-                <div className="flex w-full justify-center pt-4">
+                <div className="flex w-full justify-center py-4">
                     <Loader2 className="animate-spin" />
                 </div>
             )}
             {!loading && (
-                <div className="flex w-full flex-wrap justify-center gap-2">
+                <div className="flex w-fit flex-wrap justify-center gap-2 md:justify-start">
                     {foundedNades?.map((nade) => (
-                        <div
-                            key={nade.id}
-                            className="flex w-full max-w-xs justify-start"
-                        >
-                            <NadeCard nade={nade} key={nade.id} />
+                        <div key={nade.id} className="flex w-full max-w-xs">
+                            <NadeCard
+                                nade={nade}
+                                key={nade.id}
+                                isAdmin={isAdmin}
+                            />
                         </div>
                     ))}
                 </div>

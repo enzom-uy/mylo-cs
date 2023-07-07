@@ -11,7 +11,7 @@ const Hero = async () => {
                 <h1 className="m-0 text-3xl font-semibold">
                     Mejora tu juego con granadas útiles.
                 </h1>
-                <div className="max-w-md font-semibold text-light-muted">
+                <div className="max-w-md font-semibold text-muted-foreground">
                     <p>
                         Comparte, aprende y domina
                         <span className="csgo"> Counter-Strike</span>.

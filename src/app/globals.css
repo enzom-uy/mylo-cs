@@ -129,6 +129,10 @@ video {
     .server-badge {
         @apply flex max-h-6 w-fit items-center gap-2 text-sm;
     }
+
+    .admin-ctrl-dialog-item {
+        @apply flex w-full items-center justify-center rounded-sm px-2 py-1 text-muted-foreground hover:bg-border-dark;
+    }
 }
 
 @layer utilities {
