@@ -27,7 +27,12 @@ const NadeCard: React.FC<Props> = ({ nade, isAdmin }) => {
             <CardHeader>
                 <div className="flex items-center">
                     <CardTitle className="m-0 text-light">{title}</CardTitle>
-                    {isAdmin && <AdminControlsDropdown isPending={isPending} />}
+                    {isAdmin && (
+                        <AdminControlsDropdown
+                            isPending={isPending}
+                            nade={nade as NadeAuthorNadeType}
+                        />
+                    )}
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                     <Badge className="text-muted-foreground">

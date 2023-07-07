@@ -18,7 +18,7 @@ export default async function ServerAdminPage({
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
     if (!userIsAdmin) redirect(`/server/${params.serverId}`)
     return (
-        <div>
+        <>
             <ServerHeader
                 name={name}
                 server_icon={server_icon}
@@ -31,6 +31,6 @@ export default async function ServerAdminPage({
                 userId={session.id}
                 isAdmin={true}
             />
-        </div>
+        </>
     )
 }
