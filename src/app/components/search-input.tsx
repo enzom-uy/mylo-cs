@@ -1,9 +1,12 @@
 'use client'
+import { loadingNades } from '@/redux/features/nadesSlice'
+import { useAppDispatch } from '@/redux/hooks'
 import { Input } from '@shad/input'
 import { useRouter } from 'next/navigation'
 import { ChangeEvent, FormEvent, useState } from 'react'
 
 const SearchInput = () => {
+    const dispatch = useAppDispatch()
     const router = useRouter()
     const [query, setQuery] = useState<string>('')
     const [error, setError] = useState<string>('')
@@ -15,6 +18,7 @@ const SearchInput = () => {
     }
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+        dispatch(loadingNades(true))
         e.preventDefault()
         if (query === '') {
             setError('Este campo es obligatorio.')

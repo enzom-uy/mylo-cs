@@ -15,11 +15,9 @@ export const useNadesData = ({ isAdmin, nades }: Props) => {
 
     useEffect(() => {
         if (isAdmin) {
-            console.log('Loading...')
             dispatch(loadNades(nades))
-            console.log('Finish loading')
-            dispatch(loadingNades(false))
         }
+        dispatch(loadingNades(false))
     }, [])
 
     return { reduxIsLoading, reduxNades }

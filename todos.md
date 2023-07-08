@@ -27,12 +27,12 @@
     - Give admin role to other member/s.
   - Manage nades.
     - As ADMIN/OWNER:
-      - See PENDING nades.
+      - ~~See PENDING nades~~.
       - Edit them before approving them.
       - Decline or approve them.
       - See all nades.
       - Edit them.
-      - Delete them.
+      - ~~Delete them~~.
     - As USER:
       - Edit your own nades.
       - Delete your own nades.

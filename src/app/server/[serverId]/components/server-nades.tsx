@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react'
 import ServerNadesInput from './server-nades-input'
 import { Loader2 } from 'lucide-react'
 import UserServerDataBadges from '@/app/components/user-server-data-badges'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { useAppDispatch } from '@/redux/hooks'
 import { loadNades, loadingNades } from '@/redux/features/nadesSlice'
 import { useNadesData } from '@/hooks/useReduxNadeData'
+import Loader from '@/app/components/loader'
 
 interface Props {
     nades: NadeAuthorNadeType[]
@@ -23,11 +24,11 @@ export default function ServerNades({
     nades,
     isAdmin
 }: Props) {
-    console.log(nades)
+    const [loading, setLoading] = useState<boolean>(false)
     const { reduxIsLoading, reduxNades } = useNadesData({ isAdmin, nades })
     const dispatch = useAppDispatch()
 
-    const getNades = (fetchedNades: NadeAuthorNadeType[]) => {
+    const getNades = async (fetchedNades: NadeAuthorNadeType[]) => {
         dispatch(loadNades(fetchedNades))
     }
 
@@ -50,11 +51,7 @@ export default function ServerNades({
                 isAdmin={isAdmin}
                 nades={isAdmin ? nades : undefined}
             />
-            {reduxIsLoading && isAdmin && (
-                <div className="flex w-full justify-center py-4">
-                    <Loader2 className="animate-spin" />
-                </div>
-            )}
+            {reduxIsLoading && <Loader />}
             {!reduxIsLoading && !!reduxNades.length && (
                 <div className="flex flex-wrap justify-center gap-2 md:justify-start">
                     {reduxNades?.map((nade) => (

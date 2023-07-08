@@ -2,6 +2,9 @@
 import { useEffect, useState } from 'react'
 import NadeCard from '../nade-card'
 import { Nade } from '@prisma/client'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { loadingNades } from '@/redux/features/nadesSlice'
+import Loader from '../loader'
 
 export interface NadeWithAuthorAndMap extends Nade {
     author: {
@@ -17,6 +20,9 @@ interface Props {
 }
 
 const NadesSection: React.FC<Props> = ({ nades }) => {
+    const reduxIsLoading = useAppSelector((state) => state.nadesReducer.loading)
+    const dispatch = useAppDispatch()
+    console.log(reduxIsLoading)
     const [state, setState] = useState({
         loading: true,
         error: ''
@@ -27,12 +33,14 @@ const NadesSection: React.FC<Props> = ({ nades }) => {
                 ...prevState,
                 loading: false
             }))
+            dispatch(loadingNades(false))
         } else {
             setState((prevState) => ({
                 ...prevState,
                 loading: false,
                 error: 'No se encontraron granadas.'
             }))
+            dispatch(loadingNades(false))
         }
         return () => {
             setState((prevState) => ({
@@ -44,7 +52,9 @@ const NadesSection: React.FC<Props> = ({ nades }) => {
     }, [nades])
     return (
         <section className="flex w-full flex-wrap justify-center gap-4">
-            {!nades ? (
+            {reduxIsLoading ? (
+                <Loader />
+            ) : !nades ? (
                 <p>Haz una búsqueda para ver las granadas.</p>
             ) : !state.loading && nades.length <= 0 ? (
                 <p>No se encontraron granadas.</p>

@@ -5,7 +5,7 @@ export const nadesSlice = createSlice({
     name: 'nades',
     initialState: {
         nades: [] as NadeAuthorNadeType[],
-        loading: true as boolean
+        loading: false as boolean
     },
     reducers: {
         loadNades: (state, action: PayloadAction<NadeAuthorNadeType[]>) => {

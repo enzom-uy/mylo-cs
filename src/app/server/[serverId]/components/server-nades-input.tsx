@@ -28,8 +28,10 @@ export default function ServerNadesInput({
     }
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        dispatch(loadingNades(true))
         switch (isAdmin) {
             case true:
+                dispatch(loadingNades(true))
                 const normalizedSearch = search.trim().toLowerCase()
                 const filtered = nades?.filter(
                     (nade) =>
@@ -48,6 +50,8 @@ export default function ServerNadesInput({
                 getNades(filtered!)
                 break
             default:
+                dispatch(loadingNades(true))
+                console.log('poidiendo nades...')
                 const response = await axios
                     .get('/api/get-nades', {
                         params: {
@@ -57,6 +61,7 @@ export default function ServerNadesInput({
                         }
                     })
                     .then((res) => res.data)
+                console.log(response)
                 dispatch(loadingNades(false))
                 getNades(response.nades)
                 break
