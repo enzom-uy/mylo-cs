@@ -1,5 +1,5 @@
 import { DeleteNadeData } from '@/app/api/delete-nade/route'
-import { deleteNade } from '@/redux/features/nadesSlice'
+import { deleteNade, loadingNades } from '@/redux/features/nadesSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { NadeAuthorNadeType } from '@/services/getServer'
 import { Button } from '@/shad-components/button'
@@ -26,11 +26,15 @@ export default function AdminControlsDelete({
         const axiosBody: DeleteNadeData = {
             nadeId: nade.id
         }
+        dispatch(loadingNades(true))
         const response = await axios
             .post('/api/delete-nade', axiosBody)
-            .then((res) => res.data)
+            .then((res) => {
+                dispatch(deleteNade(nade))
+                return res.data
+            })
+            .finally(() => dispatch(loadingNades(false)))
         console.log(response)
-        dispatch(deleteNade(nade))
     }
     return (
         <Dialog open={open} onOpenChange={setOpen}>
