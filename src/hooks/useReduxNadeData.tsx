@@ -14,7 +14,9 @@ export const useNadesData = ({ isAdmin, nades }: Props) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(loadNades(nades))
+        if (isAdmin) {
+            dispatch(loadNades(nades))
+        }
         dispatch(loadingNades(false))
     }, [])
 
