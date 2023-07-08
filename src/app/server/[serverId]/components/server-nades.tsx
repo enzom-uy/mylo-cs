@@ -10,6 +10,8 @@ import { useAppDispatch } from '@/redux/hooks'
 import { loadNades, loadingNades } from '@/redux/features/nadesSlice'
 import { useNadesData } from '@/hooks/useReduxNadeData'
 import Loader from '@/app/components/loader'
+import usePagination from '@/hooks/usePagination'
+import PaginationNavigation from '@/app/components/pagination-navigation'
 
 interface Props {
     nades: NadeAuthorNadeType[]
@@ -26,11 +28,18 @@ export default function ServerNades({
 }: Props) {
     const [loading, setLoading] = useState<boolean>(false)
     const { reduxIsLoading, reduxNades } = useNadesData({ isAdmin, nades })
+    const { currentPage, currentPageItems, prevPage, nextPage, goToPage } =
+        usePagination(reduxNades, 2)
+    console.log('Redux nades: ', reduxNades)
     const dispatch = useAppDispatch()
 
     const getNades = async (fetchedNades: NadeAuthorNadeType[]) => {
         dispatch(loadNades(fetchedNades))
     }
+    console.log(nades.length)
+    useEffect(() => {
+        goToPage(1)
+    }, [reduxNades])
 
     return (
         <section className="flex w-full flex-col gap-2">
@@ -54,15 +63,15 @@ export default function ServerNades({
             {reduxIsLoading && <Loader />}
             {!reduxIsLoading && !!reduxNades.length && (
                 <div className="flex flex-wrap justify-center gap-2 md:justify-start">
-                    {reduxNades?.map((nade) => (
-                        <div key={nade.id} className="flex w-full max-w-xs">
-                            <NadeCard
-                                nade={nade}
-                                key={nade.id}
-                                isAdmin={isAdmin}
-                            />
-                        </div>
+                    {currentPageItems?.map((nade) => (
+                        <NadeCard nade={nade} key={nade.id} isAdmin={isAdmin} />
                     ))}
+                    <PaginationNavigation
+                        currentPage={currentPage}
+                        goToPage={goToPage}
+                        nextPage={nextPage}
+                        prevPage={prevPage}
+                    />
                 </div>
             )}
         </section>

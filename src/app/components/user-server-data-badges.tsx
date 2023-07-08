@@ -27,7 +27,7 @@ export default function UserServerDataBadges({
             {nades !== undefined && (
                 <Badge className="server-badge">
                     <NadeIconSvg className="w-4" />
-                    {reduxNades.length}
+                    {!!reduxNades.length ? reduxNades.length : nades}
                 </Badge>
             )}
             {servers !== undefined && (

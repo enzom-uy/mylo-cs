@@ -13,20 +13,25 @@ export default function PaginationNavigation({
     nextPage,
     goToPage
 }: PaginationNavigationProps) {
+    console.log(!!nextPage)
     return (
         <div className="flex w-full items-center justify-center gap-2 pt-4">
             <button
                 onClick={() => goToPage(prevPage as number)}
                 disabled={!prevPage && true}
             >
-                <ArrowLeft />
+                <ArrowLeft
+                    className={`${!!!prevPage && 'text-muted-foreground/50'}`}
+                />
             </button>
             <span>{currentPage}</span>
             <button
                 onClick={() => goToPage(nextPage as number)}
                 disabled={!nextPage && true}
             >
-                <ArrowRight />
+                <ArrowRight
+                    className={`${!!!nextPage && 'text-muted-foreground/50'}`}
+                />
             </button>
         </div>
     )
