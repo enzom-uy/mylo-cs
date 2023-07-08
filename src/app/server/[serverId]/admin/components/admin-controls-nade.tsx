@@ -14,7 +14,7 @@ export default function AdminControlsNade({ isPending, nade }: Props) {
     return (
         <>
             <DropdownMenuItem asChild>
-                <AdminControlsDelete nadeId={nade.id} />
+                <AdminControlsDelete nade={nade} />
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
                 <AdminControlsEdit />

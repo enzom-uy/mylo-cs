@@ -1,3 +1,5 @@
+import { loadingNades } from '@/redux/features/nadesSlice'
+import { useAppDispatch } from '@/redux/hooks'
 import { NadeAuthorNadeType } from '@/services/getServer'
 import { Input } from '@/shad-components/input'
 import axios from 'axios'
@@ -7,7 +9,6 @@ interface Props {
     serverId: string
     userId: string
     getNades: (fetchedNades: NadeAuthorNadeType[]) => void
-    isLoading: (loading: boolean) => void
     isAdmin?: boolean
     nades?: NadeAuthorNadeType[]
 }
@@ -16,17 +17,16 @@ export default function ServerNadesInput({
     serverId,
     userId,
     getNades,
-    isLoading,
     isAdmin,
     nades
 }: Props) {
     const [search, setSearch] = useState<string>('')
+    const dispatch = useAppDispatch()
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         setSearch(value)
     }
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        isLoading(true)
         e.preventDefault()
         switch (isAdmin) {
             case true:
@@ -44,7 +44,7 @@ export default function ServerNadesInput({
                             .toLowerCase()
                             .includes(normalizedSearch)
                 )
-                isLoading(false)
+                dispatch(loadingNades(false))
                 getNades(filtered!)
                 break
             default:
@@ -57,7 +57,7 @@ export default function ServerNadesInput({
                         }
                     })
                     .then((res) => res.data)
-                isLoading(false)
+                dispatch(loadingNades(false))
                 getNades(response.nades)
                 break
         }

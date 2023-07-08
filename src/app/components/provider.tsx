@@ -1,7 +1,9 @@
 'use client'
+import { store } from '@/redux/store'
 import { Toaster } from '@/shad-components/toaster'
 import { SessionProvider } from 'next-auth/react'
 import { ReactNode } from 'react'
+import { Provider as ReduxProvider } from 'react-redux'
 
 interface Props {
     children: ReactNode
@@ -9,9 +11,11 @@ interface Props {
 
 const Provider: React.FC<Props> = ({ children }) => {
     return (
-        <SessionProvider>
-            {children} <Toaster />
-        </SessionProvider>
+        <ReduxProvider store={store}>
+            <SessionProvider>
+                {children} <Toaster />
+            </SessionProvider>
+        </ReduxProvider>
     )
 }
 

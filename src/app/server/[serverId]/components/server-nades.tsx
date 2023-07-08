@@ -2,10 +2,13 @@
 
 import NadeCard from '@/app/components/nade-card'
 import { NadeAuthorNadeType } from '@/services/getServer'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ServerNadesInput from './server-nades-input'
 import { Loader2 } from 'lucide-react'
 import UserServerDataBadges from '@/app/components/user-server-data-badges'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { loadNades, loadingNades } from '@/redux/features/nadesSlice'
+import { useNadesData } from '@/hooks/useReduxNadeData'
 
 interface Props {
     nades: NadeAuthorNadeType[]
@@ -20,42 +23,41 @@ export default function ServerNades({
     nades,
     isAdmin
 }: Props) {
-    const [foundedNades, setFoundedNades] = useState<
-        NadeAuthorNadeType[] | undefined
-    >(isAdmin ? nades : undefined)
-    const [loading, setLoading] = useState<boolean>(false)
+    console.log(nades)
+    const { reduxIsLoading, reduxNades } = useNadesData({ isAdmin, nades })
+    const dispatch = useAppDispatch()
 
     const getNades = (fetchedNades: NadeAuthorNadeType[]) => {
-        return setFoundedNades(fetchedNades)
+        dispatch(loadNades(fetchedNades))
     }
 
-    const isLoading = (loading: boolean) => {
-        return setLoading(loading)
-    }
     return (
         <section className="flex w-full flex-col gap-2">
             <div className="mb-2 flex flex-wrap items-center gap-2">
                 <h2 className="m-0 w-fit text-lg font-semibold uppercase">
                     granadas
                 </h2>
-                <UserServerDataBadges nades={nades?.length} />
+                <UserServerDataBadges
+                    nades={
+                        !!reduxNades.length ? reduxNades.length : nades.length
+                    }
+                />
             </div>
             <ServerNadesInput
                 userId={userId}
                 serverId={serverId}
                 getNades={getNades}
-                isLoading={isLoading}
                 isAdmin={isAdmin}
                 nades={isAdmin ? nades : undefined}
             />
-            {loading && (
+            {reduxIsLoading && isAdmin && (
                 <div className="flex w-full justify-center py-4">
                     <Loader2 className="animate-spin" />
                 </div>
             )}
-            {!loading && (
+            {!reduxIsLoading && !!reduxNades.length && (
                 <div className="flex flex-wrap justify-center gap-2 md:justify-start">
-                    {foundedNades?.map((nade) => (
+                    {reduxNades?.map((nade) => (
                         <div key={nade.id} className="flex w-full max-w-xs">
                             <NadeCard
                                 nade={nade}
