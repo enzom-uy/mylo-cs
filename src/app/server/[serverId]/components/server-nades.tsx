@@ -16,13 +16,15 @@ interface Props {
     serverId: string
     userId: string
     isAdmin?: boolean
+    showNadeStatus?: boolean
 }
 
 export default function ServerNades({
     serverId,
     userId,
     nades,
-    isAdmin
+    isAdmin,
+    showNadeStatus
 }: Props) {
     const { reduxIsLoading, reduxNades } = useNadesData({ isAdmin, nades })
     const dispatch = useAppDispatch()
@@ -60,6 +62,7 @@ export default function ServerNades({
                                 nade={nade}
                                 key={nade.id}
                                 isAdmin={isAdmin}
+                                showStatus={showNadeStatus}
                             />
                         </div>
                     ))}

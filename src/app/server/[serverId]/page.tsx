@@ -12,7 +12,7 @@ export default async function ServerPage({
 }: {
     params: { serverId: string }
 }) {
-    const server = await getServer({ params })
+    const server = await getServer({ params, admin: false })
     if (!server) redirect('/')
 
     const session = await getServerSession(authOptions)
@@ -22,6 +22,8 @@ export default async function ServerPage({
         server
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
     const userIsMember = members.some((member) => member.id === session?.id)
+
+    console.log(nades)
     return (
         <>
             <ServerHeader

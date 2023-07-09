@@ -12,9 +12,10 @@ import AdminControlsDropdown from '../server/[serverId]/admin/components/admin-c
 interface Props {
     nade: NadeWithAuthorAndMap | NadeAuthorNadeType
     isAdmin?: boolean
+    showStatus?: boolean
 }
 
-const NadeCard: React.FC<Props> = ({ nade, isAdmin }) => {
+const NadeCard: React.FC<Props> = ({ nade, isAdmin, showStatus }) => {
     const { nade_type_name, map_name, status, video_url } = nade
     const author = nade.author.name
     const title = uppercaseFirstLetter(nade.title)
@@ -44,6 +45,19 @@ const NadeCard: React.FC<Props> = ({ nade, isAdmin }) => {
                             {author}
                         </p>
                     </Badge>
+                    {showStatus && (
+                        <Badge>
+                            <p
+                                className={`${
+                                    status === 'PENDING'
+                                        ? 'text-yellow-500'
+                                        : 'text-green-500'
+                                }`}
+                            >
+                                {status}
+                            </p>
+                        </Badge>
+                    )}
                 </div>
             </CardHeader>
             <CardContent className="text-light">

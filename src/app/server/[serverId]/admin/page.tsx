@@ -13,10 +13,22 @@ export default async function ServerAdminPage({
 }) {
     const session = await getServerSession(authOptions)
     if (!session) redirect('/')
-    const server = await getServer({ params })
+    const server = await getServer({ params, admin: true })
     const { admins, name, server_icon, description, nades, id } = server!
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
     if (!userIsAdmin) redirect(`/server/${params.serverId}`)
+
+    const pendingNadesFirst = nades.sort((a, b) => {
+        if (a.status === 'PENDING' && b.status !== 'PENDING') {
+            return -1
+        }
+        if (a.status !== 'PENDING' && b.status === 'PENDING') {
+            return 1
+        }
+        return 0
+    })
+
+    console.log(pendingNadesFirst)
     return (
         <>
             <ServerHeader
@@ -26,10 +38,11 @@ export default async function ServerAdminPage({
             />
             <Separator className="mb-4" />
             <ServerNades
-                nades={nades}
+                nades={pendingNadesFirst}
                 serverId={id}
                 userId={session.id}
                 isAdmin={true}
+                showNadeStatus={true}
             />
         </>
     )
