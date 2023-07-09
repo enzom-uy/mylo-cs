@@ -24,13 +24,13 @@ export default function ServerNades({
     nades,
     isAdmin
 }: Props) {
-    const [loading, setLoading] = useState<boolean>(false)
     const { reduxIsLoading, reduxNades } = useNadesData({ isAdmin, nades })
     const dispatch = useAppDispatch()
 
     const getNades = async (fetchedNades: NadeAuthorNadeType[]) => {
         dispatch(loadNades(fetchedNades))
     }
+    console.log(!!reduxNades.length)
 
     return (
         <section className="flex w-full flex-col gap-2">
@@ -53,7 +53,7 @@ export default function ServerNades({
             />
             {reduxIsLoading && <Loader />}
             {!reduxIsLoading && !!reduxNades.length && (
-                <div className="flex flex-wrap justify-center gap-2 md:justify-start">
+                <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
                     {reduxNades?.map((nade) => (
                         <div key={nade.id} className="flex w-full max-w-xs">
                             <NadeCard
