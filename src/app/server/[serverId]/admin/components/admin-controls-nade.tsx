@@ -21,7 +21,7 @@ export default function AdminControlsNade({ isPending, nade }: Props) {
             </DropdownMenuItem>
             {isPending && (
                 <DropdownMenuItem asChild>
-                    <AdminControlsApprove />
+                    <AdminControlsApprove nade={nade} />
                 </DropdownMenuItem>
             )}
         </>

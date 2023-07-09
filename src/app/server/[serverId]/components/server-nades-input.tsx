@@ -51,7 +51,7 @@ export default function ServerNadesInput({
                 break
             default:
                 dispatch(loadingNades(true))
-                console.log('poidiendo nades...')
+                console.log('pidiendo nades...')
                 const response = await axios
                     .get('/api/get-nades', {
                         params: {
