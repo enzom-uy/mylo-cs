@@ -21,6 +21,7 @@ export const getNadesQuery = async ({
                 },
                 id: serverId ? serverId : undefined
             },
+            status: 'APPROVED',
             OR: [
                 {
                     title: {
