@@ -1,5 +1,11 @@
 import { NadeAuthorNadeType } from '@/services/getServer'
+import { sortNadesPendingFirst } from '@/utils/pendingNadesFirst'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+
+interface EditNade {
+    nade: NadeAuthorNadeType
+    updatedNade: NadeAuthorNadeType
+}
 
 export const nadesSlice = createSlice({
     name: 'nades',
@@ -9,13 +15,22 @@ export const nadesSlice = createSlice({
     },
     reducers: {
         loadNades: (state, action: PayloadAction<NadeAuthorNadeType[]>) => {
-            state.nades = action.payload
+            state.nades = sortNadesPendingFirst(action.payload)
+        },
+        editNade: (state, action: PayloadAction<EditNade>) => {
+            const nadePreEdit = action.payload.nade
+            const updatedNade = action.payload.updatedNade
+            const nadesWithEditedRemoved = state.nades.filter(
+                (n) => n.id !== nadePreEdit.id
+            )
+            nadesWithEditedRemoved.push(updatedNade)
+            state.nades = sortNadesPendingFirst(nadesWithEditedRemoved)
         },
         deleteNade: (state, action: PayloadAction<NadeAuthorNadeType>) => {
             const updatedNades = state.nades.filter(
                 (nade) => nade.id !== action.payload.id
             )
-            state.nades = updatedNades
+            state.nades = sortNadesPendingFirst(updatedNades)
         },
         approveNade: (state, action: PayloadAction<NadeAuthorNadeType>) => {
             const approvedNade = action.payload
@@ -23,7 +38,7 @@ export const nadesSlice = createSlice({
                 (nade) => nade.id !== approvedNade.id
             )
             nadesWithApprovedNadeRemoved.push(approvedNade)
-            state.nades = nadesWithApprovedNadeRemoved
+            state.nades = sortNadesPendingFirst(nadesWithApprovedNadeRemoved)
         },
         loadingNades: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload
@@ -31,6 +46,6 @@ export const nadesSlice = createSlice({
     }
 })
 
-export const { loadNades, deleteNade, loadingNades, approveNade } =
+export const { loadNades, deleteNade, loadingNades, approveNade, editNade } =
     nadesSlice.actions
 export default nadesSlice.reducer

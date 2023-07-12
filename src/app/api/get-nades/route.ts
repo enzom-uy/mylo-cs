@@ -14,7 +14,6 @@ export async function GET(req: NextRequest) {
             serverId: serverId ? serverId : undefined,
             query
         })
-        console.log(nades)
         return NextResponse.json({ nades: nades })
     } catch (error) {
         console.error(error)

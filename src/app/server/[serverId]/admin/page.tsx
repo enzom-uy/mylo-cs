@@ -1,9 +1,10 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { getServer } from '@/services/getServer'
+import { Separator } from '@/shad-components/separator'
+import { sortNadesPendingFirst } from '@/utils/pendingNadesFirst'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import ServerHeader from '../components/server-header'
-import { Separator } from '@/shad-components/separator'
 import ServerNades from '../components/server-nades'
 
 export default async function ServerAdminPage({
@@ -18,15 +19,7 @@ export default async function ServerAdminPage({
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
     if (!userIsAdmin) redirect(`/server/${params.serverId}`)
 
-    const pendingNadesFirst = nades.sort((a, b) => {
-        if (a.status === 'PENDING' && b.status !== 'PENDING') {
-            return -1
-        }
-        if (a.status !== 'PENDING' && b.status === 'PENDING') {
-            return 1
-        }
-        return 0
-    })
+    const pendingNadesFirst = sortNadesPendingFirst(nades)
 
     console.log(pendingNadesFirst)
     return (

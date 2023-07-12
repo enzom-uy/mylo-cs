@@ -1,11 +1,11 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { getServer } from '@/services/getServer'
+import { Separator } from '@/shad-components/separator'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
-import { Separator } from '@/shad-components/separator'
-import ServerNades from './components/server-nades'
 import ServerHeader from './components/server-header'
 import ServerMembers from './components/server-members'
+import ServerNades from './components/server-nades'
 
 export default async function ServerPage({
     params
@@ -23,7 +23,6 @@ export default async function ServerPage({
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
     const userIsMember = members.some((member) => member.id === session?.id)
 
-    console.log(nades)
     return (
         <>
             <ServerHeader

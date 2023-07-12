@@ -5,9 +5,9 @@ import { uppercaseFirstLetter } from '@/utils/uppercaseFirstLetter'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Badge } from '@shad/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@shad/card'
+import AdminControlsDropdown from '../server/[serverId]/admin/components/admin-controls-dropdown'
 import { NadeWithAuthorAndMap } from './sections/nades-section'
 import VideoPlayer from './video-player'
-import AdminControlsDropdown from '../server/[serverId]/admin/components/admin-controls-dropdown'
 
 interface Props {
     nade: NadeWithAuthorAndMap | NadeAuthorNadeType

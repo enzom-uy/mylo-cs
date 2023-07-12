@@ -26,15 +26,17 @@
     - See banned members and unban them.
     - Give admin role to other member/s.
   - Manage nades.
-    - As ADMIN/OWNER:
-      - ~~See PENDING nades~~.
-      - Edit them before approving them.
-      - Decline or approve them.
-      - See all nades.
-      - Edit them.
-      - ~~Delete them~~.
     - As USER:
       - Edit your own nades.
       - Delete your own nades.
 
 ## Done
+
+- Manage nades.
+  - As ADMIN/OWNER:
+    - ~~See PENDING nades~~.
+    - ~~Edit them before approving them~~.
+    - ~~Decline or approve them~~.
+    - ~~See all nades~~.
+    - ~~Edit them~~.
+    - ~~Delete them~~.

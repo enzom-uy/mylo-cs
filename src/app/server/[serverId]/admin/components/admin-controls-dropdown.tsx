@@ -1,3 +1,4 @@
+import { NadeAuthorNadeType } from '@/services/getServer'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -5,7 +6,6 @@ import {
 } from '@radix-ui/react-dropdown-menu'
 import { MoreHorizontal } from 'lucide-react'
 import AdminControlsNade from './admin-controls-nade'
-import { NadeAuthorNadeType } from '@/services/getServer'
 
 interface Props {
     isPending?: boolean

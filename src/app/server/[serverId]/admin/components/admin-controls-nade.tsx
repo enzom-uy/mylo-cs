@@ -1,9 +1,8 @@
+import { NadeAuthorNadeType } from '@/services/getServer'
 import { DropdownMenuItem } from '@shad/dropdown-menu'
-import { Trash2, Edit, CheckSquare } from 'lucide-react'
+import AdminControlsApprove from './admin-controls-approve'
 import AdminControlsDelete from './admin-controls-delete'
 import AdminControlsEdit from './admin-controls-edit'
-import AdminControlsApprove from './admin-controls-approve'
-import { NadeAuthorNadeType } from '@/services/getServer'
 
 interface Props {
     isPending?: boolean
@@ -17,7 +16,7 @@ export default function AdminControlsNade({ isPending, nade }: Props) {
                 <AdminControlsDelete nade={nade} />
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-                <AdminControlsEdit />
+                <AdminControlsEdit nade={nade} />
             </DropdownMenuItem>
             {isPending && (
                 <DropdownMenuItem asChild>
