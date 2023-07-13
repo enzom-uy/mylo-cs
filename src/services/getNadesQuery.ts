@@ -48,16 +48,9 @@ export const getNadesQuery = async ({
             ]
         },
         include: {
-            author: {
-                select: {
-                    name: true
-                }
-            },
-            map: {
-                select: {
-                    name: true
-                }
-            }
+            author: true,
+            map: true,
+            nade_type: true
         }
     })
     return nades

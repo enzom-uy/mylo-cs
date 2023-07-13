@@ -14,7 +14,6 @@ import {
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel
@@ -68,6 +67,7 @@ export default function AdminControlsEdit({
     const [open, setOpen] = useState(false)
     const { maps } = useGetMapsFromDb()
     const { toast } = useToast()
+    console.log(nade)
     const form = useForm<EditNadeSchemaType>({
         resolver: zodResolver(editNadeSchema),
         defaultValues: {

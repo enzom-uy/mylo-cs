@@ -31,16 +31,8 @@ export async function POST(req: NextRequest) {
                 description: description ? description : null
             },
             include: {
-                author: {
-                    select: {
-                        name: true
-                    }
-                },
-                nade_type: {
-                    select: {
-                        name: true
-                    }
-                }
+                author: true,
+                nade_type: true
             }
         })
 

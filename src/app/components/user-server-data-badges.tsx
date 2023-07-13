@@ -3,7 +3,7 @@
 import NadeIconSvg from '@/app/components/nade-icon-svg'
 import { useAppSelector } from '@/redux/hooks'
 import { Badge } from '@/shad-components/badge'
-import { Users, Server } from 'lucide-react'
+import { Server, Users } from 'lucide-react'
 
 export default function UserServerDataBadges({
     members,
@@ -27,7 +27,7 @@ export default function UserServerDataBadges({
             {nades !== undefined && (
                 <Badge className="server-badge">
                     <NadeIconSvg className="w-4" />
-                    {!!reduxNades.length ? reduxNades.length : nades}
+                    {nades}
                 </Badge>
             )}
             {servers !== undefined && (

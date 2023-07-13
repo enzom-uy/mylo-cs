@@ -10,16 +10,25 @@ import AdminControlsNade from './admin-controls-nade'
 interface Props {
     isPending?: boolean
     nade: NadeAuthorNadeType
+    isAdmin: boolean
 }
 
-export default function AdminControlsDropdown({ isPending, nade }: Props) {
+export default function AdminControlsDropdown({
+    isPending,
+    nade,
+    isAdmin
+}: Props) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
                 <MoreHorizontal className="w-5 text-muted-foreground" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="z-10 rounded-md bg-dark-secondary p-1">
-                <AdminControlsNade isPending={isPending} nade={nade} />
+                <AdminControlsNade
+                    isPending={isPending}
+                    nade={nade}
+                    isAdmin={isAdmin}
+                />
             </DropdownMenuContent>
         </DropdownMenu>
     )

@@ -25,10 +25,6 @@
     - If an admin kicks a member it stay banned from that server.
     - See banned members and unban them.
     - Give admin role to other member/s.
-  - Manage nades.
-    - As USER:
-      - Edit your own nades.
-      - Delete your own nades.
 
 ## Done
 
@@ -40,3 +36,7 @@
     - ~~See all nades~~.
     - ~~Edit them~~.
     - ~~Delete them~~.
+  - Manage nades.
+    - ~~As USER~~:
+      - ~~Edit your own nades~~.
+      - ~~Delete your own nades~~.

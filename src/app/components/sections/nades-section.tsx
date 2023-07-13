@@ -1,10 +1,10 @@
 'use client'
-import { useEffect, useState } from 'react'
-import NadeCard from '../nade-card'
-import { Nade } from '@prisma/client'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { loadingNades } from '@/redux/features/nadesSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { Nade } from '@prisma/client'
+import { useEffect, useState } from 'react'
 import Loader from '../loader'
+import NadeCard from '../nade-card'
 
 export interface NadeWithAuthorAndMap extends Nade {
     author: {
@@ -22,7 +22,6 @@ interface Props {
 const NadesSection: React.FC<Props> = ({ nades }) => {
     const reduxIsLoading = useAppSelector((state) => state.nadesReducer.loading)
     const dispatch = useAppDispatch()
-    console.log(reduxIsLoading)
     const [state, setState] = useState({
         loading: true,
         error: ''

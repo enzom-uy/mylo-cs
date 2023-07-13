@@ -10,16 +10,18 @@ import { NadeWithAuthorAndMap } from './sections/nades-section'
 import VideoPlayer from './video-player'
 
 interface Props {
-    nade: NadeWithAuthorAndMap | NadeAuthorNadeType
+    nade: NadeAuthorNadeType
     isAdmin?: boolean
     showStatus?: boolean
+    userId?: string
 }
 
-const NadeCard: React.FC<Props> = ({ nade, isAdmin, showStatus }) => {
+const NadeCard: React.FC<Props> = ({ nade, isAdmin, showStatus, userId }) => {
     const { nade_type_name, map_name, status, video_url } = nade
     const author = nade.author.name
     const title = uppercaseFirstLetter(nade.title)
     const isPending = status === 'PENDING'
+    const isAuthor = nade.author.id === userId
 
     return (
         <Card
@@ -28,12 +30,13 @@ const NadeCard: React.FC<Props> = ({ nade, isAdmin, showStatus }) => {
             <CardHeader>
                 <div className="flex items-center">
                     <CardTitle className="m-0 text-light">{title}</CardTitle>
-                    {isAdmin && (
+                    {isAuthor || isAdmin ? (
                         <AdminControlsDropdown
                             isPending={isPending}
                             nade={nade as NadeAuthorNadeType}
+                            isAdmin={isAdmin ? isAdmin : false}
                         />
-                    )}
+                    ) : null}
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                     <Badge className="text-muted-foreground">

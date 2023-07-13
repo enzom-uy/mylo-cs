@@ -7,9 +7,10 @@ import AdminControlsEdit from './admin-controls-edit'
 interface Props {
     isPending?: boolean
     nade: NadeAuthorNadeType
+    isAdmin: boolean
 }
 
-export default function AdminControlsNade({ isPending, nade }: Props) {
+export default function AdminControlsNade({ isPending, nade, isAdmin }: Props) {
     return (
         <>
             <DropdownMenuItem asChild>
@@ -18,7 +19,7 @@ export default function AdminControlsNade({ isPending, nade }: Props) {
             <DropdownMenuItem asChild>
                 <AdminControlsEdit nade={nade} />
             </DropdownMenuItem>
-            {isPending && (
+            {isPending && isAdmin && (
                 <DropdownMenuItem asChild>
                     <AdminControlsApprove nade={nade} />
                 </DropdownMenuItem>

@@ -1,6 +1,6 @@
 import { NadeWithAuthorAndMap } from '@/app/components/sections/nades-section'
 import { db } from '@/config/db'
-import { Nade, Server, User } from '@prisma/client'
+import { Nade, NadeType, Server, User } from '@prisma/client'
 
 export const getServer = async ({
     params,
@@ -15,31 +15,6 @@ export const getServer = async ({
         whereCondition = undefined // Eliminar el filtro si admin es true
     }
 
-    const serverQuery = {
-        where: {
-            id: params.serverId
-        },
-        include: {
-            admins: true,
-            members: true,
-            nades: {
-                where: whereCondition,
-                include: {
-                    author: {
-                        select: {
-                            name: true
-                        }
-                    },
-                    nade_type: {
-                        select: {
-                            name: true
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     const server = await db.server.findFirst({
         where: {
             id: params.serverId
@@ -50,16 +25,8 @@ export const getServer = async ({
             nades: {
                 where: whereCondition as any,
                 include: {
-                    author: {
-                        select: {
-                            name: true
-                        }
-                    },
-                    nade_type: {
-                        select: {
-                            name: true
-                        }
-                    }
+                    author: true,
+                    nade_type: true
                 }
             }
         }
@@ -69,12 +36,8 @@ export const getServer = async ({
 }
 
 export interface NadeAuthorNadeType extends Nade {
-    author: {
-        name: string
-    }
-    nade_type: {
-        name: string
-    }
+    author: User
+    nade_type: NadeType
 }
 
 export interface ServerWithNadesNadeTypeAdminsMembers extends Server {

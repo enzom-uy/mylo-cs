@@ -63,6 +63,7 @@ export default function ServerNades({
                                 key={nade.id}
                                 isAdmin={isAdmin}
                                 showStatus={showNadeStatus}
+                                userId={userId}
                             />
                         </div>
                     ))}
