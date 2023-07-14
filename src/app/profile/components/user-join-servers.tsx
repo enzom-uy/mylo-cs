@@ -1,10 +1,10 @@
 'use client'
 
-import axios from 'axios'
-import { useRouter } from 'next/navigation'
-import { RotateCw } from 'lucide-react'
-import { useState } from 'react'
 import { useToast } from '@/shad-components/use-toast'
+import axios from 'axios'
+import { RotateCw } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 export default function UserJoinServers({
     access_token,
@@ -24,10 +24,12 @@ export default function UserJoinServers({
                 id
             })
             .then((res) => res.data)
-        router.refresh()
         console.log(response)
         setClicked(false)
         toast({ title: 'Se han actualizado tus servidores.' })
+        setTimeout(() => {
+            router.refresh()
+        }, 500)
     }
     return (
         <button

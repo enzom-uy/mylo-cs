@@ -1,4 +1,4 @@
-import { loadNades, loadingNades } from '@/redux/features/nadesSlice'
+import { loadNades } from '@/redux/features/nadesSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { NadeAuthorNadeType } from '@/services/getServer'
 import { useEffect } from 'react'
@@ -17,7 +17,6 @@ export const useNadesData = ({ isAdmin, nades }: Props) => {
         if (isAdmin) {
             dispatch(loadNades(nades))
         }
-        dispatch(loadingNades(false))
     }, [])
 
     return { reduxIsLoading, reduxNades }

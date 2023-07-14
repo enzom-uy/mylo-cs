@@ -14,14 +14,16 @@ export default function UserServerDataBadges({
     nades?: number
     servers?: number
 }) {
-    const reduxNades = useAppSelector((state) => state.nadesReducer.nades)
+    const reduxMembers = useAppSelector((state) => state.membersReducer.members)
     const formattedNumber = (number: number) => (number > 900 ? '+900' : number)
     return (
         <div className="flex items-center gap-2">
             {members !== undefined && (
                 <Badge className="server-badge">
                     <Users className="w-4" />
-                    {formattedNumber(members)}
+                    {formattedNumber(
+                        !!reduxMembers.length ? reduxMembers.length : members
+                    )}
                 </Badge>
             )}
             {nades !== undefined && (

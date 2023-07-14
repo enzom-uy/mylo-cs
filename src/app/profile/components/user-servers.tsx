@@ -1,9 +1,9 @@
 'use client'
 
 import { Server } from '@prisma/client'
+import { Session } from 'next-auth'
 import { useRouter } from 'next/navigation'
 import UserJoinServers from './user-join-servers'
-import { Session } from 'next-auth'
 
 export default function UserServers({
     servers,
@@ -13,6 +13,7 @@ export default function UserServers({
     session: Session
 }) {
     const router = useRouter()
+    console.log(session)
     return (
         <div className="transparent-card max-h-full w-fit flex-grow overflow-hidden border-none">
             <div className="flex w-full items-center justify-between">

@@ -1,9 +1,11 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import nadesReducer from './features/nadesSlice'
+import membersReducer from './features/membersSlice'
 
 export const store = configureStore({
     reducer: {
-        nadesReducer
+        nadesReducer,
+        membersReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({ serializableCheck: false })

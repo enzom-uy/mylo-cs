@@ -65,6 +65,7 @@ model Server {
     UserServerRole   UserServerRole[]
     nades            Nade[]
     reports_received Report[]
+    banned_users     User[]           @relation("BannedMembers")
 }
 
 model ServerRole {
@@ -99,6 +100,7 @@ model User {
     user_server_role  UserServerRole[]
     reports_made      Report[]
     reports_received  Report[]         @relation("ReportsReceived")
+    banned_from       Server[]         @relation("BannedMembers")
 }
 
 model Account {

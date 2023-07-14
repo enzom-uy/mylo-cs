@@ -6,6 +6,7 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import ServerHeader from '../components/server-header'
 import ServerNades from '../components/server-nades'
+import ServerMembers from '../components/server-members'
 
 export default async function ServerAdminPage({
     params
@@ -15,7 +16,8 @@ export default async function ServerAdminPage({
     const session = await getServerSession(authOptions)
     if (!session) redirect('/')
     const server = await getServer({ params, admin: true })
-    const { admins, name, server_icon, description, nades, id } = server!
+    const { admins, name, server_icon, description, nades, id, members } =
+        server!
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
     if (!userIsAdmin) redirect(`/server/${params.serverId}`)
 
@@ -36,6 +38,13 @@ export default async function ServerAdminPage({
                 userId={session.id}
                 isAdmin={true}
                 showNadeStatus={true}
+            />
+            <Separator className="my-4" />
+            <ServerMembers
+                members={members}
+                userIsAdmin={userIsAdmin}
+                userId={session?.id as string}
+                serverId={id}
             />
         </>
     )

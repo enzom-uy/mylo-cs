@@ -41,6 +41,7 @@ export default async function ServerPage({
                 members={members}
                 userIsAdmin={userIsAdmin}
                 userId={session?.id as string}
+                serverId={id}
             />
         </>
     )

@@ -1,6 +1,6 @@
-import axios from 'axios'
-import { db } from '@/config/db'
 import { Guild } from '@/app/create-server/utils/getUserGuilds'
+import { db } from '@/config/db'
+import axios from 'axios'
 
 // Use discord API to get user's guilds.
 // Checks if any of the guilds already exists in the database
@@ -16,6 +16,7 @@ export const addUserToExistingServers = async ({
     providerAccountId
 }: Props) => {
     try {
+        console.log(access_token, providerAccountId)
         const userGuilds = await axios
             .get('https://discordapp.com/api/users/@me/guilds', {
                 headers: {
@@ -28,9 +29,18 @@ export const addUserToExistingServers = async ({
 
         const userIsInExistingServers = await db.server.findMany({
             where: {
-                OR: guildsId
+                OR: guildsId,
+                banned_users: {
+                    none: {
+                        id: providerAccountId
+                    }
+                }
+            },
+            include: {
+                banned_users: true
             }
         })
+
         console.log('User is in existing servers:', userIsInExistingServers)
         if (!!userIsInExistingServers) {
             userIsInExistingServers.forEach(
