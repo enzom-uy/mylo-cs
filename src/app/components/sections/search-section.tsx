@@ -1,7 +1,8 @@
+import { getNadesQuery } from '@/services/getNadesQuery'
 import React from 'react'
+import NadeSkeleton from '../nade-skeleton'
 import SearchInput from '../search-input'
 import NadesSection from './nades-section'
-import { getNadesQuery } from '@/services/getNadesQuery'
 
 interface Props {
     query?: string
