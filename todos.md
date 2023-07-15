@@ -22,9 +22,6 @@
 
 - Server profile.
   - Manage members.
-    - ~~Ban users~~.
-    - If an admin kicks a member it stay banned from that server.
-    - See banned members and unban them.
     - Give admin role to other member/s.
 
 ## Done
@@ -41,7 +38,8 @@
     - ~~As USER~~:
       - ~~Edit your own nades~~.
       - ~~Delete your own nades~~.
-
 - Server profile.
   - Manage members.
-    - Ban users
+    - ~~Ban users~~.
+    - ~~See banned members and unban them~~.
+    - ~~If an admin kicks a member it stay banned from that server~~.

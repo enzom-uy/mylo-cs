@@ -1,24 +1,25 @@
 'use client'
 
+import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
 import { User } from '@prisma/client'
 import Image from 'next/image'
+import AdminControlsUser from '../server/[serverId]/admin/components/admin-controls-user'
 import DiscordPlaceholder from './discord-placeholder-svg'
-import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
-import { Ban } from 'lucide-react'
-import AdminControlsBanUser from '../server/[serverId]/admin/components/admin-controls-ban-user'
 
 interface Props {
     user: User
     userIsAdmin: boolean
     userSelfId: string
     serverId: string
+    isBanned?: boolean
 }
 
 export default function UserCard({
     user,
     userIsAdmin,
     userSelfId,
-    serverId
+    serverId,
+    isBanned
 }: Props) {
     return (
         <div className="flex items-center gap-2 break-all py-2 will-change-transform duration-150 hover:translate-x-2">
@@ -39,9 +40,10 @@ export default function UserCard({
             )}
             <p>{user.name}</p>
             {userIsAdmin && user.id !== userSelfId && (
-                <AdminControlsBanUser
+                <AdminControlsUser
                     bannedUserId={user.id}
                     serverId={serverId}
+                    isUnban={isBanned ? true : false}
                 />
             )}
         </div>

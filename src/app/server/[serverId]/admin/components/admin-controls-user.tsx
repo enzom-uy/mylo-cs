@@ -1,5 +1,5 @@
 import { BanUserReqBody } from '@/app/api/ban-user/route'
-import { deleteMember } from '@/redux/features/membersSlice'
+import { deleteBannedMember, deleteMember } from '@/redux/features/membersSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { Button } from '@/shad-components/button'
 import { useToast } from '@/shad-components/use-toast'
@@ -14,26 +14,35 @@ import axios from 'axios'
 import { Ban } from 'lucide-react'
 import { useState } from 'react'
 
-export default function AdminControlsBanUser({
+export default function AdminControlsUser({
     bannedUserId,
-    serverId
+    serverId,
+    isUnban
 }: {
     bannedUserId: string
     serverId: string
+    isUnban?: boolean
 }) {
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState<boolean>()
     const { toast } = useToast()
     const handleConfirm = async () => {
         const axiosBody: BanUserReqBody = {
-            bannedUserId: bannedUserId,
+            bannedUserId,
             serverId
         }
         try {
             const response = await axios
-                .post('/api/ban-user', axiosBody)
+                .post(
+                    `${isUnban ? '/api/unban-user' : '/api/ban-user'}`,
+                    axiosBody
+                )
                 .then((res) => res.data)
-            dispatch(deleteMember({ bannedUserId }))
+            dispatch(
+                isUnban
+                    ? deleteBannedMember({ bannedUserId })
+                    : deleteMember({ bannedUserId })
+            )
             console.log(response)
             toast({ title: response.message, duration: 2000 })
         } catch (error) {
@@ -48,6 +57,7 @@ export default function AdminControlsBanUser({
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle className="flex flex-col items-center gap-2">
+                        {isUnban ? 'Desbanear usuario.' : 'Banear usuario.'}
                         <Button
                             onClick={handleConfirm}
                             className="btn w-full max-w-xs bg-destructive hover:bg-destructive/90"

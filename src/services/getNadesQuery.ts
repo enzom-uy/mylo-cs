@@ -19,6 +19,11 @@ export const getNadesQuery = async ({
                         id: serverId ? undefined : userId
                     }
                 },
+                banned_users: {
+                    none: {
+                        id: userId
+                    }
+                },
                 id: serverId ? serverId : undefined
             },
             status: 'APPROVED',

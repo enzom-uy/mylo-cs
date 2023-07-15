@@ -8,13 +8,18 @@ import { Server, Users } from 'lucide-react'
 export default function UserServerDataBadges({
     members,
     nades,
-    servers
+    servers,
+    isBannedMembers
 }: {
     members?: number
     nades?: number
     servers?: number
+    isBannedMembers?: boolean
 }) {
     const reduxMembers = useAppSelector((state) => state.membersReducer.members)
+    const reduxBannedMembers = useAppSelector(
+        (state) => state.membersReducer.bannedMembers
+    )
     const formattedNumber = (number: number) => (number > 900 ? '+900' : number)
     return (
         <div className="flex items-center gap-2">
@@ -22,7 +27,13 @@ export default function UserServerDataBadges({
                 <Badge className="server-badge">
                     <Users className="w-4" />
                     {formattedNumber(
-                        !!reduxMembers.length ? reduxMembers.length : members
+                        isBannedMembers
+                            ? !!reduxBannedMembers.length
+                                ? reduxBannedMembers.length
+                                : members
+                            : !!reduxMembers.length
+                            ? reduxMembers.length
+                            : members
                     )}
                 </Badge>
             )}

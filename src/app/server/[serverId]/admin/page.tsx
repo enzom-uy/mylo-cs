@@ -5,8 +5,9 @@ import { sortNadesPendingFirst } from '@/utils/pendingNadesFirst'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import ServerHeader from '../components/server-header'
-import ServerNades from '../components/server-nades'
 import ServerMembers from '../components/server-members'
+import ServerNades from '../components/server-nades'
+import ServerBannedMembers from './components/sections/sever-banned-members'
 
 export default async function ServerAdminPage({
     params
@@ -16,14 +17,21 @@ export default async function ServerAdminPage({
     const session = await getServerSession(authOptions)
     if (!session) redirect('/')
     const server = await getServer({ params, admin: true })
-    const { admins, name, server_icon, description, nades, id, members } =
-        server!
+    const {
+        admins,
+        name,
+        server_icon,
+        description,
+        nades,
+        id,
+        members,
+        banned_users
+    } = server!
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
     if (!userIsAdmin) redirect(`/server/${params.serverId}`)
-
     const pendingNadesFirst = sortNadesPendingFirst(nades)
+    console.log(banned_users)
 
-    console.log(pendingNadesFirst)
     return (
         <>
             <ServerHeader
@@ -45,6 +53,13 @@ export default async function ServerAdminPage({
                 userIsAdmin={userIsAdmin}
                 userId={session?.id as string}
                 serverId={id}
+            />
+            <Separator className="my-4" />
+            <ServerBannedMembers
+                banned_members={banned_users}
+                serverId={id}
+                userIsAdmin={userIsAdmin}
+                userSelfId={session.user.id}
             />
         </>
     )

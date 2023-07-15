@@ -21,6 +21,7 @@ export const getServer = async ({
         include: {
             admins: true,
             members: true,
+            banned_users: true,
             nades: {
                 where: whereCondition as any,
                 include: {
@@ -42,5 +43,6 @@ export interface NadeAuthorNadeType extends Nade {
 export interface ServerWithNadesNadeTypeAdminsMembers extends Server {
     admins: User[]
     members: User[]
+    banned_users: User[]
     nades: NadeAuthorNadeType[]
 }
