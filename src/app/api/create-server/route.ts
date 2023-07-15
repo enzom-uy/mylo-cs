@@ -47,15 +47,9 @@ export async function POST(req: NextRequest) {
                         id: ownerId
                     }
                 },
-                UserServerRole: {
-                    create: {
-                        role: 'OWNER',
-                        id: serverId,
-                        user: {
-                            connect: {
-                                id: ownerId
-                            }
-                        }
+                owner: {
+                    connect: {
+                        id: ownerId
                     }
                 }
             }

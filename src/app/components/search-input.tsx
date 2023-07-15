@@ -18,12 +18,14 @@ const SearchInput = () => {
     }
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-        dispatch(loadingNades(true))
         e.preventDefault()
+        const url = window.location.href
+        if (url.includes(query)) return dispatch(loadingNades(false))
         if (query === '') {
             setError('Este campo es obligatorio.')
             return
         }
+        dispatch(loadingNades(true))
         const formattedQuery = query.replaceAll(' ', '-')
         router.push(`/?query=${formattedQuery}`)
     }

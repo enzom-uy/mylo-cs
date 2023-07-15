@@ -1,5 +1,5 @@
-import { Session } from 'next-auth'
 import { db } from '@/config/db'
+import { Session } from 'next-auth'
 
 export const getUserServers = async ({
     session
@@ -11,15 +11,9 @@ export const getUserServers = async ({
             id: session?.id
         },
         select: {
-            servers_is_member: {
-                select: {
-                    name: true,
-                    description: true,
-                    UserServerRole: true,
-                    members: true,
-                    id: true
-                }
-            }
+            servers_is_member: true,
+            servers_is_admin: true,
+            servers_is_owner: true
         }
     })
     return userServers

@@ -22,7 +22,7 @@ export default function UserCard({
     isBanned
 }: Props) {
     return (
-        <div className="flex items-center gap-2 break-all py-2 will-change-transform duration-150 hover:translate-x-2">
+        <div className="flex items-center gap-2 break-all py-2">
             {user.image ? (
                 <Image
                     src={user.image}

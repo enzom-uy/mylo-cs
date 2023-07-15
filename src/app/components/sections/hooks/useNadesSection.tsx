@@ -9,6 +9,7 @@ interface Props {
 
 export const useNadesSection = ({ nades }: Props) => {
     const reduxIsLoading = useAppSelector((state) => state.nadesReducer.loading)
+    console.log('Redux is loading: ', reduxIsLoading)
     const dispatch = useAppDispatch()
     const [state, setState] = useState({
         loading: true
@@ -29,11 +30,14 @@ export const useNadesSection = ({ nades }: Props) => {
             dispatch(loadingNades(false))
         }
 
+        dispatch(loadingNades(false))
         return () => {
             setState((prevState) => ({
                 ...prevState,
                 loading: true
             }))
+
+            dispatch(loadingNades(false))
         }
     }, [nades])
 

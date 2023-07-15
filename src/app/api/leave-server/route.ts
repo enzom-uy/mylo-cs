@@ -7,12 +7,7 @@ export interface LeaveServerReqBody extends UserServerId {}
 export async function POST(req: NextRequest) {
     try {
         const { serverId, userId } = (await req.json()) as LeaveServerReqBody
-        const userServerRole = await db.userServerRole.findFirst({
-            where: {
-                server_id: serverId,
-                user_id: userId
-            }
-        })
+
         await db.user.update({
             where: {
                 id: userId
@@ -26,11 +21,6 @@ export async function POST(req: NextRequest) {
                 servers_is_admin: {
                     disconnect: {
                         id: serverId
-                    }
-                },
-                user_server_role: {
-                    delete: {
-                        id: userServerRole?.id
                     }
                 }
             }

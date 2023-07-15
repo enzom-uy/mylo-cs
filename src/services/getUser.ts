@@ -1,13 +1,11 @@
 import { db } from '@/config/db'
-import { Nade, Server, User, UserServerRole } from '@prisma/client'
-
-export interface ServerWithUserRole extends Server {
-    UserServerRole: UserServerRole[]
-}
+import { Nade, Server, User } from '@prisma/client'
 
 export interface UserWithNadesAndServers extends User {
     nades: Nade[]
-    servers_is_member: ServerWithUserRole[]
+    servers_is_member: Server[]
+    servers_is_admin: Server[]
+    servers_is_owner: Server[]
 }
 
 export const getUser = async ({ id }: { id: string }) => {
@@ -17,17 +15,10 @@ export const getUser = async ({ id }: { id: string }) => {
         },
         include: {
             nades: true,
-            servers_is_member: {
-                include: {
-                    UserServerRole: {
-                        where: {
-                            user_id: id
-                        }
-                    }
-                }
-            }
+            servers_is_member: true,
+            servers_is_admin: true,
+            servers_is_owner: true
         }
     })
-    console.log(user)
     return user
 }

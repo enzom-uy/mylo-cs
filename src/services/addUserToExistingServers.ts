@@ -22,15 +22,6 @@ export const addUserToExistingServers = async ({
             .then((res) => res.data as Guild[])
 
         const guildsId = userGuilds.map((g) => ({ id: { contains: g.id } }))
-        const serverGuildsId = userGuilds.map((g) => ({
-            server_id: { contains: g.id }
-        }))
-        await db.userServerRole.deleteMany({
-            where: {
-                user_id: providerAccountId,
-                OR: serverGuildsId
-            }
-        })
 
         const userIsInExistingServers = await db.server.findMany({
             where: {
@@ -45,10 +36,10 @@ export const addUserToExistingServers = async ({
                 banned_users: true
             }
         })
+        console.log(userIsInExistingServers)
 
-        console.log('User is in existing servers:', userIsInExistingServers)
         if (!!userIsInExistingServers) {
-            userGuilds.forEach(async (g) => {
+            userIsInExistingServers.forEach(async (g) => {
                 await db.user.update({
                     where: {
                         id: providerAccountId
@@ -57,16 +48,6 @@ export const addUserToExistingServers = async ({
                         servers_is_member: {
                             connect: {
                                 id: g.id
-                            }
-                        },
-                        user_server_role: {
-                            create: {
-                                role: g.owner ? 'OWNER' : 'USER',
-                                server: {
-                                    connect: {
-                                        id: g.id
-                                    }
-                                }
                             }
                         }
                     }

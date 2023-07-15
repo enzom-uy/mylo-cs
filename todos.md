@@ -20,13 +20,14 @@
 
 ## Doing
 
-- Leave server.
+- Delete server as Owner.
 - Server profile.
   - Manage members.
     - Give admin role to other member/s.
 
 ## Done
 
+- ~~Leave server~~.
 - Manage nades.
   - As ADMIN/OWNER:
     - ~~See PENDING nades~~.

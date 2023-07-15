@@ -10,12 +10,6 @@ export async function POST(req: NextRequest) {
     try {
         const body = (await req.json()) as BanUserReqBody
         const { serverId, bannedUserId } = body
-        const userServerRole = await db.userServerRole.findFirst({
-            where: {
-                server_id: serverId,
-                user_id: bannedUserId
-            }
-        })
 
         await db.server.update({
             where: {
@@ -27,14 +21,14 @@ export async function POST(req: NextRequest) {
                         id: bannedUserId
                     }
                 },
-                banned_users: {
-                    connect: {
+                admins: {
+                    disconnect: {
                         id: bannedUserId
                     }
                 },
-                UserServerRole: {
-                    delete: {
-                        id: userServerRole?.id
+                banned_users: {
+                    connect: {
+                        id: bannedUserId
                     }
                 }
             }

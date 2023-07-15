@@ -57,50 +57,35 @@ model Report {
 }
 
 model Server {
-    id               String           @id
+    id               String   @id
     name             String
-    description      String?          @db.Text
+    description      String?  @db.Text
     server_icon      String?
-    members          User[]           @relation("ServerMembers")
-    admins           User[]
-    UserServerRole   UserServerRole[]
+    members          User[]   @relation("ServerMembers")
+    admins           User[]   @relation("ServerAdmins")
+    owner            User     @relation(fields: [owner_id], references: [id])
+    owner_id         String   @map("userId")
     nades            Nade[]
     reports_received Report[]
-    banned_users     User[]           @relation("BannedMembers")
-}
+    banned_users     User[]   @relation("BannedMembers")
 
-model ServerRole {
-    name  Server_Role @id
-    users User[]
-}
-
-model UserServerRole {
-    id        String      @id @default(cuid())
-    user_id   String
-    server_id String
-    role      Server_Role
-    user      User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
-    server    Server      @relation(fields: [server_id], references: [id], onDelete: Cascade)
-
-    @@index([user_id])
-    @@index([server_id])
+    @@index([owner_id])
 }
 
 model User {
-    id                String           @id @default(cuid())
+    id                String    @id @default(cuid())
     name              String
-    email             String?          @unique
+    email             String?   @unique
     emailVerified     DateTime?
     image             String?
     accounts          Account[]
     sessions          Session[]
     nades             Nade[]
-    servers_is_member Server[]         @relation("ServerMembers")
-    servers_is_admin  Server[]
-    roles             ServerRole[]
-    user_server_role  UserServerRole[]
+    servers_is_member Server[]  @relation("ServerMembers")
+    servers_is_admin  Server[]  @relation("ServerAdmins")
+    servers_is_owner  Server[]
     reports_made      Report[]
-    banned_from       Server[]         @relation("BannedMembers")
+    banned_from       Server[]  @relation("BannedMembers")
 }
 
 model Account {
@@ -143,12 +128,6 @@ model VerificationToken {
 enum Nade_status {
     APPROVED
     PENDING
-}
-
-enum Server_Role {
-    OWNER
-    ADMIN
-    USER
 }
 
 enum Report_Type {

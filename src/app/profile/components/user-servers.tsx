@@ -1,6 +1,5 @@
 'use client'
 
-import { ServerWithUserRole } from '@/services/getUser'
 import { Server } from '@prisma/client'
 import { Session } from 'next-auth'
 import { useRouter } from 'next/navigation'
@@ -11,7 +10,7 @@ export default function UserServers({
     servers,
     session
 }: {
-    servers: ServerWithUserRole[] | undefined
+    servers: Server[] | undefined
     session: Session
 }) {
     const router = useRouter()
@@ -27,17 +26,7 @@ export default function UserServers({
             <ul className="no-scrollbar flex w-full flex-col gap-1 overflow-hidden overflow-x-hidden overflow-y-scroll">
                 {!!servers?.length ? (
                     servers?.map((s) => {
-                        console.log(`Servidor: ${s.name}`)
-                        console.log(
-                            `Dueño: ${JSON.stringify(
-                                s.UserServerRole.filter(
-                                    (role) => role.role === 'OWNER'
-                                )
-                            )}`
-                        )
-                        const isOwner = s.UserServerRole.filter(
-                            (role) => role.role === 'OWNER'
-                        )
+                        const isOwner = s.owner_id === session.id
                         return (
                             <div key={s.id} className="flex items-center gap-4">
                                 <li
@@ -50,10 +39,10 @@ export default function UserServers({
                                         {s.name}
                                     </p>
                                 </li>
-                                {!!!isOwner.length && (
+                                {!isOwner && (
                                     <UserLeaveServer
-                                        userId={session.id}
                                         server={s}
+                                        userId={session.id}
                                     />
                                 )}
                             </div>
