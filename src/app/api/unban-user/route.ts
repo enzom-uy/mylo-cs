@@ -1,9 +1,15 @@
 import { db } from '@/config/db'
+import { ApiResponse } from '@/types/api'
+import { User } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 
 export interface UnbanUserReqBody {
     bannedUserId: string
     serverId: string
+}
+
+export interface UnbanUserApiResponse extends ApiResponse {
+    unbannedUser: User | undefined
 }
 
 export async function POST(req: NextRequest) {
@@ -34,11 +40,20 @@ export async function POST(req: NextRequest) {
                 }
             }
         })
-        return NextResponse.json({
+        const user = unbannedUser.members[0]
+        return NextResponse.json<UnbanUserApiResponse>({
             message: 'Se desbaneó al usuario.',
-            unbannedUser
+            unbannedUser: user,
+            result: 'success',
+            status: '200'
         })
     } catch (error) {
         console.error(error)
+        return NextResponse.json<UnbanUserApiResponse>({
+            message: 'Ha ocurrido un error al intentar desbanear el usuario.',
+            unbannedUser: undefined,
+            result: 'error',
+            status: '404'
+        })
     }
 }

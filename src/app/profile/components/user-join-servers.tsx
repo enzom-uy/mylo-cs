@@ -1,5 +1,6 @@
 'use client'
 
+import { ServerApiResponse } from '@/app/api/create-server/route'
 import { useToast } from '@/shad-components/use-toast'
 import axios from 'axios'
 import { RotateCw } from 'lucide-react'
@@ -18,15 +19,19 @@ export default function UserJoinServers({
     const { toast } = useToast()
     const handleClick = async () => {
         setClicked(true)
-        const response = await axios
+        const response = (await axios
             .post('/api/join-servers', {
                 access_token,
                 id
             })
-            .then((res) => res.data)
-        console.log(response)
+            .then((res) => res.data)) as ServerApiResponse
+        if (response.result === 'error') {
+            setClicked(false)
+            toast({ title: response.message, variant: 'destructive' })
+            return
+        }
         setClicked(false)
-        toast({ title: 'Se han actualizado tus servidores.' })
+        toast({ title: response.message })
         setTimeout(() => {
             router.refresh()
         }, 500)

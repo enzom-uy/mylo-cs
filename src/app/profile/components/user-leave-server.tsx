@@ -10,6 +10,7 @@ import {
     DialogTrigger
 } from '@/shad-components/dialog'
 import { useToast } from '@/shad-components/use-toast'
+import { ApiResponse } from '@/types/api'
 import { Server } from '@prisma/client'
 import axios from 'axios'
 import { Ban } from 'lucide-react'
@@ -31,9 +32,15 @@ export default function UserLeaveServer({
             serverId: server.id,
             userId
         }
-        const response = await axios
+        const response = (await axios
             .post('/api/leave-server', axiosBody)
-            .then((res) => res.data)
+            .then((res) => res.data)) as ApiResponse
+
+        if (response.result === 'error') {
+            toast({ title: response.message, variant: 'destructive' })
+            return
+        }
+
         toast({ title: response.message })
         setTimeout(() => {
             router.refresh()

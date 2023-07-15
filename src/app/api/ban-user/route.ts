@@ -1,4 +1,5 @@
 import { db } from '@/config/db'
+import { ApiResponse } from '@/types/api'
 import { NextRequest, NextResponse } from 'next/server'
 
 export interface BanUserReqBody {
@@ -34,10 +35,17 @@ export async function POST(req: NextRequest) {
             }
         })
 
-        return NextResponse.json({
-            message: 'Se baneó al usuario exitosamente.'
+        return NextResponse.json<ApiResponse>({
+            message: 'Se baneó al usuario exitosamente.',
+            result: 'success',
+            status: '200'
         })
     } catch (error) {
         console.error(error)
+        return NextResponse.json<ApiResponse>({
+            message: 'Ha ocurrido un error al intentar banear al usuario.',
+            result: 'error',
+            status: '404'
+        })
     }
 }

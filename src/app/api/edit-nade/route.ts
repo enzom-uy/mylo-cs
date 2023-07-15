@@ -1,9 +1,15 @@
 import { EditNadeSchemaType } from '@/app/server/[serverId]/admin/components/admin-controls-edit'
 import { db } from '@/config/db'
+import { ApiResponse } from '@/types/api'
+import { Nade } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 
 export interface EditNadeData extends EditNadeSchemaType {
     nadeId: string
+}
+
+export interface EditNadeApiResponse extends ApiResponse {
+    updatedNade: Nade | undefined
 }
 
 export async function POST(req: NextRequest) {
@@ -36,8 +42,19 @@ export async function POST(req: NextRequest) {
             }
         })
 
-        return NextResponse.json(updatedNade)
+        return NextResponse.json<EditNadeApiResponse>({
+            message: 'Se ha editado la granada correctamente.',
+            result: 'success',
+            status: '200',
+            updatedNade
+        })
     } catch (error) {
         console.error(error)
+        return NextResponse.json<EditNadeApiResponse>({
+            message: 'Ha ocurrido un error al intentar editar la granada.',
+            result: 'error',
+            status: '404',
+            updatedNade: undefined
+        })
     }
 }

@@ -1,4 +1,7 @@
-import { DeleteNadeData } from '@/app/api/delete-nade/route'
+import {
+    DeleteNadeApiResponse,
+    DeleteNadeData
+} from '@/app/api/delete-nade/route'
 import { deleteNade, loadingNades } from '@/redux/features/nadesSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { NadeAuthorNadeType } from '@/services/getServer'
@@ -10,6 +13,7 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@/shad-components/dialog'
+import { useToast } from '@/shad-components/use-toast'
 import axios from 'axios'
 import { Trash2 } from 'lucide-react'
 import { useState } from 'react'
@@ -20,20 +24,27 @@ export default function AdminControlsDelete({
     nade: NadeAuthorNadeType
 }) {
     const [open, setOpen] = useState(false)
+    const { toast } = useToast()
     const dispatch = useAppDispatch()
     const handleConfirm = async () => {
         const axiosBody: DeleteNadeData = {
             nadeId: nade.id
         }
         dispatch(loadingNades(true))
-        const response = await axios
+        const response = (await axios
             .post('/api/delete-nade', axiosBody)
             .then((res) => {
-                dispatch(deleteNade(nade))
                 return res.data
-            })
-            .finally(() => dispatch(loadingNades(false)))
-        console.log(response)
+            })) as DeleteNadeApiResponse
+
+        if (response.result === 'error') {
+            toast({ title: response.message, variant: 'destructive' })
+            dispatch(loadingNades(false))
+            return
+        }
+
+        dispatch(deleteNade(nade))
+        dispatch(loadingNades(false))
     }
     return (
         <Dialog open={open} onOpenChange={setOpen}>

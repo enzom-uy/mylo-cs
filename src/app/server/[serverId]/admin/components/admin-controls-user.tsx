@@ -1,8 +1,10 @@
 import { BanUserReqBody } from '@/app/api/ban-user/route'
+import { UnbanUserApiResponse } from '@/app/api/unban-user/route'
 import { deleteBannedMember, deleteMember } from '@/redux/features/membersSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { Button } from '@/shad-components/button'
 import { useToast } from '@/shad-components/use-toast'
+import { ApiResponse } from '@/types/api'
 import {
     Dialog,
     DialogContent,
@@ -31,23 +33,22 @@ export default function AdminControlsUser({
             bannedUserId,
             serverId
         }
-        try {
-            const response = await axios
-                .post(
-                    `${isUnban ? '/api/unban-user' : '/api/ban-user'}`,
-                    axiosBody
-                )
-                .then((res) => res.data)
-            dispatch(
-                isUnban
-                    ? deleteBannedMember({ bannedUserId })
-                    : deleteMember({ bannedUserId })
-            )
-            console.log(response)
-            toast({ title: response.message, duration: 2000 })
-        } catch (error) {
-            console.error(error)
+        const response = (await axios
+            .post(`${isUnban ? '/api/unban-user' : '/api/ban-user'}`, axiosBody)
+            .then((res) => res.data)) as ApiResponse | UnbanUserApiResponse
+
+        toast({ title: response.message, duration: 2000 })
+        if (
+            (!isUnban && response.result === 'error') ||
+            (isUnban && response.result === 'error')
+        ) {
+            return
         }
+        dispatch(
+            isUnban
+                ? deleteBannedMember({ bannedUserId })
+                : deleteMember({ bannedUserId })
+        )
     }
     return (
         <Dialog open={open} onOpenChange={setOpen}>

@@ -1,7 +1,9 @@
+import { GetNadesApiResponse } from '@/app/api/get-nades/route'
 import { loadingNades } from '@/redux/features/nadesSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { NadeAuthorNadeType } from '@/services/getServer'
 import { Input } from '@/shad-components/input'
+import { useToast } from '@/shad-components/use-toast'
 import axios from 'axios'
 import { useState } from 'react'
 
@@ -21,6 +23,7 @@ export default function ServerNadesInput({
     nades
 }: Props) {
     const [search, setSearch] = useState<string>('')
+    const { toast } = useToast()
     const dispatch = useAppDispatch()
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
@@ -44,15 +47,15 @@ export default function ServerNadesInput({
                             .includes(normalizedSearch) ||
                         nade.nade_type.name
                             .toLowerCase()
-                            .includes(normalizedSearch)
+                            .includes(normalizedSearch) ||
+                        nade.status.toLowerCase().includes(normalizedSearch)
                 )
                 dispatch(loadingNades(false))
                 getNades(filtered!)
                 break
             default:
                 dispatch(loadingNades(true))
-                console.log('pidiendo nades...')
-                const response = await axios
+                const response = (await axios
                     .get('/api/get-nades', {
                         params: {
                             serverId,
@@ -60,10 +63,14 @@ export default function ServerNadesInput({
                             userId
                         }
                     })
-                    .then((res) => res.data)
-                console.log(response)
+                    .then((res) => res.data)) as GetNadesApiResponse
+                toast({ title: response.message })
+                if (response.result === 'error') {
+                    dispatch(loadingNades(false))
+                    break
+                }
                 dispatch(loadingNades(false))
-                getNades(response.nades)
+                getNades(response.nades!)
                 break
         }
     }

@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
 import { addUserToExistingServers } from '@/services/addUserToExistingServers'
+import { NextRequest, NextResponse } from 'next/server'
 import { ServerApiResponse } from '../create-server/route'
 
 interface Body {
@@ -17,14 +17,14 @@ export async function POST(req: NextRequest) {
             access_token: access_token
         })
         return NextResponse.json<ServerApiResponse>({
-            status: 200,
+            status: '200',
             message: 'Se agregó al usuario a los servidores existentes.',
             result: 'success'
         })
     } catch (error) {
         console.log(error)
         return NextResponse.json<ServerApiResponse>({
-            status: 403,
+            status: '403',
             message:
                 'Ha ocurrido un error al intentar unir al usuario a los servidores. Inténtalo nuevamente.',
             result: 'error'

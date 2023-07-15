@@ -1,6 +1,6 @@
+import { db } from '@/config/db'
 import { NextRequest, NextResponse } from 'next/server'
 import { NewServerData, ServerApiResponse } from '../create-server/route'
-import { db } from '@/config/db'
 
 export async function POST(req: NextRequest) {
     try {
@@ -14,14 +14,14 @@ export async function POST(req: NextRequest) {
         })
 
         return NextResponse.json<ServerApiResponse>({
-            status: 200,
+            status: '200',
             message: 'Se ha borrado el servidor exitosamente.',
             result: 'success'
         })
     } catch (error) {
         console.log(error)
         return NextResponse.json<ServerApiResponse>({
-            status: 403,
+            status: '403',
             message:
                 'Ha ocurrido un error al intentar borrar el servidor. Inténtalo nuevamente.',
             result: 'error'

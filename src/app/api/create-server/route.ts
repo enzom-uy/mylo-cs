@@ -1,4 +1,5 @@
 import { db } from '@/config/db'
+import { ApiResponse } from '@/types/api'
 import { NextRequest, NextResponse } from 'next/server'
 import {
     errorMessage,
@@ -15,10 +16,7 @@ export interface NewServerData {
     serverIcon?: string
 }
 
-export interface ServerApiResponse {
-    status: 201 | 200 | 403
-    message: string
-    result: 'error' | 'success'
+export interface ServerApiResponse extends ApiResponse {
     serverId?: string
 }
 
@@ -57,7 +55,7 @@ export async function POST(req: NextRequest) {
         console.log(newServer)
 
         return NextResponse.json<ServerApiResponse>({
-            status: 201,
+            status: '201',
             message: successMessage,
             result: 'success',
             serverId: newServer.id
@@ -65,7 +63,7 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         console.log('ERROR: ', error)
         return NextResponse.json<ServerApiResponse>({
-            status: 403,
+            status: '403',
             message: errorMessage,
             result: 'error'
         })
