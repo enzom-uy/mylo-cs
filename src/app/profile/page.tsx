@@ -1,10 +1,10 @@
+import { getUser } from '@/services/getUser'
+import { Separator } from '@/shad-components/separator'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { authOptions } from '../api/auth/[...nextauth]/route'
-import { Separator } from '@/shad-components/separator'
-import { getUser } from '@/services/getUser'
-import ProfileHeader from './components/profile-header'
 import ProfileContent from './components/profile-content'
+import ProfileHeader from './components/profile-header'
 
 export default async function ProfilePage() {
     const session = await getServerSession(authOptions)

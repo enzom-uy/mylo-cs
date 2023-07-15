@@ -1,38 +1,34 @@
 import { db } from '@/config/db'
+import { UserServerId } from '@/types'
 import { NextRequest, NextResponse } from 'next/server'
 
-export interface BanUserReqBody {
-    bannedUserId: string
-    serverId: string
-}
+export interface LeaveServerReqBody extends UserServerId {}
 
 export async function POST(req: NextRequest) {
     try {
-        const body = (await req.json()) as BanUserReqBody
-        const { serverId, bannedUserId } = body
+        const { serverId, userId } = (await req.json()) as LeaveServerReqBody
         const userServerRole = await db.userServerRole.findFirst({
             where: {
                 server_id: serverId,
-                user_id: bannedUserId
+                user_id: userId
             }
         })
-
-        await db.server.update({
+        await db.user.update({
             where: {
-                id: serverId
+                id: userId
             },
             data: {
-                members: {
+                servers_is_member: {
                     disconnect: {
-                        id: bannedUserId
+                        id: serverId
                     }
                 },
-                banned_users: {
-                    connect: {
-                        id: bannedUserId
+                servers_is_admin: {
+                    disconnect: {
+                        id: serverId
                     }
                 },
-                UserServerRole: {
+                user_server_role: {
                     delete: {
                         id: userServerRole?.id
                     }
@@ -41,7 +37,7 @@ export async function POST(req: NextRequest) {
         })
 
         return NextResponse.json({
-            message: 'Se baneó al usuario exitosamente.'
+            message: 'Dejaste el servidor.'
         })
     } catch (error) {
         console.error(error)

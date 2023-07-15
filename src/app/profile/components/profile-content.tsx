@@ -1,7 +1,7 @@
 import { UserWithNadesAndServers } from '@/services/getUser'
+import { Session } from 'next-auth'
 import UserLastNade from './user-last-nade'
 import UserServers from './user-servers'
-import { Session } from 'next-auth'
 
 export default function ProfileContent({
     user,

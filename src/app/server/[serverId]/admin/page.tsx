@@ -30,7 +30,7 @@ export default async function ServerAdminPage({
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
     if (!userIsAdmin) redirect(`/server/${params.serverId}`)
     const pendingNadesFirst = sortNadesPendingFirst(nades)
-    console.log(banned_users)
+    console.log(session)
 
     return (
         <>
@@ -51,7 +51,7 @@ export default async function ServerAdminPage({
             <ServerMembers
                 members={members}
                 userIsAdmin={userIsAdmin}
-                userId={session?.id as string}
+                userId={session.id}
                 serverId={id}
             />
             <Separator className="my-4" />
@@ -59,7 +59,7 @@ export default async function ServerAdminPage({
                 banned_members={banned_users}
                 serverId={id}
                 userIsAdmin={userIsAdmin}
-                userSelfId={session.user.id}
+                userSelfId={session.id}
             />
         </>
     )

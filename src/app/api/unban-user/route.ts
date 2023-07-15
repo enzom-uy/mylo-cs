@@ -24,6 +24,16 @@ export async function POST(req: NextRequest) {
                     connect: {
                         id: bannedUserId
                     }
+                },
+                UserServerRole: {
+                    create: {
+                        role: 'USER',
+                        user: {
+                            connect: {
+                                id: bannedUserId
+                            }
+                        }
+                    }
                 }
             },
             select: {

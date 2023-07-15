@@ -1,7 +1,7 @@
-import Image from 'next/image'
+import UserServerDataBadges from '@/app/components/user-server-data-badges'
 import { UserWithNadesAndServers } from '@/services/getUser'
 import { Session } from 'next-auth'
-import UserServerDataBadges from '@/app/components/user-server-data-badges'
+import Image from 'next/image'
 
 export default function ProfileHeader({
     user,
