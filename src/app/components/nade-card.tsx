@@ -6,6 +6,7 @@ import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Badge } from '@shad/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@shad/card'
 import AdminControlsDropdown from '../server/[serverId]/admin/components/admin-controls-dropdown'
+import NadeDialog from './nade-dialog'
 import { NadeWithAuthorAndMap } from './sections/nades-section'
 import VideoPlayer from './video-player'
 
@@ -30,13 +31,16 @@ const NadeCard: React.FC<Props> = ({ nade, isAdmin, showStatus, userId }) => {
             <CardHeader>
                 <div className="flex items-center">
                     <CardTitle className="m-0 text-light">{title}</CardTitle>
-                    {isAuthor || isAdmin ? (
-                        <AdminControlsDropdown
-                            isPending={isPending}
-                            nade={nade as NadeAuthorNadeType}
-                            isAdmin={isAdmin ? isAdmin : false}
-                        />
-                    ) : null}
+                    <div className="flex items-center gap-2">
+                        <NadeDialog nade={nade} />
+                        {isAuthor || isAdmin ? (
+                            <AdminControlsDropdown
+                                isPending={isPending}
+                                nade={nade as NadeAuthorNadeType}
+                                isAdmin={isAdmin ? isAdmin : false}
+                            />
+                        ) : null}
+                    </div>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                     <Badge className="text-muted-foreground">

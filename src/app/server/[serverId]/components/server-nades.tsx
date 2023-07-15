@@ -2,6 +2,7 @@
 
 import Loader from '@/app/components/loader'
 import NadeCard from '@/app/components/nade-card'
+import NadeDialog from '@/app/components/nade-dialog'
 import UserServerDataBadges from '@/app/components/user-server-data-badges'
 import { useNadesData } from '@/hooks/useReduxNadeData'
 import { loadNades, loadingNades } from '@/redux/features/nadesSlice'
@@ -46,13 +47,15 @@ export default function ServerNades({
                     }
                 />
             </div>
-            <ServerNadesInput
-                userId={userId}
-                serverId={serverId}
-                getNades={getNades}
-                isAdmin={isAdmin}
-                nades={isAdmin ? nades : undefined}
-            />
+            {nades.length !== 0 && (
+                <ServerNadesInput
+                    userId={userId}
+                    serverId={serverId}
+                    getNades={getNades}
+                    isAdmin={isAdmin}
+                    nades={isAdmin ? nades : undefined}
+                />
+            )}
             {reduxIsLoading && <Loader />}
             {!reduxIsLoading && !!reduxNades.length && (
                 <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
