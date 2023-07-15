@@ -1,4 +1,3 @@
-import { NadeWithAuthorAndMap } from '@/app/components/sections/nades-section'
 import { db } from '@/config/db'
 import { Nade, NadeType, Server, User } from '@prisma/client'
 
@@ -43,5 +42,5 @@ export interface NadeAuthorNadeType extends Nade {
 export interface ServerWithNadesNadeTypeAdminsMembers extends Server {
     admins: User[]
     members: User[]
-    nades: NadeWithAuthorAndMap[]
+    nades: NadeAuthorNadeType[]
 }

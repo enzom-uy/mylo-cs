@@ -1,22 +1,14 @@
 'use client'
 import { loadingNades } from '@/redux/features/nadesSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { NadeAuthorNadeType } from '@/services/getServer'
 import { Nade } from '@prisma/client'
 import { useEffect, useState } from 'react'
 import Loader from '../loader'
 import NadeCard from '../nade-card'
 
-export interface NadeWithAuthorAndMap extends Nade {
-    author: {
-        name: string
-    }
-    map: {
-        name: string
-    }
-}
-
 interface Props {
-    nades: NadeWithAuthorAndMap[]
+    nades: NadeAuthorNadeType[]
 }
 
 const NadesSection: React.FC<Props> = ({ nades }) => {
