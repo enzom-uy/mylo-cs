@@ -9,16 +9,8 @@ export const approveNade = async (nadeId: string) => {
             status: 'APPROVED'
         },
         include: {
-            author: {
-                select: {
-                    name: true
-                }
-            },
-            nade_type: {
-                select: {
-                    name: true
-                }
-            }
+            author: true,
+            nade_type: true
         }
     })
     return approvedNade
