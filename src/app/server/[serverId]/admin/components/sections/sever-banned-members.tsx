@@ -2,14 +2,9 @@
 
 import UserCard from '@/app/components/user-card'
 import UserServerDataBadges from '@/app/components/user-server-data-badges'
-import {
-    loadBannedMembers,
-    loadingMembers
-} from '@/redux/features/membersSlice'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { User } from '@prisma/client'
-import { useEffect } from 'react'
 import MembersSkeleton from '../../../components/members-skeleton'
+import { useServerBannedMembers } from './hooks/useServerBannedMembers'
 
 interface Props {
     banned_members: User[]
@@ -24,18 +19,12 @@ export default function ServerBannedMembers({
     userSelfId,
     serverId
 }: Props) {
-    const reduxBannedMembers = useAppSelector(
-        (state) => state.membersReducer.bannedMembers
-    )
-    const reduxLoadingMembers = useAppSelector(
-        (state) => state.membersReducer.loading
-    )
-    const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        dispatch(loadBannedMembers(banned_members))
-        dispatch(loadingMembers(false))
-    }, [banned_members])
+    const { reduxBannedMembers, reduxLoadingMembers } = useServerBannedMembers({
+        banned_members,
+        userIsAdmin,
+        userSelfId,
+        serverId
+    })
     return (
         <section>
             <div className="mb-2 flex flex-wrap items-center gap-2">

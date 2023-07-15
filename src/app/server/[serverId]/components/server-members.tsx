@@ -2,12 +2,8 @@
 
 import UserCard from '@/app/components/user-card'
 import UserServerDataBadges from '@/app/components/user-server-data-badges'
-import { loadMembers } from '@/redux/features/membersSlice'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { User } from '@prisma/client'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useServerMembers } from './hooks/useServerMembers'
 import MembersSkeleton from './members-skeleton'
 
 interface Props {
@@ -23,15 +19,10 @@ export default function ServerMembers({
     userId,
     serverId
 }: Props) {
-    const router = useRouter()
-    const dispatch = useAppDispatch()
-    const reduxLoadingMembers = useAppSelector(
-        (state) => state.membersReducer.loading
-    )
-    const reduxMembers = useAppSelector((state) => state.membersReducer.members)
-    useEffect(() => {
-        dispatch(loadMembers(members))
-    }, [members])
+    const { reduxMembers } = useServerMembers({
+        members
+    })
+
     return (
         <section>
             <div className="mb-2 flex flex-wrap items-center gap-2">

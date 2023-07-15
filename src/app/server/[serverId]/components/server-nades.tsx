@@ -2,14 +2,11 @@
 
 import Loader from '@/app/components/loader'
 import NadeCard from '@/app/components/nade-card'
-import NadeDialog from '@/app/components/nade-dialog'
 import UserServerDataBadges from '@/app/components/user-server-data-badges'
 import { useNadesData } from '@/hooks/useReduxNadeData'
-import { loadNades, loadingNades } from '@/redux/features/nadesSlice'
+import { loadNades } from '@/redux/features/nadesSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { NadeAuthorNadeType } from '@/services/getServer'
-import { Loader2 } from 'lucide-react'
-import { useEffect, useState } from 'react'
 import ServerNadesInput from './server-nades-input'
 
 interface Props {

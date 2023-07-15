@@ -20,6 +20,7 @@
 
 ## Doing
 
+- Leave server.
 - Server profile.
   - Manage members.
     - Give admin role to other member/s.
