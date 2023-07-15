@@ -29,10 +29,10 @@ model Nade {
     map_name         String
     user_id          String
     server_id        String?
-    author           User        @relation(fields: [user_id], references: [id])
+    author           User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
     map              Map         @relation(fields: [map_name], references: [name])
     nade_type        NadeType    @relation(fields: [nade_type_name], references: [name])
-    Server           Server?     @relation(fields: [server_id], references: [id])
+    Server           Server?     @relation(fields: [server_id], references: [id], onDelete: Cascade)
     reports_received Report[]
 
     @@index([nade_type_name])
