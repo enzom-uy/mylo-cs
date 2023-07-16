@@ -16,7 +16,7 @@ interface Props {
     isBanned?: boolean
     serverAdmins?: User[]
     serverMembers?: User[]
-    ownerId: string
+    ownerId?: string
 }
 
 export default function UserCard({
@@ -26,7 +26,6 @@ export default function UserCard({
     serverId,
     isBanned,
     serverAdmins,
-    serverMembers,
     ownerId
 }: Props) {
     const targetUserIsAdmin = serverAdmins?.filter(
