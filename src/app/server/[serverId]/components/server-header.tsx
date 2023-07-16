@@ -9,6 +9,8 @@ interface Props {
     description: string | null
     serverId: string
     isAdmin?: boolean
+    ownerId?: string
+    userId?: string
 }
 
 export default function ServerHeader({
@@ -16,7 +18,9 @@ export default function ServerHeader({
     name,
     description,
     isAdmin,
-    serverId
+    serverId,
+    ownerId,
+    userId
 }: Props) {
     return (
         <div className="mb-4 flex w-full flex-col items-center gap-4 break-all md:flex-row md:items-start md:justify-start">
@@ -44,7 +48,13 @@ export default function ServerHeader({
                     <h1 className="m-0 w-fit text-center md:text-start">
                         {name}
                     </h1>
-                    {isAdmin && <ServerConfig serverId={serverId} />}
+                    {isAdmin && ownerId === userId && (
+                        <ServerConfig
+                            serverId={serverId}
+                            ownerId={ownerId!}
+                            userId={userId!}
+                        />
+                    )}
                 </div>
                 {description && <p>{description}</p>}
             </div>

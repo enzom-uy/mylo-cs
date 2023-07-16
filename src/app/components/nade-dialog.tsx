@@ -25,13 +25,22 @@ export default function NadeDialog({ nade }: Props) {
             <DialogTrigger>
                 <Maximize2 className="w-5 text-muted-foreground" />
             </DialogTrigger>
-            <DialogContent>
-                <DialogHeader className="flex flex-col items-center gap-2">
-                    <DialogTitle className="m-0 flex flex-col items-center gap-2 break-all">
+            <DialogContent className="p-0">
+                <AspectRatio
+                    ratio={16 / 9}
+                    className="relative overflow-hidden rounded-t-md"
+                >
+                    <div className="absolute left-0 top-0 aspect-video w-full rounded-[0.25rem] bg-black">
+                        <VideoPlayer url={nade.video_url} />
+                    </div>
+                </AspectRatio>
+
+                <DialogHeader className="flex flex-col items-center gap-2 px-4">
+                    <DialogTitle className="m-0 flex flex-col items-start gap-2 break-all">
                         {nade.title}
                     </DialogTitle>
 
-                    <div className="flex flex-wrap items-center gap-2">
+                    <div className="flex w-full flex-wrap items-center gap-2">
                         <Badge className="bg-dark text-muted-foreground">
                             {nade.nade_type_name}
                         </Badge>
@@ -46,17 +55,10 @@ export default function NadeDialog({ nade }: Props) {
                     </div>
                 </DialogHeader>
                 {nade.description && (
-                    <DialogDescription>{nade.description}</DialogDescription>
+                    <DialogDescription className="px-4 pb-4">
+                        {nade.description}
+                    </DialogDescription>
                 )}
-
-                <AspectRatio
-                    ratio={16 / 9}
-                    className="relative overflow-hidden"
-                >
-                    <div className="absolute left-0 top-0 aspect-video w-full rounded-[0.25rem] bg-black">
-                        <VideoPlayer url={nade.video_url} />
-                    </div>
-                </AspectRatio>
             </DialogContent>
         </Dialog>
     )

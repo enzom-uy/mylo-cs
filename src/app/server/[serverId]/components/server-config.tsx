@@ -11,9 +11,11 @@ import ServerConfigDelete from './server-config-delete'
 
 interface Props {
     serverId: string
+    ownerId: string
+    userId: string
 }
 
-export default function ServerConfig({ serverId }: Props) {
+export default function ServerConfig({ serverId, ownerId, userId }: Props) {
     return (
         <Sheet>
             <SheetTrigger>

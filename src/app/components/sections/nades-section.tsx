@@ -12,7 +12,11 @@ const NadesSection: React.FC<Props> = ({ nades }) => {
     const { state, reduxIsLoading } = useNadesSection({ nades })
     const { loading } = state
     return (
-        <section className="flex w-full flex-wrap justify-center gap-4 lg:justify-start">
+        <section
+            className={`flex w-full flex-wrap justify-center gap-4 lg:justify-start ${
+                nades.length === 0 && 'lg:justify-center'
+            }`}
+        >
             {reduxIsLoading ? (
                 <NadeSkeleton />
             ) : !nades ? (

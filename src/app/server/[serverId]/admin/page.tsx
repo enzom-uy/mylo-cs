@@ -26,7 +26,8 @@ export default async function ServerAdminPage({
         nades,
         id,
         members,
-        banned_users
+        banned_users,
+        owner_id
     } = server!
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
     if (!userIsAdmin) redirect(`/server/${params.serverId}`)
@@ -41,6 +42,8 @@ export default async function ServerAdminPage({
                 description={description}
                 isAdmin={true}
                 serverId={id}
+                ownerId={owner_id}
+                userId={session.id}
             />
             <Separator className="mb-4" />
             <ServerNades
