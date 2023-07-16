@@ -11,13 +11,15 @@ interface Props {
     userIsAdmin: boolean
     userId: string
     serverId: string
+    admins?: User[]
 }
 
 export default function ServerMembers({
     members,
     userIsAdmin,
     userId,
-    serverId
+    serverId,
+    admins
 }: Props) {
     const { reduxMembers } = useServerMembers({
         members
@@ -42,6 +44,8 @@ export default function ServerMembers({
                             userIsAdmin={userIsAdmin}
                             userSelfId={userId}
                             serverId={serverId}
+                            serverAdmins={admins}
+                            serverMembers={members}
                         />
                     ))
                 )}

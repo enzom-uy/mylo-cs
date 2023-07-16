@@ -41,13 +41,13 @@ export default function NadeDialog({ nade }: Props) {
                     </DialogTitle>
 
                     <div className="flex w-full flex-wrap items-center gap-2">
-                        <Badge className="bg-dark text-muted-foreground">
+                        <Badge className="bg-dark-secondary text-muted-foreground">
                             {nade.nade_type_name}
                         </Badge>
-                        <Badge className="bg-dark text-muted-foreground">
+                        <Badge className="bg-dark-secondary text-muted-foreground">
                             {nade.map_name}
                         </Badge>
-                        <Badge className="bg-dark text-muted-foreground">
+                        <Badge className="bg-dark-secondary text-muted-foreground">
                             <p className="max-w-[9ch] overflow-hidden text-ellipsis whitespace-nowrap ">
                                 {nade.author.name}
                             </p>

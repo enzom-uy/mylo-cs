@@ -23,7 +23,6 @@
 
 ## Doing
 
-- Delete server as Owner.
 - Server profile.
   - Manage members.
     - Give admin role to other member/s.
@@ -44,6 +43,7 @@
       - ~~Edit your own nades~~.
       - ~~Delete your own nades~~.
 - Server profile.
+  - ~~Delete server as Owner~~.
   - Manage members.
     - ~~Ban users~~.
     - ~~See banned members and unban them~~.

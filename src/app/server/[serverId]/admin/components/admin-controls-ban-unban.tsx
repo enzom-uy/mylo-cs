@@ -2,6 +2,17 @@ import { BanUserReqBody } from '@/app/api/ban-user/route'
 import { UnbanUserApiResponse } from '@/app/api/unban-user/route'
 import { deleteBannedMember, deleteMember } from '@/redux/features/membersSlice'
 import { useAppDispatch } from '@/redux/hooks'
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger
+} from '@/shad-components/alert-dialog'
 import { Button } from '@/shad-components/button'
 import { useToast } from '@/shad-components/use-toast'
 import { ApiResponse } from '@/types/api'
@@ -17,7 +28,7 @@ import axios from 'axios'
 import { Ban } from 'lucide-react'
 import { useState } from 'react'
 
-export default function AdminControlsUser({
+export default function AdminControlsBanUnban({
     bannedUserId,
     serverId,
     isUnban
@@ -52,29 +63,28 @@ export default function AdminControlsUser({
         )
     }
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger className="hover:text-destructive">
+        <AlertDialog open={open} onOpenChange={setOpen}>
+            <AlertDialogTrigger className="hover:text-destructiveover:text-destructive">
                 <Ban className="w-5 text-muted-foreground duration-200 hover:text-destructive" />
-            </DialogTrigger>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle className="flex flex-col items-center gap-2">
-                        {isUnban ? 'Desbanear usuario.' : 'Banear usuario.'}
-                        <Button
-                            onClick={handleConfirm}
-                            className="btn w-full max-w-xs bg-destructive hover:bg-destructive/90"
-                        >
-                            Confirmar
-                        </Button>
-                        <Button
-                            className="btn w-full max-w-xs bg-dark/80 hover:bg-dark/90"
-                            onClick={() => setOpen(false)}
-                        >
-                            Cancelar
-                        </Button>
-                    </DialogTitle>
-                </DialogHeader>
-            </DialogContent>
-        </Dialog>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>
+                        {isUnban ? 'Desbanear usuario' : 'Banear usuario'}
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                        {isUnban
+                            ? 'El usuario volverá a formar parte del servidor y podrá ver las granadas.'
+                            : 'El usuario dejará de formar parte del servidor. No podrá volver a unirse ni ver las granadas.'}
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogAction onClick={handleConfirm}>
+                        Confirmar
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
     )
 }
