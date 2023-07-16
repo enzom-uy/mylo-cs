@@ -2,6 +2,7 @@
 
 import { ServerApiResponse } from '@/app/api/create-server/route'
 import { useToast } from '@/shad-components/use-toast'
+import { TOAST_DURATION } from '@/utils/contants'
 import axios from 'axios'
 import { RotateCw } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -27,11 +28,15 @@ export default function UserJoinServers({
             .then((res) => res.data)) as ServerApiResponse
         if (response.result === 'error') {
             setClicked(false)
-            toast({ title: response.message, variant: 'destructive' })
+            toast({
+                title: response.message,
+                variant: 'destructive',
+                duration: TOAST_DURATION
+            })
             return
         }
         setClicked(false)
-        toast({ title: response.message })
+        toast({ title: response.message, duration: TOAST_DURATION })
         setTimeout(() => {
             router.refresh()
         }, 500)

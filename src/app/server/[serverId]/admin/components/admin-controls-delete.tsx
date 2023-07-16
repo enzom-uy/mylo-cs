@@ -14,6 +14,7 @@ import {
     DialogTrigger
 } from '@/shad-components/dialog'
 import { useToast } from '@/shad-components/use-toast'
+import { TOAST_DURATION } from '@/utils/contants'
 import axios from 'axios'
 import { Trash2 } from 'lucide-react'
 import { useState } from 'react'
@@ -38,7 +39,11 @@ export default function AdminControlsDelete({
             })) as DeleteNadeApiResponse
 
         if (response.result === 'error') {
-            toast({ title: response.message, variant: 'destructive' })
+            toast({
+                title: response.message,
+                variant: 'destructive',
+                duration: TOAST_DURATION
+            })
             dispatch(loadingNades(false))
             return
         }

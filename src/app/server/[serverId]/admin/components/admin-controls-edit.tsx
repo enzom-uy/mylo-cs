@@ -28,6 +28,7 @@ import {
 } from '@/shad-components/select'
 import { Textarea } from '@/shad-components/textarea'
 import { useToast } from '@/shad-components/use-toast'
+import { TOAST_DURATION } from '@/utils/contants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogDescription } from '@radix-ui/react-dialog'
 import axios from 'axios'
@@ -105,11 +106,13 @@ export default function AdminControlsEdit({
         if (!updatedNade)
             toast({
                 title: 'Ha ocurrido un error al intentar editar la granada.',
-                variant: 'destructive'
+                variant: 'destructive',
+                duration: TOAST_DURATION
             })
 
         toast({
-            title: 'Granada editada.'
+            title: 'Granada editada.',
+            duration: TOAST_DURATION
         })
     }
 

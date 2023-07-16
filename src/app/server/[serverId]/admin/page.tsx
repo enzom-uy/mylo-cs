@@ -17,6 +17,7 @@ export default async function ServerAdminPage({
     const session = await getServerSession(authOptions)
     if (!session) redirect('/')
     const server = await getServer({ params, admin: true })
+    if (!server) redirect('/')
     const {
         admins,
         name,
@@ -37,7 +38,9 @@ export default async function ServerAdminPage({
             <ServerHeader
                 name={name}
                 server_icon={server_icon}
-                description={null}
+                description={description}
+                isAdmin={true}
+                serverId={id}
             />
             <Separator className="mb-4" />
             <ServerNades

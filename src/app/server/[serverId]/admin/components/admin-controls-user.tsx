@@ -5,6 +5,7 @@ import { useAppDispatch } from '@/redux/hooks'
 import { Button } from '@/shad-components/button'
 import { useToast } from '@/shad-components/use-toast'
 import { ApiResponse } from '@/types/api'
+import { TOAST_DURATION } from '@/utils/contants'
 import {
     Dialog,
     DialogContent,
@@ -37,7 +38,7 @@ export default function AdminControlsUser({
             .post(`${isUnban ? '/api/unban-user' : '/api/ban-user'}`, axiosBody)
             .then((res) => res.data)) as ApiResponse | UnbanUserApiResponse
 
-        toast({ title: response.message, duration: 2000 })
+        toast({ title: response.message, duration: TOAST_DURATION })
         if (
             (!isUnban && response.result === 'error') ||
             (isUnban && response.result === 'error')

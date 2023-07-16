@@ -4,6 +4,7 @@ import { useAppDispatch } from '@/redux/hooks'
 import { NadeAuthorNadeType } from '@/services/getServer'
 import { Input } from '@/shad-components/input'
 import { useToast } from '@/shad-components/use-toast'
+import { TOAST_DURATION } from '@/utils/contants'
 import axios from 'axios'
 import { useState } from 'react'
 
@@ -64,7 +65,7 @@ export default function ServerNadesInput({
                         }
                     })
                     .then((res) => res.data)) as GetNadesApiResponse
-                toast({ title: response.message })
+                toast({ title: response.message, duration: TOAST_DURATION })
                 if (response.result === 'error') {
                     dispatch(loadingNades(false))
                     break

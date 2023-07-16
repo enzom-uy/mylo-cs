@@ -1,5 +1,12 @@
 'use client'
 
+import { NewServerData, ServerApiResponse } from '@/app/api/create-server/route'
+import {
+    errorMessage,
+    serverIdMinLength,
+    serverNameMinLength,
+    successMessage
+} from '@/app/api/create-server/utils'
 import Terms from '@/app/components/terms'
 import { Button } from '@/shad-components/button'
 import { Checkbox } from '@/shad-components/checkbox'
@@ -13,24 +20,18 @@ import {
     FormMessage
 } from '@/shad-components/form'
 import { useToast } from '@/shad-components/use-toast'
+import { TOAST_DURATION } from '@/utils/contants'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { CheckedState } from '@radix-ui/react-checkbox'
 import { Input } from '@shad/input'
 import { Textarea } from '@shad/textarea'
 import axios from 'axios'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
-import Required from './required'
-import {
-    errorMessage,
-    serverIdMinLength,
-    serverNameMinLength,
-    successMessage
-} from '@/app/api/create-server/utils'
-import { NewServerData, ServerApiResponse } from '@/app/api/create-server/route'
-import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
-import { CheckedState } from '@radix-ui/react-checkbox'
 import { Guild } from '../utils/getUserGuilds'
+import Required from './required'
 
 export const createServerSchema = z.object({
     serverName: z.string().min(serverNameMinLength, {
@@ -67,7 +68,8 @@ export default function CreateServerForm() {
 
         if (values.terms === false) {
             toast({
-                title: 'Debes aceptar los términos y condiciones para continuar.'
+                title: 'Debes aceptar los términos y condiciones para continuar.',
+                duration: TOAST_DURATION
             })
             return
         }
@@ -89,7 +91,7 @@ export default function CreateServerForm() {
         if (response.result === 'error') {
             toast({
                 title: errorMessage,
-                duration: 5000
+                duration: TOAST_DURATION
             })
             return
         }
@@ -98,7 +100,7 @@ export default function CreateServerForm() {
         router.push(`/server/${response.serverId}`)
         return toast({
             title: successMessage,
-            duration: 5000
+            duration: TOAST_DURATION
         })
     }
     return (

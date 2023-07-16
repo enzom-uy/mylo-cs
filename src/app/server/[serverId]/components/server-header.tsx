@@ -1,17 +1,22 @@
 import DiscordPlaceholder from '@/app/components/discord-placeholder-svg'
 import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
 import Image from 'next/image'
+import ServerConfig from './server-config'
 
 interface Props {
     server_icon: string | null
     name: string
     description: string | null
+    serverId: string
+    isAdmin?: boolean
 }
 
 export default function ServerHeader({
     server_icon,
     name,
-    description
+    description,
+    isAdmin,
+    serverId
 }: Props) {
     return (
         <div className="mb-4 flex w-full flex-col items-center gap-4 break-all md:flex-row md:items-start md:justify-start">
@@ -34,8 +39,13 @@ export default function ServerHeader({
                 </div>
             )}
 
-            <div className="flex flex-col items-center gap-1 md:items-start">
-                <h1 className="m-0 w-fit text-center">{name}</h1>
+            <div className="flex w-full flex-col items-center gap-1 md:items-start">
+                <div className="flex w-full items-start justify-between gap-8">
+                    <h1 className="m-0 w-fit text-center md:text-start">
+                        {name}
+                    </h1>
+                    {isAdmin && <ServerConfig serverId={serverId} />}
+                </div>
                 {description && <p>{description}</p>}
             </div>
         </div>
