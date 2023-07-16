@@ -16,6 +16,7 @@ interface Props {
     isBanned?: boolean
     serverAdmins?: User[]
     serverMembers?: User[]
+    ownerId: string
 }
 
 export default function UserCard({
@@ -25,12 +26,14 @@ export default function UserCard({
     serverId,
     isBanned,
     serverAdmins,
-    serverMembers
+    serverMembers,
+    ownerId
 }: Props) {
     const targetUserIsAdmin = serverAdmins?.filter(
         (admin) => admin.id === user.id
     )
     const isAdmin = !!targetUserIsAdmin?.length
+    const isOwner = ownerId === user.id
 
     return (
         <div className="flex flex-wrap items-center gap-2 break-all py-2">
@@ -51,25 +54,31 @@ export default function UserCard({
             )}
             <p>{user.name}</p>
             <div className="flex flex-wrap items-center gap-2">
-                {isAdmin && (
+                {isAdmin && !isOwner ? (
                     <Badge className="font-semibold uppercase">admin</Badge>
+                ) : (
+                    isOwner && (
+                        <Badge className="font-semibold uppercase">dueño</Badge>
+                    )
                 )}
-                {userIsAdmin && user.id !== userSelfId && (
-                    <div className="flex items-center gap-2">
-                        <AdminControlsBanUnban
-                            bannedUserId={user.id}
-                            serverId={serverId}
-                            isUnban={isBanned ? true : false}
-                        />
-                        {!isBanned && (
-                            <AdminControlsGiveRole
-                                isAdmin={isAdmin}
+                {userIsAdmin &&
+                    user.id !== userSelfId &&
+                    user.id !== ownerId && (
+                        <div className="flex items-center gap-2">
+                            <AdminControlsBanUnban
+                                bannedUserId={user.id}
                                 serverId={serverId}
-                                userId={user.id}
+                                isUnban={isBanned ? true : false}
                             />
-                        )}
-                    </div>
-                )}
+                            {!isBanned && (
+                                <AdminControlsGiveRole
+                                    isAdmin={isAdmin}
+                                    serverId={serverId}
+                                    userId={user.id}
+                                />
+                            )}
+                        </div>
+                    )}
             </div>
         </div>
     )

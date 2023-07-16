@@ -18,10 +18,17 @@ export default async function ServerPage({
     const session = await getServerSession(authOptions)
     if (!session) redirect('/')
 
-    const { name, server_icon, id, admins, members, nades, description } =
-        server
+    const {
+        name,
+        server_icon,
+        id,
+        admins,
+        members,
+        nades,
+        description,
+        owner_id
+    } = server
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
-    const userIsMember = members.some((member) => member.id === session?.id)
 
     return (
         <>
@@ -43,6 +50,8 @@ export default async function ServerPage({
                 userIsAdmin={userIsAdmin}
                 userId={session?.id as string}
                 serverId={id}
+                admins={admins}
+                ownerId={owner_id}
             />
         </>
     )

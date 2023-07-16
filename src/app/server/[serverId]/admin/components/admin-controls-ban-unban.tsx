@@ -26,6 +26,7 @@ import {
 } from '@shad/dialog'
 import axios from 'axios'
 import { Ban } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export default function AdminControlsBanUnban({
@@ -40,6 +41,7 @@ export default function AdminControlsBanUnban({
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState<boolean>()
     const { toast } = useToast()
+    const router = useRouter()
     const handleConfirm = async () => {
         const axiosBody: BanUserReqBody = {
             bannedUserId,
@@ -56,11 +58,8 @@ export default function AdminControlsBanUnban({
         ) {
             return
         }
-        dispatch(
-            isUnban
-                ? deleteBannedMember({ bannedUserId })
-                : deleteMember({ bannedUserId })
-        )
+        if (isUnban) router.refresh()
+        if (!isUnban) dispatch(deleteMember({ bannedUserId }))
     }
     return (
         <AlertDialog open={open} onOpenChange={setOpen}>

@@ -60,6 +60,7 @@ export default async function ServerAdminPage({
                 userId={session.id}
                 serverId={id}
                 admins={admins}
+                ownerId={owner_id}
             />
             <Separator className="my-4" />
             <ServerBannedMembers

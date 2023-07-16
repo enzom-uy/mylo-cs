@@ -2,6 +2,7 @@
 
 import UserCard from '@/app/components/user-card'
 import UserServerDataBadges from '@/app/components/user-server-data-badges'
+import { sortServerMembers } from '@/utils/sortServerMembers'
 import { User } from '@prisma/client'
 import { useServerMembers } from './hooks/useServerMembers'
 import MembersSkeleton from './members-skeleton'
@@ -11,7 +12,8 @@ interface Props {
     userIsAdmin: boolean
     userId: string
     serverId: string
-    admins?: User[]
+    admins: User[]
+    ownerId: string
 }
 
 export default function ServerMembers({
@@ -19,8 +21,13 @@ export default function ServerMembers({
     userIsAdmin,
     userId,
     serverId,
-    admins
+    admins,
+    ownerId
 }: Props) {
+    const sortedMembers = sortServerMembers({
+        admins: admins,
+        members: members
+    })
     const { reduxMembers } = useServerMembers({
         members
     })
@@ -46,6 +53,7 @@ export default function ServerMembers({
                             serverId={serverId}
                             serverAdmins={admins}
                             serverMembers={members}
+                            ownerId={ownerId}
                         />
                     ))
                 )}
