@@ -1,5 +1,6 @@
 'use client'
 
+import { Badge } from '@/shad-components/badge'
 import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
 import { User } from '@prisma/client'
 import Image from 'next/image'
@@ -29,8 +30,10 @@ export default function UserCard({
     const targetUserIsAdmin = serverAdmins?.filter(
         (admin) => admin.id === user.id
     )
+    const isAdmin = !!targetUserIsAdmin?.length
+
     return (
-        <div className="flex items-center gap-2 break-all py-2">
+        <div className="flex flex-wrap items-center gap-2 break-all py-2">
             {user.image ? (
                 <Image
                     src={user.image}
@@ -47,20 +50,27 @@ export default function UserCard({
                 </div>
             )}
             <p>{user.name}</p>
-            {userIsAdmin && user.id !== userSelfId && (
-                <div className="flex items-center gap-2">
-                    <AdminControlsBanUnban
-                        bannedUserId={user.id}
-                        serverId={serverId}
-                        isUnban={isBanned ? true : false}
-                    />
-                    {!isBanned && (
-                        <AdminControlsGiveRole
-                            isAdmin={!!targetUserIsAdmin?.length}
+            <div className="flex flex-wrap items-center gap-2">
+                {isAdmin && (
+                    <Badge className="font-semibold uppercase">admin</Badge>
+                )}
+                {userIsAdmin && user.id !== userSelfId && (
+                    <div className="flex items-center gap-2">
+                        <AdminControlsBanUnban
+                            bannedUserId={user.id}
+                            serverId={serverId}
+                            isUnban={isBanned ? true : false}
                         />
-                    )}
-                </div>
-            )}
+                        {!isBanned && (
+                            <AdminControlsGiveRole
+                                isAdmin={isAdmin}
+                                serverId={serverId}
+                                userId={user.id}
+                            />
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

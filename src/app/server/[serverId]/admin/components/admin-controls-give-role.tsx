@@ -1,3 +1,4 @@
+import { ChangeUserRoleReqBody } from '@/app/api/change-user-role/route'
 import {
     AlertDialog,
     AlertDialogAction,
@@ -9,13 +10,42 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger
 } from '@/shad-components/alert-dialog'
+import { useToast } from '@/shad-components/use-toast'
+import { ApiResponse } from '@/types/api'
+import { TOAST_DURATION } from '@/utils/contants'
+import axios from 'axios'
 import { UserCog } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 interface Props {
     isAdmin: boolean
+    serverId: string
+    userId: string
 }
 
-export default function AdminControlsGiveRole({ isAdmin }: Props) {
+export default function AdminControlsGiveRole({
+    isAdmin,
+    serverId,
+    userId
+}: Props) {
+    const { toast } = useToast()
+    const router = useRouter()
+    const handleConfirm = async () => {
+        const axiosBody: ChangeUserRoleReqBody = {
+            newRole: isAdmin ? 'member' : 'admin',
+            serverId,
+            userId
+        }
+
+        const response = await axios
+            .post('/api/change-user-role', axiosBody)
+            .then((res) => res.data as ApiResponse)
+        toast({ title: response.message, duration: TOAST_DURATION })
+        if (response.result === 'success')
+            setTimeout(() => {
+                router.refresh()
+            }, 300)
+    }
     return (
         <AlertDialog>
             <AlertDialogTrigger>
@@ -34,7 +64,7 @@ export default function AdminControlsGiveRole({ isAdmin }: Props) {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                    <AlertDialogAction>
+                    <AlertDialogAction onClick={handleConfirm}>
                         {isAdmin ? 'Quitar admin' : 'Dar admin'}
                     </AlertDialogAction>
                 </AlertDialogFooter>
