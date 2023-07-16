@@ -1,6 +1,3 @@
-import { DeleteServerReqBody } from '@/app/api/delete-server/route'
-import { Button } from '@/shad-components/button'
-import { Label } from '@/shad-components/label'
 import {
     Sheet,
     SheetContent,
@@ -9,9 +6,6 @@ import {
     SheetTitle,
     SheetTrigger
 } from '@/shad-components/sheet'
-import { useToast } from '@/shad-components/use-toast'
-import { ApiResponse } from '@/types/api'
-import axios, { AxiosResponse } from 'axios'
 import { Settings } from 'lucide-react'
 import ServerConfigDelete from './server-config-delete'
 

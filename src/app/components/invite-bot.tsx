@@ -1,6 +1,4 @@
 'use client'
-
-import { Button } from '@/shad-components/button'
 import { Bot } from 'lucide-react'
 
 export default function InviteBot() {

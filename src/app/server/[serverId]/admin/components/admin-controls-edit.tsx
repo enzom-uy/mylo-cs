@@ -33,7 +33,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogDescription } from '@radix-ui/react-dialog'
 import axios from 'axios'
 import { Edit } from 'lucide-react'
-import { Suspense, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 

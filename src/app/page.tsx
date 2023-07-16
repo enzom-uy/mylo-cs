@@ -1,8 +1,7 @@
 import { getServerSession } from 'next-auth'
+import { authOptions } from './api/auth/[...nextauth]/route'
 import Hero from './components/sections/hero-section'
 import SearchSection from './components/sections/search-section'
-import { authOptions } from './api/auth/[...nextauth]/route'
-import CreateServerForm from './create-server/components/create-server-form'
 
 const Home = async ({
     searchParams
