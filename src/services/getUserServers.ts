@@ -1,11 +1,17 @@
 import { db } from '@/config/db'
+import { Server } from '@prisma/client'
 import { Session } from 'next-auth'
 
+/**
+ * Gets user's servers from the database. Returns null if doesn't exists.
+ * @param {Session} params.session - User's Session from next-auth.
+ * @returns {Promise<UserServers | null>}
+ */
 export const getUserServers = async ({
     session
 }: {
     session: Session | null
-}) => {
+}): Promise<UserServers | null> => {
     const userServers = await db.user.findFirst({
         where: {
             id: session?.id
@@ -17,4 +23,10 @@ export const getUserServers = async ({
         }
     })
     return userServers
+}
+
+export interface UserServers {
+    servers_is_member: Server[]
+    servers_is_admin: Server[]
+    servers_is_owner: Server[]
 }

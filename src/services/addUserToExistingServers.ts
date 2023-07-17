@@ -7,10 +7,16 @@ interface Props {
     providerAccountId: string
 }
 
+/**
+ * Gets all discord servers the user is on, check if they exist in the database and add the user to the servers if possible.
+ * @param {string} params.access_token - Access token returned by the Discord Auth Provider on login.
+ * @param {string} params.providerAccountId - User provider account ID returned by the Discord Auth Provider.
+ * @returns {Promise<void>}
+ */
 export const addUserToExistingServers = async ({
     access_token,
     providerAccountId
-}: Props) => {
+}: Props): Promise<void> => {
     try {
         console.log(access_token, providerAccountId)
         const userGuilds = await axios

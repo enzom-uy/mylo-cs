@@ -1,7 +1,7 @@
 import { getNadesQuery } from '@/services/getNadesQuery'
 import { NadeAuthorNadeType } from '@/services/getServer'
 import { ApiResponse } from '@/types/api'
-import { Map, Nade } from '@prisma/client'
+import { Map } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'

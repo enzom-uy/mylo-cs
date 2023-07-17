@@ -8,7 +8,16 @@ export interface UserWithNadesAndServers extends User {
     servers_is_owner: Server[]
 }
 
-export const getUser = async ({ id }: { id: string }) => {
+/**
+ * Gets the user info from the database, with nades, servers_is_member, servers_is_admin and servers_is_owner included. Returns null if doesn't exists.
+ * @param {string} params.id - User ID.
+ * @returns {Promise<UserWithNadesAndServers | null>}
+ */
+export const getUser = async ({
+    id
+}: {
+    id: string
+}): Promise<UserWithNadesAndServers | null> => {
     const user = await db.user.findFirst({
         where: {
             id

@@ -15,7 +15,14 @@ interface GetUserGuildsProps {
     access_token: string
 }
 
-export const getUserGuilds = async ({ access_token }: GetUserGuildsProps) => {
+/**
+ * Gets all discord servers the user is in. Returns undefined on fail.
+ * @param {string} params.access_token - Access token returned by the Discord Auth Provider.
+ * @returns {Promise<Guild[] | undefined>}
+ */
+export const getUserGuilds = async ({
+    access_token
+}: GetUserGuildsProps): Promise<Guild[] | undefined> => {
     try {
         axiosRetry(axios, { retries: 5 })
         axiosRetry(axios, {
