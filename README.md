@@ -25,30 +25,18 @@ Web app connected to a Discord Bot to upload and manager all your Counter-Strike
 
 <!--toc:start-->
 
-- [Mylo](#mylo)
-- [Table of Contents](#table-of-contents)
-- [About the project](#about-the-project)
-  - [Screenshots](#screenshots)
-  - [Explaining the project](#explaining-the-project)
-  - [Core features](#core-features)
-  - [Featured technologies](#featured-technologies)
-- [Starting the project.](#starting-the-project)
-  - [Prerequirements](#prerequirements)
-  - [Running the project locally](#running-the-project-locally)
-  - [Env variables](#env-variables)
+-   [Mylo](#mylo)
+-   [Table of Contents](#table-of-contents)
+-   [About the project](#about-the-project)
+    -   [Explaining the project](#explaining-the-project)
+    -   [Core features](#core-features)
+    -   [Featured technologies](#featured-technologies)
+-   [Starting the project.](#starting-the-project)
+    -   [Requirements](#requirements)
+    -   [Running the project locally](#running-the-project-locally)
+    -   [Env variables](#env-variables)
 
 # About the project
-
-<!-- Screenshots -->
-
-## Screenshots
-
-<div style="display: flex; gap: 2px;"> 
-  <img src="https://i.imgur.com/zJrhQvT.png" alt="Demo screenshot" width="500" />
-  <img src="https://i.imgur.com/jgOuHT1.png" alt="Demo screenshot" width="500" />
-</div>
-
----
 
 <!-- Explaining the project -->
 
@@ -82,19 +70,19 @@ This is how it's all connected from the perspective of a Server Member:
 
 ## Core features
 
-- FROM THE WEBSITE:
-  - Create a "Server" in the Database with the same ID as your Discord Server (required by the Discord Bot to work).
-  - Search for all the nades in all the servers you're a member.
-  - Search for all the nades in a specific server.
-  - Leave a server so you won't see the server's nades.
-  - AS SERVER ADMIN/OWNER:
-    - Manage the server nades (see all pending nades, approve nades, edit and delete them).
-    - Manage the server members (see all members, ban a member from searching your nades or unban a member, give/remove ADMIN role).
-    - Delete your server with all the nades.
-- FROM A DISCORD SERVER: 
-  - Upload nades only if you or the server owner created the "server" in the website previously.
-    - The Discord Bot is always checking in the shared database if the server he's working on exists.
-  - Search for a specific nade or nades that match your query (nade type, author, map, title or description).
+-   FROM THE WEBSITE:
+    -   Create a "Server" in the Database with the same ID as your Discord Server (required by the Discord Bot to work).
+    -   Search for all the nades in all the servers you're a member.
+    -   Search for all the nades in a specific server.
+    -   Leave a server so you won't see the server's nades.
+    -   AS SERVER ADMIN/OWNER:
+        -   Manage the server nades (see all pending nades, approve nades, edit and delete them).
+        -   Manage the server members (see all members, ban a member from searching your nades or unban a member, give/remove ADMIN role).
+        -   Delete your server with all the nades.
+-   FROM A DISCORD SERVER:
+    -   Upload nades only if you or the server owner created the "server" in the website previously.
+        -   The Discord Bot is always checking in the shared database if the server he's working on exists.
+    -   Search for a specific nade or nades that match your query (nade type, author, map, title or description).
 
 <!-- TechStack -->
 
@@ -119,9 +107,9 @@ This is how it's all connected from the perspective of a Server Member:
 
 # Starting the project.
 
-<!-- Prerequisites -->
+<!-- Requirements -->
 
-## Prerequirements
+## Requirements
 
 This project uses either yarn, npm or pnpm as dependency/package manager. You should have npm installed if you already have Node. If you choose to use yarn, run the next command to install it:
 
