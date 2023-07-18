@@ -1,9 +1,9 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '../api/auth/[...nextauth]/route'
-import { getUserGuilds } from '@/services/getUserGuilds'
-import PrevFormSelectPath from './components/prev-form-select-path'
-import { redirect } from 'next/navigation'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { checkIfUserGuildsExist } from '@/services/checkIfUserGuildsExists'
+import { getUserGuilds } from '@/services/getUserGuilds'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
+import PrevFormSelectPath from './components/prev-form-select-path'
 
 export default async function CreateServerPage() {
     const session = await getServerSession(authOptions)
