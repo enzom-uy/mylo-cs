@@ -1,14 +1,16 @@
 'use client'
 
 import { Button } from '@shad/button'
-import { BsDiscord } from 'react-icons/bs'
 import { signIn } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
+import { BsDiscord } from 'react-icons/bs'
 
 const LoginDiscordButton = () => {
+    const t = useTranslations()
     return (
         <Button className="btn" onClick={() => signIn('discord')}>
             <BsDiscord className="h-6 w-6" />
-            Entrar
+            {t('Hero.login')}
         </Button>
     )
 }

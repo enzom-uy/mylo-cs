@@ -3,6 +3,7 @@
 import { Badge } from '@/shad-components/badge'
 import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
 import { User } from '@prisma/client'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import AdminControlsBanUnban from '../server/[serverId]/admin/components/admin-controls-ban-unban'
 import AdminControlsGiveRole from '../server/[serverId]/admin/components/admin-controls-give-role'
@@ -28,6 +29,8 @@ export default function UserCard({
     serverAdmins,
     ownerId
 }: Props) {
+    const t = useTranslations()
+
     const targetUserIsAdmin = serverAdmins?.filter(
         (admin) => admin.id === user.id
     )
@@ -54,10 +57,14 @@ export default function UserCard({
             <p>{user.name}</p>
             <div className="flex flex-wrap items-center gap-2">
                 {isAdmin && !isOwner ? (
-                    <Badge className="font-semibold uppercase">admin</Badge>
+                    <Badge className="font-semibold uppercase">
+                        {t('User-Card.admin')}
+                    </Badge>
                 ) : (
                     isOwner && (
-                        <Badge className="font-semibold uppercase">dueño</Badge>
+                        <Badge className="font-semibold uppercase">
+                            {t('User-Card.owner')}
+                        </Badge>
                     )
                 )}
                 {userIsAdmin &&

@@ -1,5 +1,6 @@
 'use client'
 import { NadeAuthorNadeType } from '@/services/getServer'
+import { useTranslations } from 'next-intl'
 import NadeCard from '../nade-card'
 import NadeSkeleton from '../nade-skeleton'
 import { useNadesSection } from './hooks/useNadesSection'
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const NadesSection: React.FC<Props> = ({ nades }) => {
+    const t = useTranslations()
     const { state, reduxIsLoading } = useNadesSection({ nades })
     const { loading } = state
     return (
@@ -20,9 +22,9 @@ const NadesSection: React.FC<Props> = ({ nades }) => {
             {reduxIsLoading ? (
                 <NadeSkeleton />
             ) : !nades ? (
-                <p>Haz una búsqueda para ver las granadas.</p>
+                <p>{t('Nades-Section.do-query-to-search')}</p>
             ) : !loading && nades.length <= 0 ? (
-                <p>No se encontraron granadas.</p>
+                <p>{t('Nades-Section.no-nades')}</p>
             ) : (
                 nades.map((nade) => <NadeCard key={nade.id} nade={nade} />)
             )}

@@ -15,6 +15,7 @@ import { TOAST_DURATION } from '@/utils/contants'
 import { Server } from '@prisma/client'
 import axios from 'axios'
 import { Ban } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -25,6 +26,7 @@ export default function UserLeaveServer({
     userId: string
     server: Server
 }) {
+    const t = useTranslations()
     const [open, setOpen] = useState<boolean>()
     const router = useRouter()
     const { toast } = useToast()
@@ -39,14 +41,17 @@ export default function UserLeaveServer({
 
         if (response.result === 'error') {
             toast({
-                title: response.message,
+                title: t('Leave-Server.api.error'),
                 variant: 'destructive',
                 duration: TOAST_DURATION
             })
             return
         }
 
-        toast({ title: response.message, duration: TOAST_DURATION })
+        toast({
+            title: t('Leave-Server.api.success'),
+            duration: TOAST_DURATION
+        })
         setOpen(false)
         setTimeout(() => {
             router.refresh()
@@ -60,19 +65,19 @@ export default function UserLeaveServer({
             <DialogContent className="flex justify-center">
                 <DialogHeader className="w-fit">
                     <DialogTitle className="w-fit">
-                        ¿Dejar el servidor {server.name}
+                        {t('Leave-Server.leave-server')} {server.name}?
                     </DialogTitle>
                     <Button
                         onClick={handleConfirm}
                         className="btn w-full max-w-xs bg-destructive hover:bg-destructive/90"
                     >
-                        Confirmar
+                        {t('Button.confirm')}
                     </Button>
                     <Button
                         className="btn w-full max-w-xs bg-dark/80 hover:bg-dark/90"
                         onClick={() => setOpen(false)}
                     >
-                        Cancelar
+                        {t('Button.cancel')}
                     </Button>
                 </DialogHeader>
             </DialogContent>

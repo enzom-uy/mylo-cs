@@ -6,6 +6,7 @@ import { Input } from '@/shad-components/input'
 import { useToast } from '@/shad-components/use-toast'
 import { TOAST_DURATION } from '@/utils/contants'
 import axios from 'axios'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 interface Props {
@@ -23,6 +24,7 @@ export default function ServerNadesInput({
     isAdmin,
     nades
 }: Props) {
+    const t = useTranslations()
     const [search, setSearch] = useState<string>('')
     const { toast } = useToast()
     const dispatch = useAppDispatch()
@@ -65,9 +67,12 @@ export default function ServerNadesInput({
                         }
                     })
                     .then((res) => res.data)) as GetNadesApiResponse
-                toast({ title: response.message, duration: TOAST_DURATION })
                 if (response.result === 'error') {
                     dispatch(loadingNades(false))
+                    toast({
+                        title: t('api/get-nades.error'),
+                        duration: TOAST_DURATION
+                    })
                     break
                 }
                 dispatch(loadingNades(false))

@@ -18,7 +18,7 @@ const Header = async () => {
                     className="text-lg font-semibold text-accent-dark"
                 >
                     mylo
-                    <span className="csgo">/csgo</span>
+                    <span className="csgo">/cs</span>
                 </Link>
                 {session && (
                     <HeaderMenu

@@ -27,6 +27,7 @@ import { Input } from '@shad/input'
 import { Textarea } from '@shad/textarea'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -46,6 +47,8 @@ export const createServerSchema = z.object({
 
 export default function CreateServerForm() {
     const { data: session } = useSession()
+    const t = useTranslations()
+
     const selectedGuild = JSON.parse(
         localStorage.getItem('selectedGuild') as string
     ) as Guild
@@ -68,7 +71,7 @@ export default function CreateServerForm() {
 
         if (values.terms === false) {
             toast({
-                title: 'Debes aceptar los términos y condiciones para continuar.',
+                title: t('Create-Server.accept-terms'),
                 duration: TOAST_DURATION
             })
             return
@@ -90,7 +93,7 @@ export default function CreateServerForm() {
 
         if (response.result === 'error') {
             toast({
-                title: errorMessage,
+                title: t('Create-Server.api.error'),
                 duration: TOAST_DURATION
             })
             return
@@ -99,7 +102,7 @@ export default function CreateServerForm() {
         form.reset()
         router.push(`/server/${response.serverId}`)
         return toast({
-            title: successMessage,
+            title: t('Create-Server.api.success'),
             duration: TOAST_DURATION
         })
     }
@@ -117,13 +120,16 @@ export default function CreateServerForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>
-                                    Nombre del Servidor <Required />
+                                    {t('Create-Server.form.server-name.label')}
+                                    <Required />
                                 </FormLabel>
                                 <FormControl>
                                     <Input {...field} required />
                                 </FormControl>
                                 <FormDescription>
-                                    Nombre público para mostrar en la página.
+                                    {t(
+                                        'Create-Server.form.server-name.description'
+                                    )}
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
@@ -136,13 +142,17 @@ export default function CreateServerForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel htmlFor="serverDescription">
-                                    Descripción del servidor
+                                    {t(
+                                        'Create-Server.form.server-description.label'
+                                    )}
                                 </FormLabel>
                                 <FormControl>
                                     <Textarea {...field} />
                                 </FormControl>
                                 <FormDescription>
-                                    Descripción para mostrar en la página.
+                                    {t(
+                                        'Create-Server.form.server-description.description'
+                                    )}
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
@@ -154,7 +164,8 @@ export default function CreateServerForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel htmlFor="serverId">
-                                    Id del Servidor <Required />
+                                    {t('Create-Server.form.server-id.label')}
+                                    <Required />
                                 </FormLabel>
                                 <FormControl>
                                     <Input
@@ -163,11 +174,6 @@ export default function CreateServerForm() {
                                         disabled={userSelectedGuildPrev && true}
                                     />
                                 </FormControl>
-                                <FormDescription>
-                                    En Discord: Configuración {'>'} Avanzado{' '}
-                                    {'>'} Modo desarrollador {'>'} Click derecho
-                                    en tu servidor {'>'} Copiar ID del servidor.
-                                </FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -191,13 +197,15 @@ export default function CreateServerForm() {
                                 </FormControl>
                                 <div className="space-y-1 leading-none">
                                     <FormLabel>
-                                        Acepto los términos y condiciones.
+                                        {t('Create-Server.form.terms.label')}
                                     </FormLabel>
                                 </div>
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Crear</Button>
+                    <Button type="submit">
+                        {t('Create-Server.form.submit')}
+                    </Button>
                 </form>
             </Form>
         </>

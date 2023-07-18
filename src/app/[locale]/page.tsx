@@ -1,7 +1,13 @@
 import { getServerSession } from 'next-auth'
+import { useTranslations } from 'next-intl'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import Hero from './components/sections/hero-section'
 import SearchSection from './components/sections/search-section'
+
+const Msg = () => {
+    const t = useTranslations()
+    return <p className="mt-6">{t('Search-Section.must-login')}</p>
+}
 
 const Home = async ({
     searchParams
@@ -18,10 +24,7 @@ const Home = async ({
                     userId={session?.id}
                 />
             ) : (
-                <p className="mt-6">
-                    Debes iniciar sesión y estar en un servidor para buscar
-                    granadas.
-                </p>
+                <Msg />
             )}
         </>
     )

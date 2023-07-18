@@ -7,6 +7,7 @@ import { useNadesData } from '@/hooks/useReduxNadeData'
 import { loadNades } from '@/redux/features/nadesSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { NadeAuthorNadeType } from '@/services/getServer'
+import { useTranslations } from 'next-intl'
 import ServerNadesInput from './server-nades-input'
 
 interface Props {
@@ -26,6 +27,7 @@ export default function ServerNades({
 }: Props) {
     const { reduxIsLoading, reduxNades } = useNadesData({ isAdmin, nades })
     const dispatch = useAppDispatch()
+    const t = useTranslations()
 
     const getNades = async (fetchedNades: NadeAuthorNadeType[]) => {
         dispatch(loadNades(fetchedNades))
@@ -36,7 +38,7 @@ export default function ServerNades({
         <section className="flex w-full flex-col gap-2">
             <div className="mb-2 flex flex-wrap items-center gap-2">
                 <h2 className="m-0 w-fit text-lg font-semibold uppercase">
-                    granadas
+                    {t('Server-Profile.nades')}
                 </h2>
                 <UserServerDataBadges
                     nades={

@@ -18,6 +18,7 @@ import {
     AlertDialogTrigger
 } from '@shad/alert-dialog'
 import axios, { AxiosResponse } from 'axios'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
 interface Props {
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export default function ServerConfigDelete({ serverId }: Props) {
+    const t = useTranslations()
     const { toast } = useToast()
     const router = useRouter()
     const axiosBody: DeleteServerReqBody = {
@@ -43,7 +45,7 @@ export default function ServerConfigDelete({ serverId }: Props) {
     }
     return (
         <div className="flex flex-wrap items-center justify-between gap-2">
-            <Label htmlFor="delete">Eliminar servidor</Label>
+            <Label htmlFor="delete">{t('Delete-Server.delete-server')}</Label>
             <AlertDialog>
                 <AlertDialogTrigger>
                     <Button
@@ -51,29 +53,27 @@ export default function ServerConfigDelete({ serverId }: Props) {
                         variant="destructive"
                         className="w-full sm:w-fit"
                     >
-                        Eliminar
+                        {t('Delete-Server.action.delete')}
                     </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent className="rounded-md border border-border-dark p-4">
                     <AlertDialogHeader>
                         <AlertDialogTitle className="m-0">
-                            ¿Estás completamente seguro?
+                            {t('Delete-Server.action.are-you-sure')}
                         </AlertDialogTitle>
                         <AlertDialogDescription>
-                            Esta acción no se puede deshacer. Se borrará
-                            permanentemente este servidor junto con sus
-                            granadas.
+                            {t('Delete-Server.action.explanation')}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter className="mt-4">
                         <AlertDialogCancel className="hover:bg-dark hover:text-light">
-                            Cancelar
+                            {t('Button.cancel')}
                         </AlertDialogCancel>
                         <AlertDialogAction
                             onClick={handleDeleteServer}
                             className="bg-destructive hover:bg-destructive/90"
                         >
-                            Confirmar
+                            {t('Button.confirm')}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>

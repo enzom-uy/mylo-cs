@@ -5,6 +5,7 @@ import { useToast } from '@/shad-components/use-toast'
 import { TOAST_DURATION } from '@/utils/contants'
 import axios from 'axios'
 import { RotateCw } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -15,6 +16,7 @@ export default function UserJoinServers({
     access_token: string
     id: string
 }) {
+    const t = useTranslations()
     const [clicked, setClicked] = useState<boolean>(false)
     const router = useRouter()
     const { toast } = useToast()
@@ -29,14 +31,14 @@ export default function UserJoinServers({
         if (response.result === 'error') {
             setClicked(false)
             toast({
-                title: response.message,
+                title: t('Join-Server.api.error'),
                 variant: 'destructive',
                 duration: TOAST_DURATION
             })
             return
         }
         setClicked(false)
-        toast({ title: response.message, duration: TOAST_DURATION })
+        toast({ title: t('Join-Server.api.success'), duration: TOAST_DURATION })
         setTimeout(() => {
             router.refresh()
         }, 500)

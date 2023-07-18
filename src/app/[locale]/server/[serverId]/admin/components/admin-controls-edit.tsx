@@ -33,6 +33,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogDescription } from '@radix-ui/react-dialog'
 import axios from 'axios'
 import { Edit } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -64,6 +65,7 @@ export default function AdminControlsEdit({
 }: {
     nade: NadeAuthorNadeType
 }) {
+    const t = useTranslations()
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false)
     const { maps } = useGetMapsFromDb()
@@ -220,13 +222,13 @@ export default function AdminControlsEdit({
                                     type="submit"
                                     className="btn bg-green-500 hover:bg-green-600"
                                 >
-                                    Confirmar
+                                    {t('Button.confirm')}
                                 </Button>
                                 <Button
                                     className="btn bg-dark/80 hover:bg-dark/90"
                                     onClick={() => setOpen(false)}
                                 >
-                                    Cancelar
+                                    {t('Button.confirm')}
                                 </Button>
                             </div>
                         </form>

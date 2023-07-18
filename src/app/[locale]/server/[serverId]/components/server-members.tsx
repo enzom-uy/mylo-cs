@@ -4,6 +4,7 @@ import UserCard from '@/app/[locale]/components/user-card'
 import UserServerDataBadges from '@/app/[locale]/components/user-server-data-badges'
 import { sortServerMembers } from '@/utils/sortServerMembers'
 import { User } from '@prisma/client'
+import { useTranslations } from 'next-intl'
 import { useServerMembers } from './hooks/useServerMembers'
 import MembersSkeleton from './members-skeleton'
 
@@ -24,19 +25,16 @@ export default function ServerMembers({
     admins,
     ownerId
 }: Props) {
-    const sortedMembers = sortServerMembers({
-        admins: admins,
-        members: members
-    })
     const { reduxMembers } = useServerMembers({
         members
     })
+    const t = useTranslations()
 
     return (
         <section>
             <div className="mb-2 flex flex-wrap items-center gap-2">
                 <h3 className="m-0 w-fit text-lg font-semibold uppercase">
-                    miembros
+                    {t('Server-Profile.members')}
                 </h3>
                 <UserServerDataBadges members={members.length} />
             </div>

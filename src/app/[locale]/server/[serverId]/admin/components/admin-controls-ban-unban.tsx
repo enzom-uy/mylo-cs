@@ -1,6 +1,6 @@
 import { BanUserReqBody } from '@/app/api/ban-user/route'
 import { UnbanUserApiResponse } from '@/app/api/unban-user/route'
-import { deleteBannedMember, deleteMember } from '@/redux/features/membersSlice'
+import { deleteMember } from '@/redux/features/membersSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import {
     AlertDialog,
@@ -13,19 +13,12 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger
 } from '@/shad-components/alert-dialog'
-import { Button } from '@/shad-components/button'
 import { useToast } from '@/shad-components/use-toast'
 import { ApiResponse } from '@/types/api'
 import { TOAST_DURATION } from '@/utils/contants'
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger
-} from '@shad/dialog'
 import axios from 'axios'
 import { Ban } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -38,6 +31,7 @@ export default function AdminControlsBanUnban({
     serverId: string
     isUnban?: boolean
 }) {
+    const t = useTranslations()
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState<boolean>()
     const { toast } = useToast()
@@ -73,14 +67,14 @@ export default function AdminControlsBanUnban({
                     </AlertDialogTitle>
                     <AlertDialogDescription>
                         {isUnban
-                            ? 'El usuario volverá a formar parte del servidor y podrá ver las granadas.'
-                            : 'El usuario dejará de formar parte del servidor. No podrá volver a unirse ni ver las granadas.'}
+                            ? t('BanUnban-User.unban-user-description')
+                            : t('BanUnban-User.ban-user-description')}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogCancel>{t('Button.cancel')}</AlertDialogCancel>
                     <AlertDialogAction onClick={handleConfirm}>
-                        Confirmar
+                        {t('Button.confirm')}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

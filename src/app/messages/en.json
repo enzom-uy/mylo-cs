@@ -8,10 +8,46 @@
         "and": "and ",
         "mylo-cs": "mylo/cs",
         "rest": "to create, search and share the most useful nades.",
-        "invite-bot": "Invite Bot"
+        "invite-bot": "Invite Bot",
+        "login": "Login"
     },
     "Search-Section": {
-        "search-msg": "Type something to search for a nade."
+        "search-msg": "Type something to search for a nade.",
+        "must-login": "You have to be logged in and be in a server to search nades."
+    },
+    "Terms": {
+        "terms": "Terms and conditions",
+        "item-1": {
+            "title": "Server Content",
+            "content-1": "The project and its creator are not responsible for the content uploaded to the servers that are part of the project. Each user and server administrator is solely responsible for the content published on their server.",
+            "content-2": "Users agree not to use the Bot for illicit or malicious activities. The use of the Bot must comply with all applicable laws and regulations."
+        },
+        "item-2": {
+            "title": "Use of Server Names",
+            "content-1": "Users agree not to represent other servers or groups of people unrelated to them when creating a server. Creating servers with names that may cause confusion or impersonate entities, companies, or brands to which they have no legitimate right is not allowed."
+        },
+        "item-3": {
+            "title": "Responsibility for Server Content",
+            "content-1": "Users who own or administer a server are responsible for the content uploaded to their servers. This includes the responsibility to review, moderate, and manage content in accordance with the rules and policies established by the server.",
+            "content-2": "Users must actively monitor content, edit, remove, or publish it as appropriate to maintain a safe and respectful environment on their server."
+        },
+        "item-4": {
+            "title": "Resolution",
+            "content-1": "By using the Discord Bot and participating in the project, you acknowledge and agree that the project and its creator assume no responsibility for the content posted on the servers, nor for any misuse or consequences resulting from the use of the Bot.",
+            "content-2": "Violation of these Terms may result in the termination of your access to the Bot and associated services.",
+            "content-3": "These Terms may be updated periodically, and it is your responsibility to review them regularly. Your continued use of the Bot after any modifications to the Terms will constitute your acceptance of them.",
+            "content-4": "If you have any questions or concerns about these Terms, please contact us through the provided support channels.",
+            "content-5": "Effective Date: Jun 09, 23.",
+            "content-6": "By using the Discord Bot and participating in the project, you declare that you have read, understood, and accepted these Terms and Conditions."
+        }
+    },
+    "Search-Input": {
+        "required-field": "This field is required.",
+        "placeholder": "Molo Banana from Site."
+    },
+    "Nades-Section": {
+        "do-query-to-search": "Type something to search for a nade.",
+        "no-nades": "No nades found."
     },
     "Menu": {
         "create-server": "Create Server",
@@ -22,5 +58,75 @@
         "no-last-nade": "You haven't uploaded a nade yet.",
         "servers": "Servers",
         "no-servers": "You're not a member of a server yet."
+    },
+    "Server-Profile": {
+        "nades": "Nades",
+        "members": "Members"
+    },
+    "User-Card": {
+        "owner": "Owner",
+        "admin": "Admin"
+    },
+    "Create-Server": {
+        "prev": {
+            "create-one-of-these": "Create one of these servers",
+            "no-owned-server": "There are no servers that you own, or all have already been created."
+        },
+        "accept-terms": "You must accept the terms and conditions to continue.",
+        "form": {
+            "server-name": {
+                "label": "Server Name",
+                "description": "Public name to display on the page."
+            },
+            "server-description": {
+                "label": "Server Description",
+                "description": "Description to display on the page."
+            },
+            "server-id": {
+                "label": "Server ID"
+            },
+            "terms": {
+                "label": "I accept the terms and conditions."
+            },
+            "submit": "Create"
+        },
+        "api": {
+            "error": "An error ocurred when tried to create the server.",
+            "success": "Server has been created."
+        }
+    },
+    "Join-Server": {
+        "api": {
+            "error": "An error ocurred when tried to join the servers.",
+            "success": "User's servers updated."
+        }
+    },
+    "Delete-Server": {
+        "delete-server": "Delete Server",
+        "action": {
+            "delete": "Delete",
+            "are-you-sure": "Are you absolutely sure?",
+            "explanation": "This action cannot be undone. It will permanently delete this server along with its grenades."
+        }
+    },
+    "Leave-Server": {
+        "leave-server": "Leave the server",
+        "api": {
+            "error": "An error ocurred when tried to leave the server.",
+            "success": "You've left the server."
+        }
+    },
+    "Button": {
+        "confirm": "Confirm",
+        "cancel": "Cancel"
+    },
+    "BanUnban-User": {
+        "unban-user": "Unban user",
+        "unban-user-description": "User will join the server again and will see the nades.",
+        "ban-user": "Ban user",
+        "ban-user-description": "The user will no longer be part of the server. He will not be able to rejoin or see the nades."
+    },
+    "api/get-nades": {
+        "error": "An error ocurred when trying to get nades."
     }
 }

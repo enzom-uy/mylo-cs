@@ -8,10 +8,46 @@
         "and": "y ",
         "mylo-cs": "mylo/cs",
         "rest": "para crear, ver y compartir las granadas más útiles.",
-        "invite-bot": "Invitar Bot"
+        "invite-bot": "Invitar Bot",
+        "login": "Entrar"
     },
     "Search-Section": {
-        "search-msg": "Haz una búsqueda para ver las granadas."
+        "search-msg": "Haz una búsqueda para ver las granadas.",
+        "must-login": "Debes iniciar sesión y estar en un servidor para buscar granadas."
+    },
+    "Search-Input": {
+        "required-field": "Este campo es obligatorio.",
+        "placeholder": "Molo Banana desde Site."
+    },
+    "Nades-Section": {
+        "do-query-to-search": "Haz una búsqueda para ver las granadas.",
+        "no-nades": "No se encontraron granadas."
+    },
+    "Terms": {
+        "terms": "Términos y condiciones",
+        "item-1": {
+            "title": "Contenido del Servidor",
+            "content-1": "El proyecto y su creador no se hacen responsables del contenido que se suba a los servidores que formen parte del proyecto. Cada usuario y administrador de un servidor es el único responsable del contenido que se publica en su servidor.",
+            "content-2": "Los usuarios aceptan no utilizar el Bot para actividades ilícitas o maliciosas. El uso del Bot debe cumplir con todas las leyes y regulaciones aplicables."
+        },
+        "item-2": {
+            "title": "Uso de Nombres de Servidor",
+            "content-1": "Los usuarios aceptan no representar a otros servidores o grupos de personas ajenos a ellos al crear un servidor. No se permite crear servidores con nombres que puedan inducir a confusión o hacerse pasar por entidades, empresas o marcas a las que no tienen derecho legítimo."
+        },
+        "item-3": {
+            "title": "Responsabilidad del Contenido del Servidor",
+            "content-1": "Los usuarios dueños o administradores de un servidor son los responsables del contenido que se suba a sus servidores. Esto incluye la responsabilidad de revisar, moderar y gestionar el contenido de acuerdo con las normas y políticas establecidas por el servidor.",
+            "content-2": "Los usuarios deben realizar un monitoreo activo del contenido, editarlo, eliminarlo o publicarlo según corresponda para mantener un entorno seguro y respetuoso en su servidor."
+        },
+        "item-4": {
+            "title": "Resolución",
+            "content-1": "Al utilizar el Bot de Discord y participar en el proyecto, usted reconoce y acepta que el proyecto y su creador no asumen ninguna responsabilidad por el contenido publicado en los servidores, ni por cualquier uso indebido o consecuencia derivada del uso del Bot.",
+            "content-2": "El incumplimiento de estos Términos puede resultar en la terminación de su acceso al Bot y a los servicios asociados.",
+            "content-3": "Estos Términos pueden actualizarse periódicamente y es su responsabilidad revisarlos regularmente. El uso continuado del Bot después de cualquier modificación de los Términos constituirá su aceptación de los mismos.",
+            "content-4": "Si tiene alguna pregunta o inquietud sobre estos Términos, por favor contáctenos a través de los canales de soporte proporcionados.",
+            "content-5": "Fecha de entrada en vigencia: 09/Jun/23.",
+            "content-6": "Al utilizar el Bot de Discord y participar en el proyecto, usted declara haber leído, entendido y aceptado estos Términos y Condiciones."
+        }
     },
     "Menu": {
         "create-server": "Crear Servidor",
@@ -22,5 +58,75 @@
         "no-last-nade": "Todavía no has subido ninguna granada.",
         "servers": "servidores",
         "no-servers": "Aún no estás en ningún servidor."
+    },
+    "Server-Profile": {
+        "nades": "granadas",
+        "members": "miembros"
+    },
+    "User-Card": {
+        "owner": "dueño",
+        "admin": "Admin"
+    },
+    "Create-Server": {
+        "prev": {
+            "create-one-of-these": "Crear uno de estos servidores",
+            "no-owned-server": "No hay ningún servidor del que seas dueño o todos ya han sido creados."
+        },
+        "accept-terms": "Debes aceptar los términos y condiciones para continuar.",
+        "form": {
+            "server-name": {
+                "label": "Nombre del servidor",
+                "description": "Nombre público para mostrar en la página."
+            },
+            "server-description": {
+                "label": "Descripción del servidor",
+                "description": "Descripción para mostrar en la página."
+            },
+            "server-id": {
+                "label": "ID del servidor"
+            },
+            "terms": {
+                "label": "Acepto los términos y condiciones."
+            },
+            "submit": "Crear"
+        },
+        "api": {
+            "error": "Ha ocurrido un error al intentar crear el servidor.",
+            "success": "Se ha creado el servidor exitosamente."
+        }
+    },
+    "Join-Server": {
+        "api": {
+            "error": "Ha ocurrido un error al intentar unirte a los servidores.",
+            "success": "Se han actualizado tus servidores."
+        }
+    },
+    "Delete-Server": {
+        "delete-server": "Eliminar servidor",
+        "action": {
+            "delete": "Eliminar",
+            "are-you-sure": "¿Estás completamente seguro?",
+            "explanation": "Esta acción no se puede deshacer. Se borrará permanentemente este servidor junto con sus granadas."
+        }
+    },
+    "Leave-Server": {
+        "leave-server": "¿Dejar el servidor ",
+        "api": {
+            "error": "Ha ocurrido un error al intentar salir del servidor.",
+            "success": "Abandonaste el servidor."
+        }
+    },
+    "Button": {
+        "confirm": "Confirmar",
+        "cancel": "Cancelar"
+    },
+    "BanUnban-User": {
+        "unban-user": "Desbanear usuario",
+        "unban-user-description": "El usuario volverá a formar parte del servidor y podrá ver las granadas.",
+        "ban-user": "Banear usuario",
+        "ban-user-description": "El usuario dejará de formar parte del servidor. No podrá volver a unirse ni ver las granadas."
+    },
+    "api/get-nades": {
+        "error": "Ha ocurrido un error al intentar conseguir las granadas."
     }
 }

@@ -2,10 +2,12 @@
 import { loadingNades } from '@/redux/features/nadesSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { Input } from '@shad/input'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { ChangeEvent, FormEvent, useState } from 'react'
 
 const SearchInput = () => {
+    const t = useTranslations()
     const dispatch = useAppDispatch()
     const router = useRouter()
     const [query, setQuery] = useState<string>('')
@@ -22,7 +24,7 @@ const SearchInput = () => {
         const url = window.location.href
         if (url.includes(query)) return dispatch(loadingNades(false))
         if (query === '') {
-            setError('Este campo es obligatorio.')
+            setError(t('Search-Input.required-field'))
             return
         }
         dispatch(loadingNades(true))
@@ -37,7 +39,7 @@ const SearchInput = () => {
         >
             <Input
                 type="text"
-                placeholder="Molo Banana a Carro"
+                placeholder={t('Search-Input.placeholder')}
                 value={query}
                 onChange={handleInputOnChange}
                 className="w-full border-border-dark"

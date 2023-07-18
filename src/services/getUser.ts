@@ -1,5 +1,6 @@
 import { db } from '@/config/db'
 import { Nade, Server, User } from '@prisma/client'
+import { cache } from 'react'
 
 export interface UserWithNadesAndServers extends User {
     nades: Nade[]
@@ -13,21 +14,19 @@ export interface UserWithNadesAndServers extends User {
  * @param {string} params.id - User ID.
  * @returns {Promise<UserWithNadesAndServers | null>}
  */
-export const getUser = async ({
-    id
-}: {
-    id: string
-}): Promise<UserWithNadesAndServers | null> => {
-    const user = await db.user.findFirst({
-        where: {
-            id
-        },
-        include: {
-            nades: true,
-            servers_is_member: true,
-            servers_is_admin: true,
-            servers_is_owner: true
-        }
-    })
-    return user
-}
+export const getUser = cache(
+    async ({ id }: { id: string }): Promise<UserWithNadesAndServers | null> => {
+        const user = await db.user.findFirst({
+            where: {
+                id
+            },
+            include: {
+                nades: true,
+                servers_is_member: true,
+                servers_is_admin: true,
+                servers_is_owner: true
+            }
+        })
+        return user
+    }
+)
