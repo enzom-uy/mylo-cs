@@ -1,0 +1,26 @@
+{
+    "Hero": {
+        "title": "Mejora tu juego con granadas útiles",
+        "share-learn": "Comparte, aprende y domina",
+        "counter-strike": "Counter-Strike",
+        "next-level": "Lleva tu juego al siguiente nivel. Une ",
+        "discord": "Discord ",
+        "and": "y ",
+        "mylo-cs": "mylo/cs",
+        "rest": "para crear, ver y compartir las granadas más útiles.",
+        "invite-bot": "Invitar Bot"
+    },
+    "Search-Section": {
+        "search-msg": "Haz una búsqueda para ver las granadas."
+    },
+    "Menu": {
+        "create-server": "Crear Servidor",
+        "sign-out": "Cerrar sesión"
+    },
+    "User-Profile": {
+        "last-nade": "última granada subida",
+        "no-last-nade": "Todavía no has subido ninguna granada.",
+        "servers": "servidores",
+        "no-servers": "Aún no estás en ningún servidor."
+    }
+}

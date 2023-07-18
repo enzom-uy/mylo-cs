@@ -1,4 +1,4 @@
-import { Guild } from '@/app/create-server/utils/getUserGuilds'
+import { Guild } from '@/app/[locale]/create-server/utils/getUserGuilds'
 import { db } from '@/config/db'
 import axios from 'axios'
 

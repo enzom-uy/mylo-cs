@@ -42,6 +42,7 @@
         "lucide-react": "^0.248.0",
         "next": "^13.4.8",
         "next-auth": "^4.22.1",
+        "next-intl": "3.0.0-beta.8",
         "plyr-react": "^5.2.0",
         "postcss": "8.4.24",
         "postgres": "^3.3.5",

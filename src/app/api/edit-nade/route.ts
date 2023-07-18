@@ -1,4 +1,4 @@
-import { EditNadeSchemaType } from '@/app/server/[serverId]/admin/components/admin-controls-edit'
+import { EditNadeSchemaType } from '@/app/[locale]/server/[serverId]/admin/components/admin-controls-edit'
 import { db } from '@/config/db'
 import { ApiResponse } from '@/types/api'
 import { Nade } from '@prisma/client'

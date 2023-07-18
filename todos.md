@@ -14,11 +14,9 @@
 - API rate limit.
 - Allow server owner to set visibility to Public.
   - Users that are not members can search public servers and see their nades.
-
 - Report system.
   - Report nades and servers.
   - Send all the reports to a Reports-only email.
-
 - Localization
 
 ## Doing
@@ -39,7 +37,6 @@
       - ~~Edit your own nades~~.
       - ~~Delete your own nades~~.
 - Server profile.
-
   - ~~Delete server as Owner~~.
   - Manage members.
     - ~~Give admin role to other member/s~~.

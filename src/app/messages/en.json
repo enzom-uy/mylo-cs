@@ -1,0 +1,26 @@
+{
+    "Hero": {
+        "title": "Improve your game with useful nades.",
+        "share-learn": "Share, learn and master",
+        "counter-strike": "Counter-Strike",
+        "next-level": "Take your gameplay to the next level. Combine ",
+        "discord": "Discord ",
+        "and": "and ",
+        "mylo-cs": "mylo/cs",
+        "rest": "to create, search and share the most useful nades.",
+        "invite-bot": "Invite Bot"
+    },
+    "Search-Section": {
+        "search-msg": "Type something to search for a nade."
+    },
+    "Menu": {
+        "create-server": "Create Server",
+        "sign-out": "Sign out"
+    },
+    "User-Profile": {
+        "last-nade": "Last uploaded nade",
+        "no-last-nade": "You haven't uploaded a nade yet.",
+        "servers": "Servers",
+        "no-servers": "You're not a member of a server yet."
+    }
+}
