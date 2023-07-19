@@ -141,7 +141,6 @@ You'll need to declare some env variables if you actually want it to work:
 
 ## Roadmap
 
-- API rate limit.
 - Allow server owner to set visibility to Public.
   - Users that are not members can search public servers and see their nades.
 - Report system.
