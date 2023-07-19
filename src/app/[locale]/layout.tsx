@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import React from 'react'
 import Provider from './components/provider'
+import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -58,6 +59,7 @@ export default async function LocaleLayout({
                         <Main>{children}</Main>
                     </NextIntlClientProvider>
                 </Provider>
+                <Analytics />
             </body>
         </html>
     )
