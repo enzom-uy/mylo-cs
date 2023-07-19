@@ -1,4 +1,4 @@
-import { EditNadeData } from '@/app/api/edit-nade/route'
+import { EditNadeApiResponse, EditNadeData } from '@/app/api/edit-nade/route'
 import { useGetMapsFromDb } from '@/hooks/useGetMapsFromDb'
 import { editNade, loadingNades } from '@/redux/features/nadesSlice'
 import { useAppDispatch } from '@/redux/hooks'
@@ -94,28 +94,32 @@ export default function AdminControlsEdit({
         const updatedNade = await axios
             .post('/api/edit-nade', axiosBody)
             .then((res) => {
-                const updatedNade = res.data
-                dispatch(editNade({ nade, updatedNade }))
-                return res.data
-            })
-            .catch((err) => {
-                console.error(err)
-            })
-            .finally(() => {
-                dispatch(loadingNades(false))
+                const data: EditNadeApiResponse = res.data
+                const updatedNade = data.updatedNade
+                dispatch(
+                    editNade({
+                        nade,
+                        updatedNade: updatedNade as NadeAuthorNadeType
+                    })
+                )
+                return data
             })
 
-        if (!updatedNade)
+        if (updatedNade.result === 'error') {
             toast({
-                title: 'Ha ocurrido un error al intentar editar la granada.',
+                title: t('Edit-Nade.api.error'),
                 variant: 'destructive',
                 duration: TOAST_DURATION
             })
+            return
+        }
 
         toast({
-            title: 'Granada editada.',
+            title: t('Edit-Nade.api.success'),
             duration: TOAST_DURATION
         })
+
+        dispatch(loadingNades(false))
     }
 
     return (
@@ -125,7 +129,7 @@ export default function AdminControlsEdit({
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Editar granada</DialogTitle>
+                    <DialogTitle>{t('Edit-Nade.edit-nade')}</DialogTitle>
                 </DialogHeader>
                 <DialogDescription>
                     <Form {...form}>
@@ -138,7 +142,9 @@ export default function AdminControlsEdit({
                                 name="title"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Título</FormLabel>
+                                        <FormLabel>
+                                            {t('Edit-Nade.form.label-title')}
+                                        </FormLabel>
                                         <FormControl>
                                             <Input {...field} />
                                         </FormControl>
@@ -150,7 +156,11 @@ export default function AdminControlsEdit({
                                 name="description"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Descripción</FormLabel>
+                                        <FormLabel>
+                                            {t(
+                                                'Edit-Nade.form.label-description'
+                                            )}
+                                        </FormLabel>
                                         <FormControl>
                                             <Textarea {...field} />
                                         </FormControl>
@@ -162,7 +172,9 @@ export default function AdminControlsEdit({
                                 name="map"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Mapa</FormLabel>
+                                        <FormLabel>
+                                            {t('Edit-Nade.form.label-map')}
+                                        </FormLabel>
                                         <Select
                                             onValueChange={field.onChange}
                                             defaultValue={field.value}
@@ -192,7 +204,11 @@ export default function AdminControlsEdit({
                                 name="nadeType"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Tipo</FormLabel>
+                                        <FormLabel>
+                                            {t(
+                                                'Edit-Nade.form.label-nade_type'
+                                            )}
+                                        </FormLabel>
                                         <Select
                                             onValueChange={field.onChange}
                                             defaultValue={field.value}
@@ -212,6 +228,9 @@ export default function AdminControlsEdit({
                                                 <SelectItem value="Explosive">
                                                     Explosive
                                                 </SelectItem>
+                                                <SelectItem value="Molo">
+                                                    Molo
+                                                </SelectItem>
                                             </SelectContent>
                                         </Select>
                                     </FormItem>
@@ -221,12 +240,6 @@ export default function AdminControlsEdit({
                                 <Button
                                     type="submit"
                                     className="btn bg-green-500 hover:bg-green-600"
-                                >
-                                    {t('Button.confirm')}
-                                </Button>
-                                <Button
-                                    className="btn bg-dark/80 hover:bg-dark/90"
-                                    onClick={() => setOpen(false)}
                                 >
                                     {t('Button.confirm')}
                                 </Button>

@@ -17,6 +17,7 @@ import { useToast } from '@/shad-components/use-toast'
 import { TOAST_DURATION } from '@/utils/contants'
 import axios from 'axios'
 import { CheckCheck } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 export default function AdminControlsApprove({
@@ -24,6 +25,7 @@ export default function AdminControlsApprove({
 }: {
     nade: NadeAuthorNadeType
 }) {
+    const t = useTranslations()
     const [open, setOpen] = useState(false)
     const dispatch = useAppDispatch()
     const { toast } = useToast()
@@ -43,13 +45,17 @@ export default function AdminControlsApprove({
             response.approvedNade === undefined
         ) {
             toast({
-                title: response.message,
+                title: t('Approve-Nade.api.error'),
                 variant: 'destructive',
                 duration: TOAST_DURATION
             })
             dispatch(loadingNades(false))
             return
         }
+        toast({
+            title: t('Approve-Nade.api.success'),
+            duration: TOAST_DURATION
+        })
 
         dispatch(approveNade(response.approvedNade!))
         dispatch(loadingNades(false))
@@ -66,13 +72,13 @@ export default function AdminControlsApprove({
                             onClick={handleConfirm}
                             className="w-full max-w-xs bg-green-500 hover:bg-green-600"
                         >
-                            Aprobar
+                            {t('Approve-Nade.approve')}
                         </Button>
                         <Button
                             className="btn w-full max-w-xs bg-dark/80 hover:bg-dark/90"
                             onClick={() => setOpen(false)}
                         >
-                            Cancelar
+                            {t('Button.cancel')}
                         </Button>
                     </DialogTitle>
                 </DialogHeader>

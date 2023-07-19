@@ -45,15 +45,36 @@ export default function AdminControlsBanUnban({
             .post(`${isUnban ? '/api/unban-user' : '/api/ban-user'}`, axiosBody)
             .then((res) => res.data)) as ApiResponse | UnbanUserApiResponse
 
-        toast({ title: response.message, duration: TOAST_DURATION })
-        if (
-            (!isUnban && response.result === 'error') ||
-            (isUnban && response.result === 'error')
-        ) {
+        if (response.result === 'error') {
+            if (isUnban)
+                toast({
+                    title: t('BanUnban-User.api.error-unban'),
+                    variant: 'destructive',
+                    duration: TOAST_DURATION
+                })
+            if (!isUnban)
+                toast({
+                    title: t('BanUnban-User.api.error-ban'),
+                    variant: 'destructive',
+                    duration: TOAST_DURATION
+                })
             return
         }
-        if (isUnban) router.refresh()
-        if (!isUnban) dispatch(deleteMember({ bannedUserId }))
+
+        if (isUnban) {
+            toast({
+                title: t('BanUnban-User.api.success-unban'),
+                duration: TOAST_DURATION
+            })
+            router.refresh()
+        }
+        if (!isUnban) {
+            toast({
+                title: t('BanUnban-User.api.success-ban'),
+                duration: TOAST_DURATION
+            })
+            dispatch(deleteMember({ bannedUserId }))
+        }
     }
     return (
         <AlertDialog open={open} onOpenChange={setOpen}>
@@ -63,7 +84,9 @@ export default function AdminControlsBanUnban({
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>
-                        {isUnban ? 'Desbanear usuario' : 'Banear usuario'}
+                        {isUnban
+                            ? t('BanUnban-User.unban-user')
+                            : t('BanUnban-User.ban-user')}
                     </AlertDialogTitle>
                     <AlertDialogDescription>
                         {isUnban
@@ -73,7 +96,10 @@ export default function AdminControlsBanUnban({
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>{t('Button.cancel')}</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleConfirm}>
+                    <AlertDialogAction
+                        onClick={handleConfirm}
+                        className="bg-destructive hover:bg-destructive/90"
+                    >
                         {t('Button.confirm')}
                     </AlertDialogAction>
                 </AlertDialogFooter>

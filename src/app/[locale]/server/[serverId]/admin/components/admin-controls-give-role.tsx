@@ -15,6 +15,7 @@ import { ApiResponse } from '@/types/api'
 import { TOAST_DURATION } from '@/utils/contants'
 import axios from 'axios'
 import { UserCog } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
 interface Props {
@@ -28,6 +29,7 @@ export default function AdminControlsGiveRole({
     serverId,
     userId
 }: Props) {
+    const t = useTranslations()
     const { toast } = useToast()
     const router = useRouter()
     const handleConfirm = async () => {
@@ -40,11 +42,22 @@ export default function AdminControlsGiveRole({
         const response = await axios
             .post('/api/change-user-role', axiosBody)
             .then((res) => res.data as ApiResponse)
-        toast({ title: response.message, duration: TOAST_DURATION })
+        if (response.result === 'error') {
+            toast({
+                title: t('Give-Role.api.error'),
+                duration: TOAST_DURATION,
+                variant: 'destructive'
+            })
+            return
+        }
         if (response.result === 'success')
-            setTimeout(() => {
-                router.refresh()
-            }, 300)
+            toast({
+                title: t('Give-Role.api.success'),
+                duration: TOAST_DURATION
+            })
+        setTimeout(() => {
+            router.refresh()
+        }, 300)
     }
     return (
         <AlertDialog>
@@ -54,18 +67,20 @@ export default function AdminControlsGiveRole({
             <AlertDialogContent className="bg-dark">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="m-0">
-                        {isAdmin ? 'Quitar admin' : 'Dar admin'}
+                        {isAdmin
+                            ? t('Give-Role.remove-admin')
+                            : t('Give-Role.give-admin')}
                     </AlertDialogTitle>
                     <AlertDialogDescription>
                         {isAdmin
-                            ? 'El usuario ya no podrá acceder a la configuración del servidor, administrar las granadas ni los usuarios.'
-                            : 'El usuario podrá acceder a la configuración del servidor,  administrar las granadas y los usuarios.'}
+                            ? t('Give-Role.remove-admin-description')
+                            : t('Give-Role.give-admin-description')}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogCancel>{t('Button.cancel')}</AlertDialogCancel>
                     <AlertDialogAction onClick={handleConfirm}>
-                        {isAdmin ? 'Quitar admin' : 'Dar admin'}
+                        {t('Button.confirm')}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

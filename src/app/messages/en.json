@@ -1,4 +1,7 @@
 {
+    "Metadata": {
+        "description": "Create and manage Counter-Strike nades on your discord servers."
+    },
     "Hero": {
         "title": "Improve your game with useful nades.",
         "share-learn": "Share, learn and master",
@@ -95,6 +98,14 @@
             "success": "Server has been created."
         }
     },
+    "Server": {
+        "banned-members": "Banned members",
+        "no-banned-members": "No banned members",
+        "server-config": {
+            "title": "Settings",
+            "description": "Manage your server settings."
+        }
+    },
     "Join-Server": {
         "api": {
             "error": "An error ocurred when tried to join the servers.",
@@ -124,7 +135,46 @@
         "unban-user": "Unban user",
         "unban-user-description": "User will join the server again and will see the nades.",
         "ban-user": "Ban user",
-        "ban-user-description": "The user will no longer be part of the server. He will not be able to rejoin or see the nades."
+        "ban-user-description": "The user will no longer be part of the server. He will not be able to rejoin or see the nades.",
+        "api": {
+            "success-unban": "User unbanned.",
+            "error-unban": "An error ocurred when tried to unban the user.",
+            "success-ban": "User banned.",
+            "error-ban": "An error ocurred when tried to ban the user."
+        }
+    },
+    "Give-Role": {
+        "give-admin": "Give Admin role",
+        "give-admin-description": "The user will be able to access the server configuration (can't delete the server), manage grenades and users.",
+        "remove-admin": "Remove Admin role",
+        "remove-admin-description": "The user will no longer be able to access the server configuration, manage grenades or users.",
+        "api": {
+            "success": "Updated user role.",
+            "error": "An error ocurred when tried to update user's role."
+        }
+    },
+    "Delete-Nade": {
+        "delete": "Delete"
+    },
+    "Approve-Nade": {
+        "api": {
+            "success": "Nade approved successfully.",
+            "error": "An error ocurred when tried to approve the nade."
+        },
+        "approve": "Approve"
+    },
+    "Edit-Nade": {
+        "edit-nade": "Edit nade",
+        "form": {
+            "label-title": "Title",
+            "label-description": "Description",
+            "label-map": "Map",
+            "label-nade_type": "Type"
+        },
+        "api": {
+            "error": "An error ocurred when tried to edit the nade.",
+            "success": "Nade successfully edited."
+        }
     },
     "api/get-nades": {
         "error": "An error ocurred when trying to get nades."

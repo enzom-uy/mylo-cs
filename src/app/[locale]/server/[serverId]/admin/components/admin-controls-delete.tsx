@@ -17,6 +17,7 @@ import { useToast } from '@/shad-components/use-toast'
 import { TOAST_DURATION } from '@/utils/contants'
 import axios from 'axios'
 import { Trash2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 export default function AdminControlsDelete({
@@ -24,6 +25,7 @@ export default function AdminControlsDelete({
 }: {
     nade: NadeAuthorNadeType
 }) {
+    const t = useTranslations()
     const [open, setOpen] = useState(false)
     const { toast } = useToast()
     const dispatch = useAppDispatch()
@@ -64,13 +66,13 @@ export default function AdminControlsDelete({
                             onClick={handleConfirm}
                             className="w-full max-w-xs"
                         >
-                            Borrar
+                            {t('Delete-Nade.delete')}
                         </Button>
                         <Button
                             className="btn w-full max-w-xs bg-dark/80 hover:bg-dark/90"
                             onClick={() => setOpen(false)}
                         >
-                            Cancelar
+                            {t('Button.cancel')}
                         </Button>
                     </DialogTitle>
                 </DialogHeader>

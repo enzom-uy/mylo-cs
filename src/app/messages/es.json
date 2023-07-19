@@ -1,4 +1,7 @@
 {
+    "Metadata": {
+        "description": "Crea y administra las granadas de Counter-Strike en tus servidores de Discord."
+    },
     "Hero": {
         "title": "Mejora tu juego con granadas útiles",
         "share-learn": "Comparte, aprende y domina",
@@ -95,6 +98,14 @@
             "success": "Se ha creado el servidor exitosamente."
         }
     },
+    "Server": {
+        "banned-members": "Miembros baneados",
+        "no-banned-members": "No hay miembros baneados.",
+        "server-config": {
+            "title": "Ajustes",
+            "description": "Configura tu servidor."
+        }
+    },
     "Join-Server": {
         "api": {
             "error": "Ha ocurrido un error al intentar unirte a los servidores.",
@@ -124,7 +135,46 @@
         "unban-user": "Desbanear usuario",
         "unban-user-description": "El usuario volverá a formar parte del servidor y podrá ver las granadas.",
         "ban-user": "Banear usuario",
-        "ban-user-description": "El usuario dejará de formar parte del servidor. No podrá volver a unirse ni ver las granadas."
+        "ban-user-description": "El usuario dejará de formar parte del servidor. No podrá volver a unirse ni ver las granadas.",
+        "api": {
+            "success-unban": "Usuario desbaneado.",
+            "error-unban": "Ha ocurrido un error al intentar desbanear el usuario.",
+            "success-ban": "Usuario baneado.",
+            "error-ban": "Ha ocurrido un error al intentar banear el usuario."
+        }
+    },
+    "Give-Role": {
+        "give-admin": "Dar Admin",
+        "give-admin-description": "El usuario podrá acceder a la configuración del servidor (aunque no borrarlo), administrar las granadas y los usuarios.",
+        "remove-admin": "Quitar Admin",
+        "remove-admin-description": "El usuario ya no podrá acceder a la configuración del servidor, administrar las granadas ni los usuarios.",
+        "api": {
+            "success": "Rol actualizado.",
+            "error": "Ha ocurrido un error al intentar actualizar el rol del usuario."
+        }
+    },
+    "Delete-Nade": {
+        "delete": "Borrar"
+    },
+    "Approve-Nade": {
+        "api": {
+            "success": "Granada aprobada.",
+            "error": "Ha ocurrido un error al intentar aprobar la granada."
+        },
+        "approve": "Aprobar"
+    },
+    "Edit-Nade": {
+        "edit-nade": "Editar granada",
+        "form": {
+            "label-title": "Título",
+            "label-description": "Descripción",
+            "label-map": "Mapa",
+            "label-nade_type": "Tipo"
+        },
+        "api": {
+            "error": "Ha ocurrido un error al intentar editar la granada.",
+            "success": "Granada editada."
+        }
     },
     "api/get-nades": {
         "error": "Ha ocurrido un error al intentar conseguir las granadas."

@@ -7,6 +7,7 @@ import {
     SheetTrigger
 } from '@/shad-components/sheet'
 import { Settings } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import ServerConfigDelete from './server-config-delete'
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export default function ServerConfig({ serverId, ownerId, userId }: Props) {
+    const t = useTranslations()
     return (
         <Sheet>
             <SheetTrigger>
@@ -24,10 +26,10 @@ export default function ServerConfig({ serverId, ownerId, userId }: Props) {
             <SheetContent className="bg-dark">
                 <SheetHeader>
                     <SheetTitle className="m-0 text-light">
-                        Configuración
+                        {t('Server.server-config.title')}
                     </SheetTitle>
                     <SheetDescription className="text-muted-foreground">
-                        Ajusta la configuración de tu servidor.
+                        {t('Server.server-config.description')}
                     </SheetDescription>
                 </SheetHeader>
                 <div className="mt-4">

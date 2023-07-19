@@ -3,6 +3,7 @@
 import UserCard from '@/app/[locale]/components/user-card'
 import UserServerDataBadges from '@/app/[locale]/components/user-server-data-badges'
 import { User } from '@prisma/client'
+import { useTranslations } from 'next-intl'
 import MembersSkeleton from '../../../components/members-skeleton'
 import { useServerBannedMembers } from './hooks/useServerBannedMembers'
 
@@ -25,11 +26,13 @@ export default function ServerBannedMembers({
         userSelfId,
         serverId
     })
+    const t = useTranslations()
+
     return (
         <section>
             <div className="mb-2 flex flex-wrap items-center gap-2">
                 <h3 className="m-0 w-fit text-lg font-semibold uppercase">
-                    miembros baneados
+                    {t('Server.banned-members')}
                 </h3>
                 <UserServerDataBadges
                     isBannedMembers
@@ -40,7 +43,7 @@ export default function ServerBannedMembers({
                 {reduxLoadingMembers ? (
                     <MembersSkeleton />
                 ) : reduxBannedMembers.length === 0 ? (
-                    <p>No hay miembros baneados.</p>
+                    <p>{t('Server.no-banned-members')}</p>
                 ) : (
                     reduxBannedMembers.map((m) => (
                         <UserCard

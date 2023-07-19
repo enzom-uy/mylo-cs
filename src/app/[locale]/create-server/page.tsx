@@ -15,8 +15,6 @@ export default async function CreateServerPage() {
     const serversNotCreated = userGuilds?.filter(
         (g) => !existingServers.some((s) => s.id === g.id)
     )
-    console.log('User guilds: ', userGuilds)
-    console.log('Servers not created: ', serversNotCreated)
     return (
         <section>
             <PrevFormSelectPath userGuilds={serversNotCreated} />

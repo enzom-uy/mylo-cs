@@ -32,7 +32,6 @@ export default function ServerNades({
     const getNades = async (fetchedNades: NadeAuthorNadeType[]) => {
         dispatch(loadNades(fetchedNades))
     }
-    console.log(!!reduxNades.length)
 
     return (
         <section className="flex w-full flex-col gap-2">
