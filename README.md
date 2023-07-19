@@ -1,3 +1,6 @@
+
+[👉 Español 👈](./docs/README_es.md)
+
 # Mylo
 
 <!--toc:start-->
@@ -12,7 +15,7 @@
   - [Starting the project](#starting-the-project)
     - [Running the project locally](#running-the-project-locally)
     - [Env variables](#env-variables)
-  - [Roadmap](#roadmap)
+  - [Contributing](#contributing)
 
 ## About
 
@@ -132,14 +135,12 @@ You'll need to declare some env variables if you actually want it to work:
 
 ---
 
-## Roadmap
+## Contributing
 
-- Notifications system.
-  - Know when a user joins your server.
-  - Know when a user uploads a nade in your server.
-  - Know when a user edit a nade in your server.
-- Allow server owner to set visibility to Public.
-  - Users that are not members can search public servers and see their nades.
-- Report system.
-  - Report nades and servers.
-  - Send all the reports to a Reports-only email.
+We welcome contributions to Mylo as an open-source project. If you'd like to contribute, please follow these guidelines:
+
+1. Fork the repository and clone it locally.
+2. Create a new branch for your contribution.
+3. Make your changes and commit them with descriptive messages.
+4. Push your changes to your forked repository.
+5. Submit a pull request, explaining the changes you've made and their purpose.
