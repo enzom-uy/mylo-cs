@@ -6,27 +6,17 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from '@/shad-components/dropdown-menu'
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectTrigger,
-    SelectValue
-} from '@/shad-components/select'
 import { Languages } from 'lucide-react'
 import { useLocale } from 'next-intl'
 import { usePathname } from 'next-intl/client'
-import { NavigateOptions } from 'next/dist/shared/lib/app-router-context'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState, useTransition } from 'react'
+import { useTransition } from 'react'
 
 export type AvailableLocales = 'es' | 'en'
 
 export default function LocaleSwitcher() {
     const locale = useLocale() as AvailableLocales
     const [isPending, startTransition] = useTransition()
-    const [currentLocale, setCurrentLocale] = useState<AvailableLocales>(locale)
     const router = useRouter()
     const pathname = usePathname()
     console.log(locale)

@@ -1,52 +1,30 @@
 # Mylo
 
-Web app connected to a Discord Bot to upload and manager all your Counter-Strike 2 utilities.
-
-<div align="left">
-<!-- Badges -->
-<p>
-  <a href="https://github.com/enzom-uy/new-mylo/commits">
-    <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/enzom-uy/new-mylo">
-  </a>
-  <a href="https://github.com/enzom-uy/new-mylo/commits">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/enzom-uy/new-mylo" /> 
-  </a>
-</p>
-<h4>
-    <a href="https://mylo.vercel.app/">Website</a>
-  </h4>
-</div>
-
----
-
-<!-- Table of Contents -->
-
-# Table of Contents
-
 <!--toc:start-->
+- [Mylo](#mylo)
+  - [About the project](#about-the-project)
+    - [Explaining the project](#explaining-the-project)
+    - [Core features](#core-features)
+    - [Featured technologies](#featured-technologies)
+  - [Starting the project](#starting-the-project)
+  - [Requirements](#requirements)
+  - [Running the project locally](#running-the-project-locally)
+  - [Env variables](#env-variables)
+  - [Roadmap](#roadmap)
 
--   [Mylo](#mylo)
--   [Table of Contents](#table-of-contents)
--   [About the project](#about-the-project)
-    -   [Explaining the project](#explaining-the-project)
-    -   [Core features](#core-features)
-    -   [Featured technologies](#featured-technologies)
--   [Starting the project.](#starting-the-project)
-    -   [Requirements](#requirements)
-    -   [Running the project locally](#running-the-project-locally)
-    -   [Env variables](#env-variables)
+## About the project
 
-# About the project
+Web app connected to a Discord Bot to upload and manager all your Counter-Strike 2 utilities.
 
 <!-- Explaining the project -->
 
-## Explaining the project
+### Explaining the project
 
 This project has three main parts:
 
--   This Frontend web app.
--   [Discord Bot](https://github.com/enzom-uy/mylonades-bot) built with Typescript and Discordjs.
--   MySQL database in [Planetscale](https://planetscale.com).
+- This Frontend web app.
+- [Discord Bot](https://github.com/enzom-uy/mylonades-bot) built with Typescript and Discordjs.
+- MySQL database in [Planetscale](https://planetscale.com).
 
 This is how it's all connected from the perspective of a Server Owner:
 
@@ -68,44 +46,44 @@ This is how it's all connected from the perspective of a Server Member:
 4. The Frontend API will check in the database for those servers, check if the user is banned from those servers and if not, will automatically add the user to that server as MEMBER.
 5. The user can automatically join more servers later with a button in his profile.
 
-## Core features
+### Core features
 
--   FROM THE WEBSITE:
-    -   Create a "Server" in the Database with the same ID as your Discord Server (required by the Discord Bot to work).
-    -   Search for all the nades in all the servers you're a member.
-    -   Search for all the nades in a specific server.
-    -   Leave a server so you won't see the server's nades.
-    -   AS SERVER ADMIN/OWNER:
-        -   Manage the server nades (see all pending nades, approve nades, edit and delete them).
-        -   Manage the server members (see all members, ban a member from searching your nades or unban a member, give/remove ADMIN role).
-        -   Delete your server with all the nades.
--   FROM A DISCORD SERVER:
-    -   Upload nades only if you or the server owner created the "server" in the website previously.
-        -   The Discord Bot is always checking in the shared database if the server he's working on exists.
-    -   Search for a specific nade or nades that match your query (nade type, author, map, title or description).
+- FROM THE WEBSITE:
+  - Create a "Server" in the Database with the same ID as your Discord Server (required by the Discord Bot to work).
+  - Search for all the nades in all the servers you're a member.
+  - Search for all the nades in a specific server.
+  - Leave a server so you won't see the server's nades.
+  - AS SERVER ADMIN/OWNER:
+    - Manage the server nades (see all pending nades, approve nades, edit and delete them).
+    - Manage the server members (see all members, ban a member from searching your nades or unban a member, give/remove ADMIN role).
+    - Delete your server with all the nades.
+- FROM A DISCORD SERVER:
+  - Upload nades only if you or the server owner created the "server" in the website previously.
+    - The Discord Bot is always checking in the shared database if the server he's working on exists.
+  - Search for a specific nade or nades that match your query (nade type, author, map, title or description).
 
 <!-- TechStack -->
 
-## Featured technologies
+### Featured technologies
 
--   [Typescript](https://www.typescriptlang.org/)
-    -   Javascript superset that makes it actually safe (and kinda fun) to use.
--   [Nextjs](https://nextjs.org/)
-    -   Next is the Javascript/React framework that I chose for this project, since it's currently the one that interests me the most and fits my needs.
--   [Tailwind](https://tailwindcss.com/)
-    -   I really love how much Tailwind speeds up my CSS and I consider it the best way to have CSS in the same file as your component.
--   [Shadcn/ui](https://ui.shadcn.com/).
-    -   I chose to use a Component Library like Shadcn/ui because it allowed me to be more focused on my code, instead of styling. It increased my development time, and it's the one that I find more easy to customize if I need to.
-    -   Shadcn/ui needs [Radix-ui](https://www.radix-ui.com/) to work.
--   [Prisma](https://www.prisma.io/) and [MySQL with Planetscale](https://planetscale.com/)
-    -   I'll always be against writing SQL manually. A person makes mistakes daily but those mistakes should never reach your Database. Prisma is an ORM (Object Relational Mapping) that works as a layer between your Frontend/Backend and your Database. All the SQL operations are Javascript/Typescript methods with great naming. You can basically type what you want and it will be a valid SQL operation.
--   [Next-Auth](https://next-auth.js.org/)
-    -   Authentication has never been easier than with Next-auth.
--   Check all the other packages in the `package.json` file.
+- [Typescript](https://www.typescriptlang.org/)
+  - Javascript superset that makes it actually safe (and kinda fun) to use.
+- [Nextjs](https://nextjs.org/)
+  - Next is the Javascript/React framework that I chose for this project, since it's currently the one that interests me the most and fits my needs.
+- [Tailwind](https://tailwindcss.com/)
+  - I really love how much Tailwind speeds up my CSS and I consider it the best way to have CSS in the same file as your component.
+- [Shadcn/ui](https://ui.shadcn.com/).
+  - I chose to use a Component Library like Shadcn/ui because it allowed me to be more focused on my code, instead of styling. It increased my development time, and it's the one that I find more easy to customize if I need to.
+  - Shadcn/ui needs [Radix-ui](https://www.radix-ui.com/) to work.
+- [Prisma](https://www.prisma.io/) and [MySQL with Planetscale](https://planetscale.com/)
+  - I'll always be against writing SQL manually. A person makes mistakes daily but those mistakes should never reach your Database. Prisma is an ORM (Object Relational Mapping) that works as a layer between your Frontend/Backend and your Database. All the SQL operations are Javascript/Typescript methods with great naming. You can basically type what you want and it will be a valid SQL operation.
+- [Next-Auth](https://next-auth.js.org/)
+  - Authentication has never been easier than with Next-auth.
+- Check all the other packages in the `package.json` file.
 
 <!-- Getting Started -->
 
-# Starting the project.
+## Starting the project
 
 <!-- Requirements -->
 
@@ -155,8 +133,17 @@ Start the development server:
 
 You'll need to declare some env variables if you actually want it to work:
 
--   `DATABASE_URL`: Planetscale connection string for Prisma.
--   `DISCORD_CLIENT_ID`: Client ID from [discord.com/developer](https://discord.com/developers). Required by Next-Auth.
--   `DISCORD_CLIENT_SECRET`: Client Secret from [discord.com/developer](https://discord.com/developers). Required by Next-Auth.
--   `NEXTAUTH_SECRET`: Secret string required by Next-Auth.
--   `NEXTAUTH_URL`: `https://localhost:3000`.
+- `DATABASE_URL`: Planetscale connection string for Prisma.
+- `DISCORD_CLIENT_ID`: Client ID from [discord.com/developer](https://discord.com/developers). Required by Next-Auth.
+- `DISCORD_CLIENT_SECRET`: Client Secret from [discord.com/developer](https://discord.com/developers). Required by Next-Auth.
+- `NEXTAUTH_SECRET`: Secret string required by Next-Auth.
+- `NEXTAUTH_URL`: `https://localhost:3000`.
+
+## Roadmap
+
+- API rate limit.
+- Allow server owner to set visibility to Public.
+  - Users that are not members can search public servers and see their nades.
+- Report system.
+  - Report nades and servers.
+  - Send all the reports to a Reports-only email.

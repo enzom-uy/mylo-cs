@@ -41,3 +41,4 @@ supabase
 .flaskenv*
 !.env.project
 !.env.vault
+todos.md
