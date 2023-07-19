@@ -24,6 +24,7 @@ export default function ProfileHeader({
                         priority
                     />
                 </div>
+                L
             </div>
             <div className="flex flex-col items-center overflow-hidden md:items-start">
                 <p className="mb-1 max-w-[25ch] truncate">{user?.name}</p>

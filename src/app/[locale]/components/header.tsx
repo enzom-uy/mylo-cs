@@ -2,6 +2,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import HeaderMenu from './header-menu'
+import LocaleSwitcher from './locale-switcher'
 
 const Header = async () => {
     const session = await getServerSession(authOptions)
@@ -20,13 +21,16 @@ const Header = async () => {
                     mylo
                     <span className="csgo">/cs</span>
                 </Link>
-                {session && (
-                    <HeaderMenu
-                        avatarImage={avatarImage}
-                        avatarFallback={userFirstTwoLetters}
-                        userName={userName}
-                    />
-                )}
+                <div className="flex items-center gap-4">
+                    <LocaleSwitcher />
+                    {session && (
+                        <HeaderMenu
+                            avatarImage={avatarImage}
+                            avatarFallback={userFirstTwoLetters}
+                            userName={userName}
+                        />
+                    )}
+                </div>
             </nav>
         </header>
     )
