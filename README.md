@@ -141,6 +141,10 @@ You'll need to declare some env variables if you actually want it to work:
 
 ## Roadmap
 
+- Notifications system.
+  - Know when a user joins your server.
+  - Know when a user uploads a nade in your server.
+  - Know when a user edit a nade in your server.
 - Allow server owner to set visibility to Public.
   - Users that are not members can search public servers and see their nades.
 - Report system.
