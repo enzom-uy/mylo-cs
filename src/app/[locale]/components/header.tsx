@@ -1,5 +1,7 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import MyloIcon from '@/app/favicon.ico'
 import { getServerSession } from 'next-auth'
+import Image from 'next/image'
 import Link from 'next/link'
 import HeaderMenu from './header-menu'
 import LocaleSwitcher from './locale-switcher'
@@ -16,10 +18,11 @@ const Header = async () => {
             <nav className="flex items-center justify-between px-3 py-[0.4rem] md:px-6 lg:px-10 2xl:px-72">
                 <Link
                     href="/"
-                    className="text-lg font-semibold text-accent-dark"
+                    className="flex items-center text-lg font-semibold text-accent-dark"
                 >
-                    mylo
-                    <span className="csgo">/cs</span>
+                    {/* <Image src={MyloIcon} width={25} alt="Mylo logo" /> */}
+                    <span className="text-accent-light font-bold">Mylo</span>
+                    <span className="text-accent-light font-bold">/cs</span>
                 </Link>
                 <div className="flex items-center gap-4">
                     <LocaleSwitcher />

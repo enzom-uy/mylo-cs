@@ -53,7 +53,7 @@
         "no-nades": "No nades found."
     },
     "Menu": {
-        "create-server": "Create Server",
+        "create-server": "Connect a Discord Server",
         "sign-out": "Sign out"
     },
     "User-Profile": {
@@ -72,8 +72,8 @@
     },
     "Create-Server": {
         "prev": {
-            "create-one-of-these": "Create one of these servers",
-            "no-owned-server": "There are no servers that you own, or all have already been created."
+            "create-one-of-these": "Connect one of these servers",
+            "no-owned-server": "There are no servers that you own, or all have already been connected."
         },
         "accept-terms": "You must accept the terms and conditions to continue.",
         "form": {
@@ -118,6 +118,10 @@
             "delete": "Delete",
             "are-you-sure": "Are you absolutely sure?",
             "explanation": "This action cannot be undone. It will permanently delete this server along with its grenades."
+        },
+        "api": {
+            "success": "Server deleted.",
+            "error": "An error ocurred when tried to delete the server."
         }
     },
     "Leave-Server": {
@@ -154,14 +158,14 @@
         }
     },
     "Delete-Nade": {
-        "delete": "Delete"
+        "delete": "Delete nade"
     },
     "Approve-Nade": {
         "api": {
             "success": "Nade approved successfully.",
             "error": "An error ocurred when tried to approve the nade."
         },
-        "approve": "Approve"
+        "approve": "Approve nade"
     },
     "Edit-Nade": {
         "edit-nade": "Edit nade",

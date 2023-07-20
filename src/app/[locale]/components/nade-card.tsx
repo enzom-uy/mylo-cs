@@ -25,7 +25,7 @@ const NadeCard: React.FC<Props> = ({ nade, isAdmin, showStatus, userId }) => {
 
     return (
         <Card
-            className={`w-full max-w-lg border-border-dark bg-dark md:max-w-md`}
+            className={`w-full max-w-lg border-border-dark bg-transparent/10 md:max-w-md`}
         >
             <CardHeader>
                 <div className="flex items-center">

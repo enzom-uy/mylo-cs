@@ -1,13 +1,13 @@
+import Footer from '@/app/[locale]/components/footer'
 import Header from '@/app/[locale]/components/header'
 import Main from '@/app/[locale]/components/main'
 import '@/app/globals.css'
-import { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/react'
 import { NextIntlClientProvider, createTranslator, useLocale } from 'next-intl'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import React from 'react'
 import Provider from './components/provider'
-import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -49,14 +49,15 @@ export default async function LocaleLayout({
     }
 
     return (
-        <html lang="en" className="bg-dark">
+        <html lang="en">
             <body
-                className={`${inter.className} mb-14 flex flex-col items-center text-light`}
+                className={`${inter.className} flex h-screen flex-col items-center text-light`}
             >
                 <Provider>
                     <NextIntlClientProvider locale={locale} messages={messages}>
                         <Header />
                         <Main>{children}</Main>
+                        <Footer />
                     </NextIntlClientProvider>
                 </Provider>
                 <Analytics />

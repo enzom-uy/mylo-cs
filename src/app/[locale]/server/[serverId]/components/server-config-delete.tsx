@@ -37,9 +37,18 @@ export default function ServerConfigDelete({ serverId }: Props) {
             '/api/delete-server',
             axiosBody
         )
-        const { message } = response.data
-        console.log(response)
-        toast({ title: message, duration: TOAST_DURATION })
+        const { result } = response.data
+        if (result === 'error') {
+            toast({
+                title: t('Delete-Server.api.error'),
+                duration: TOAST_DURATION
+            })
+            return
+        }
+        toast({
+            title: t('Delete-Server.api.success'),
+            duration: TOAST_DURATION
+        })
         router.push('/profile')
         return
     }

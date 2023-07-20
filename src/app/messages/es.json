@@ -53,7 +53,7 @@
         }
     },
     "Menu": {
-        "create-server": "Crear Servidor",
+        "create-server": "Conectar un Servidor de Discord",
         "sign-out": "Cerrar sesión"
     },
     "User-Profile": {
@@ -72,8 +72,8 @@
     },
     "Create-Server": {
         "prev": {
-            "create-one-of-these": "Crear uno de estos servidores",
-            "no-owned-server": "No hay ningún servidor del que seas dueño o todos ya han sido creados."
+            "create-one-of-these": "Conectar uno de estos servidores",
+            "no-owned-server": "No hay ningún servidor del que seas dueño o todos ya han sido conectados."
         },
         "accept-terms": "Debes aceptar los términos y condiciones para continuar.",
         "form": {
@@ -118,6 +118,10 @@
             "delete": "Eliminar",
             "are-you-sure": "¿Estás completamente seguro?",
             "explanation": "Esta acción no se puede deshacer. Se borrará permanentemente este servidor junto con sus granadas."
+        },
+        "api": {
+            "success": "Servidor eliminado.",
+            "error": "Ha ocurrido un error al intentar eliminar el servidor."
         }
     },
     "Leave-Server": {
@@ -154,14 +158,14 @@
         }
     },
     "Delete-Nade": {
-        "delete": "Borrar"
+        "delete": "Eliminar granada"
     },
     "Approve-Nade": {
         "api": {
             "success": "Granada aprobada.",
             "error": "Ha ocurrido un error al intentar aprobar la granada."
         },
-        "approve": "Aprobar"
+        "approve": "Aprobar granada"
     },
     "Edit-Nade": {
         "edit-nade": "Editar granada",

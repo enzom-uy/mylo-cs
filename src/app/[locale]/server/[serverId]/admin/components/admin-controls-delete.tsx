@@ -5,6 +5,14 @@ import {
 import { deleteNade, loadingNades } from '@/redux/features/nadesSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { NadeAuthorNadeType } from '@/services/getServer'
+import {
+    AlertDialog,
+    AlertDialogContent,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger
+} from '@/shad-components/alert-dialog'
 import { Button } from '@/shad-components/button'
 import {
     Dialog,
@@ -58,24 +66,28 @@ export default function AdminControlsDelete({
             <DialogTrigger className="admin-ctrl-dialog-item hover:text-destructive">
                 <Trash2 className="w-5" />
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="">
                 <DialogHeader>
                     <DialogTitle className="flex flex-col items-center gap-2">
-                        <Button
-                            variant="destructive"
-                            onClick={handleConfirm}
-                            className="w-full max-w-xs"
-                        >
-                            {t('Delete-Nade.delete')}
-                        </Button>
-                        <Button
-                            className="btn w-full max-w-xs bg-dark/80 hover:bg-dark/90"
-                            onClick={() => setOpen(false)}
-                        >
-                            {t('Button.cancel')}
-                        </Button>
+                        {t('Delete-Nade.delete')}
                     </DialogTitle>
                 </DialogHeader>
+
+                <div className="flex flex-col items-center gap-2 md:flex-row md:justify-center">
+                    <Button
+                        variant="destructive"
+                        onClick={handleConfirm}
+                        className="w-full"
+                    >
+                        {t('Delete-Nade.delete')}
+                    </Button>
+                    <Button
+                        className="btn w-full bg-dark-secondary hover:bg-dark-secondary/90"
+                        onClick={() => setOpen(false)}
+                    >
+                        {t('Button.cancel')}
+                    </Button>
+                </div>
             </DialogContent>
         </Dialog>
     )

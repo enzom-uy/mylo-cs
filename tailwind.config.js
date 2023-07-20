@@ -58,16 +58,14 @@ module.exports = {
                 'dark-secondary': '#0f172a',
                 light: '#e2e8f0',
                 'light-muted': '#7f8e92',
-                'accent-dark': '#38bdf8',
+                'accent-dark': '#0C455F',
+                'accent-light': '#1474a6',
                 'border-dark': '#1d283a'
             },
             borderRadius: {
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)'
-            },
-            boxShadow: {
-                'hover-accent': '-14px 0 0 0 rgba(56, 189, 248, 1)'
             },
             keyframes: {
                 'accordion-down': {

@@ -203,7 +203,10 @@ export default function CreateServerForm() {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">
+                    <Button
+                        type="submit"
+                        className="bg-accent-dark duration-100 hover:bg-accent-dark/90"
+                    >
                         {t('Create-Server.form.submit')}
                     </Button>
                 </form>

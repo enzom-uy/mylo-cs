@@ -29,19 +29,24 @@ export default function HeaderMenu({
             <DropdownMenuTrigger className="h-8 w-8" aria-label="Trigger menu">
                 <HeaderAvatar image={avatarImage} fallback={avatarFallback} />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="mr-2 md:mr-0">
+            <DropdownMenuContent className="mr-2 mt-2 max-w-[20ch] bg-transparent md:mr-0">
                 <DropdownMenuItem
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 break-all"
                     onClick={() => router.push('/profile')}
                 >
-                    <UserCircle className="w-4" /> {userName}
+                    <UserCircle className="w-full max-w-[1rem]" /> {userName}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => router.push('/create-server')}>
-                    <PlusSquare className="w-4" /> {t('Menu.create-server')}
+                <DropdownMenuItem
+                    onClick={() => router.push('/create-server')}
+                    className="flex items-center"
+                >
+                    <PlusSquare className="w-full max-w-[1rem]" />
+                    <p>{t('Menu.create-server')}</p>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => signOut()}>
-                    <LogOut className="w-4" /> {t('Menu.sign-out')}
+                    <LogOut className="w-full max-w-[1rem]" />{' '}
+                    {t('Menu.sign-out')}
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

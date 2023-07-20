@@ -4,6 +4,7 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
+    DropdownMenuSeparator,
     DropdownMenuTrigger
 } from '@/shad-components/dropdown-menu'
 import { Languages } from 'lucide-react'
@@ -29,14 +30,15 @@ export default function LocaleSwitcher() {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-2 text-xs font-bold text-muted-foreground">
+            <DropdownMenuTrigger className="flex items-center gap-2 rounded-md border border-border-dark p-1 text-xs font-bold text-accent-light">
                 <Languages className="w-5" />
                 {locale === 'es' ? 'ES' : 'EN'}
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent className="mt-3 bg-transparent">
                 <DropdownMenuItem onClick={() => onValueChange('es')}>
                     Español
                 </DropdownMenuItem>
+                <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => onValueChange('en')}>
                     English
                 </DropdownMenuItem>

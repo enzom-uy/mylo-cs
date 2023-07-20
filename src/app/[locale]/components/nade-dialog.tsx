@@ -25,7 +25,7 @@ export default function NadeDialog({ nade }: Props) {
             <DialogTrigger>
                 <Maximize2 className="w-5 text-muted-foreground" />
             </DialogTrigger>
-            <DialogContent className="p-0">
+            <DialogContent className="w-full max-w-md p-0 pb-4 sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
                 <AspectRatio
                     ratio={16 / 9}
                     className="relative overflow-hidden rounded-t-md"
@@ -55,7 +55,7 @@ export default function NadeDialog({ nade }: Props) {
                     </div>
                 </DialogHeader>
                 {nade.description && (
-                    <DialogDescription className="px-4 pb-4">
+                    <DialogDescription className="px-4">
                         {nade.description}
                     </DialogDescription>
                 )}

@@ -8,7 +8,10 @@ import { BsDiscord } from 'react-icons/bs'
 const LoginDiscordButton = () => {
     const t = useTranslations()
     return (
-        <Button className="btn" onClick={() => signIn('discord')}>
+        <Button
+            className="btn bg-accent-dark hover:bg-accent-dark/90"
+            onClick={() => signIn('discord')}
+        >
             <BsDiscord className="h-6 w-6" />
             {t('Hero.login')}
         </Button>

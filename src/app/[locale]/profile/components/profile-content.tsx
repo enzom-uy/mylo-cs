@@ -18,7 +18,7 @@ export default function ProfileContent({
     }
     return (
         <section className="min-h-fit">
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-start gap-4">
                 <UserLastNade url={lastNade?.video_url as string} />
                 <UserServers
                     servers={user?.servers_is_member}

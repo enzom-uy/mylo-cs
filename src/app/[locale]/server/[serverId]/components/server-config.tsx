@@ -23,7 +23,7 @@ export default function ServerConfig({ serverId, ownerId, userId }: Props) {
             <SheetTrigger>
                 <Settings className="text-muted-foreground" />
             </SheetTrigger>
-            <SheetContent className="bg-dark">
+            <SheetContent className="">
                 <SheetHeader>
                     <SheetTitle className="m-0 text-light">
                         {t('Server.server-config.title')}

@@ -5,6 +5,14 @@ import {
 import { approveNade, loadingNades } from '@/redux/features/nadesSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { NadeAuthorNadeType } from '@/services/getServer'
+import {
+    AlertDialog,
+    AlertDialogContent,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger
+} from '@/shad-components/alert-dialog'
 import { Button } from '@/shad-components/button'
 import {
     Dialog,
@@ -68,20 +76,23 @@ export default function AdminControlsApprove({
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle className="flex flex-col items-center gap-2">
-                        <Button
-                            onClick={handleConfirm}
-                            className="w-full max-w-xs bg-green-500 hover:bg-green-600"
-                        >
-                            {t('Approve-Nade.approve')}
-                        </Button>
-                        <Button
-                            className="btn w-full max-w-xs bg-dark/80 hover:bg-dark/90"
-                            onClick={() => setOpen(false)}
-                        >
-                            {t('Button.cancel')}
-                        </Button>
+                        {t('Approve-Nade.approve')}
                     </DialogTitle>
                 </DialogHeader>
+                <div className="flex flex-col items-center gap-2 md:flex-row md:justify-center">
+                    <Button
+                        onClick={handleConfirm}
+                        className="w-full bg-green-500 hover:bg-green-600"
+                    >
+                        {t('Approve-Nade.approve')}
+                    </Button>
+                    <Button
+                        className="btn w-full bg-dark-secondary hover:bg-dark-secondary/90"
+                        onClick={() => setOpen(false)}
+                    >
+                        {t('Button.cancel')}
+                    </Button>
+                </div>
             </DialogContent>
         </Dialog>
     )
