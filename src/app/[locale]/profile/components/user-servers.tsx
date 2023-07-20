@@ -37,7 +37,7 @@ export default function UserServers({
                                     onClick={() =>
                                         router.push(`/server/${s.id}`)
                                     }
-                                    className="flex w-full cursor-pointer items-center gap-2 rounded-sm bg-dark-secondary p-2 transition-transform duration-150 hover:translate-x-1"
+                                    className="flex w-full cursor-pointer items-center gap-2 rounded-sm bg-transparent/30 p-2 transition-transform duration-150 hover:translate-x-1"
                                 >
                                     <p className="max-w-[30ch] truncate">
                                         {s.name}

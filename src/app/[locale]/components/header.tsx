@@ -14,15 +14,15 @@ const Header = async () => {
         .toUpperCase() as string
     const userName = session?.user?.name as string
     return (
-        <header className="sticky top-0 z-10 w-full border-b border-b-border-dark backdrop-blur-[3px]">
+        <header className="sticky top-0 z-10 w-full bg-transparent backdrop-blur-[3px]">
             <nav className="flex items-center justify-between px-3 py-[0.4rem] md:px-6 lg:px-10 2xl:px-72">
                 <Link
                     href="/"
                     className="flex items-center text-lg font-semibold text-accent-dark"
                 >
                     {/* <Image src={MyloIcon} width={25} alt="Mylo logo" /> */}
-                    <span className="text-accent-light font-bold">Mylo</span>
-                    <span className="text-accent-light font-bold">/cs</span>
+                    <span className="font-bold text-accent-light">Mylo</span>
+                    <span className="font-bold text-accent-light">/cs</span>
                 </Link>
                 <div className="flex items-center gap-4">
                     <LocaleSwitcher />
