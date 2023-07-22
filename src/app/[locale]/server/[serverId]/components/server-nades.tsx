@@ -58,10 +58,60 @@ export default function ServerNades({
             {!reduxIsLoading && !!reduxNades.length && (
                 <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
                     {reduxNades?.map((nade) => (
-                        <div key={nade.id} className="flex w-full max-w-xs">
+                        <div
+                            key={nade.id}
+                            className="flex w-full flex-wrap justify-center gap-2 md:justify-normal"
+                        >
                             <NadeCard
                                 nade={nade}
-                                key={nade.id}
+                                isAdmin={isAdmin}
+                                showStatus={showNadeStatus}
+                                userId={userId}
+                            />
+                            <NadeCard
+                                nade={nade}
+                                isAdmin={isAdmin}
+                                showStatus={showNadeStatus}
+                                userId={userId}
+                            />
+                            <NadeCard
+                                nade={nade}
+                                isAdmin={isAdmin}
+                                showStatus={showNadeStatus}
+                                userId={userId}
+                            />
+                            <NadeCard
+                                nade={nade}
+                                isAdmin={isAdmin}
+                                showStatus={showNadeStatus}
+                                userId={userId}
+                            />
+                            <NadeCard
+                                nade={nade}
+                                isAdmin={isAdmin}
+                                showStatus={showNadeStatus}
+                                userId={userId}
+                            />
+                            <NadeCard
+                                nade={nade}
+                                isAdmin={isAdmin}
+                                showStatus={showNadeStatus}
+                                userId={userId}
+                            />
+                            <NadeCard
+                                nade={nade}
+                                isAdmin={isAdmin}
+                                showStatus={showNadeStatus}
+                                userId={userId}
+                            />
+                            <NadeCard
+                                nade={nade}
+                                isAdmin={isAdmin}
+                                showStatus={showNadeStatus}
+                                userId={userId}
+                            />
+                            <NadeCard
+                                nade={nade}
                                 isAdmin={isAdmin}
                                 showStatus={showNadeStatus}
                                 userId={userId}
