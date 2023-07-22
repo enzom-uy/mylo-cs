@@ -6,7 +6,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from '@shad/dropdown-menu'
-import { LogOut, PlusSquare, UserCircle, Users } from 'lucide-react'
+import { LogOut, PlusSquare, UserCircle } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
@@ -29,7 +29,7 @@ export default function HeaderMenu({
             <DropdownMenuTrigger className="h-8 w-8" aria-label="Trigger menu">
                 <HeaderAvatar image={avatarImage} fallback={avatarFallback} />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="mr-2 mt-2 max-w-[20ch] bg-transparent md:mr-0">
+            <DropdownMenuContent className="mr-2 mt-2 max-w-[20ch] md:mr-0">
                 <DropdownMenuItem
                     className="flex items-center gap-2 break-all"
                     onClick={() => router.push('/profile')}

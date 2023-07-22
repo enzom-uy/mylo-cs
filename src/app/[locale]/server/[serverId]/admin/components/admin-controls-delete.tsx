@@ -82,7 +82,7 @@ export default function AdminControlsDelete({
                         {t('Delete-Nade.delete')}
                     </Button>
                     <Button
-                        className="btn w-full bg-dark-secondary hover:bg-dark-secondary/90"
+                        className="btn w-full border border-border-dark bg-dark-secondary hover:bg-dark/20"
                         onClick={() => setOpen(false)}
                     >
                         {t('Button.cancel')}

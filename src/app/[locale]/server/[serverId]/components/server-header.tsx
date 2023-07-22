@@ -2,6 +2,9 @@ import DiscordPlaceholder from '@/app/[locale]/components/discord-placeholder-sv
 import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
 import Image from 'next/image'
 import ServerConfig from './server-config'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 interface Props {
     server_icon: string | null
@@ -11,6 +14,7 @@ interface Props {
     isAdmin?: boolean
     ownerId?: string
     userId?: string
+    userIsAdmin?: boolean
 }
 
 export default function ServerHeader({
@@ -20,8 +24,10 @@ export default function ServerHeader({
     isAdmin,
     serverId,
     ownerId,
-    userId
+    userId,
+    userIsAdmin
 }: Props) {
+    const t = useTranslations()
     return (
         <div className="mb-4 flex w-full flex-col items-center gap-4 break-all md:flex-row md:items-start md:justify-start">
             {server_icon ? (
@@ -46,9 +52,14 @@ export default function ServerHeader({
 
             <div className="flex w-full flex-col items-center gap-1 md:items-start">
                 <div className="flex w-full items-start justify-between gap-8">
-                    <h1 className="m-0 w-fit text-center md:text-start">
+                    <h1 className="m-0 w-fit max-w-[30ch] text-center md:text-start">
                         {name}
                     </h1>
+                    {userIsAdmin && (
+                        <Link href={`/server/${serverId}/admin`}>
+                            {t('Server-Profile.goto-admin')}
+                        </Link>
+                    )}
                     {isAdmin && ownerId === userId && (
                         <ServerConfig
                             serverId={serverId}

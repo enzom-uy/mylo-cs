@@ -64,7 +64,8 @@
     },
     "Server-Profile": {
         "nades": "granadas",
-        "members": "miembros"
+        "members": "miembros",
+        "goto-admin": "Ir a la página de Admin"
     },
     "User-Card": {
         "owner": "dueño",

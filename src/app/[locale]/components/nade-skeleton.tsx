@@ -5,7 +5,7 @@ import { Skeleton } from '@/shad-components/skeleton'
 export default function NadeSkeleton() {
     return (
         <Card
-            className={`w-full max-w-lg border-border-dark bg-dark md:max-w-md`}
+            className={`w-full max-w-lg border-border-dark bg-dark/80 md:max-w-md`}
         >
             <CardHeader>
                 <div className="flex items-center">

@@ -34,7 +34,7 @@ export default function LocaleSwitcher() {
                 <Languages className="w-5" />
                 {locale === 'es' ? 'ES' : 'EN'}
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="mt-3 bg-transparent">
+            <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => onValueChange('es')}>
                     Español
                 </DropdownMenuItem>

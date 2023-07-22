@@ -1,5 +1,6 @@
 generator client {
-    provider = "prisma-client-js"
+    provider      = "prisma-client-js"
+    binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {
@@ -42,14 +43,15 @@ model Nade {
 }
 
 model Report {
-    id                 String      @id @default(cuid())
-    author             User        @relation(fields: [author_id], references: [id])
+    id                 String        @id @default(cuid())
+    author             User          @relation(fields: [author_id], references: [id])
     author_id          String
-    type               Report_Type
-    reported_server    Server?     @relation(fields: [reported_server_id], references: [id])
+    target             Report_Target
+    type               Report_Reason
+    reported_server    Server?       @relation(fields: [reported_server_id], references: [id])
     reported_server_id String?
-    reported_nade      Nade?       @relation(fields: [nade_id], references: [id])
-    nade_id            String?     @map("nade_id")
+    reported_nade      Nade?         @relation(fields: [nade_id], references: [id])
+    nade_id            String?       @map("nade_id")
 
     @@index([author_id])
     @@index([reported_server_id])
@@ -130,8 +132,14 @@ enum Nade_status {
     PENDING
 }
 
-enum Report_Type {
-    USER
+enum Report_Target {
     NADE
     SERVER
+}
+
+enum Report_Reason {
+    NSFW_Content
+    Illegal_Content
+    Spam
+    Offensive_Content
 }

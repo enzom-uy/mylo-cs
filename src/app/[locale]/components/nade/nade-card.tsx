@@ -5,9 +5,9 @@ import { uppercaseFirstLetter } from '@/utils/uppercaseFirstLetter'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Badge } from '@shad/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@shad/card'
-import AdminControlsDropdown from '../server/[serverId]/admin/components/admin-controls-dropdown'
+import AdminControlsDropdown from '@/app/[locale]/server/[serverId]/admin/components/admin-controls-dropdown'
 import NadeDialog from './nade-dialog'
-import VideoPlayer from './video-player'
+import VideoPlayer from '../video-player'
 
 interface Props {
     nade: NadeAuthorNadeType
@@ -25,7 +25,7 @@ const NadeCard: React.FC<Props> = ({ nade, isAdmin, showStatus, userId }) => {
 
     return (
         <Card
-            className={`w-full max-w-lg border-border-dark bg-transparent/10 md:max-w-md`}
+            className={`w-full max-w-lg border-border-dark bg-transparent/20 md:max-w-md`}
         >
             <CardHeader>
                 <div className="flex items-center">

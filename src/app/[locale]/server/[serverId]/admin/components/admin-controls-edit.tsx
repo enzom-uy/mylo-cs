@@ -16,7 +16,8 @@ import {
     FormControl,
     FormField,
     FormItem,
-    FormLabel
+    FormLabel,
+    FormMessage
 } from '@/shad-components/form'
 import { Input } from '@/shad-components/input'
 import {
@@ -124,7 +125,7 @@ export default function AdminControlsEdit({
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger className="admin-ctrl-dialog-item hover:text-accent-dark">
+            <DialogTrigger className="admin-ctrl-dialog-item hover:text-accent-light">
                 <Edit className="w-5" />
             </DialogTrigger>
             <DialogContent>
@@ -146,7 +147,7 @@ export default function AdminControlsEdit({
                                             {t('Edit-Nade.form.label-title')}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input {...field} minLength={4} />
                                         </FormControl>
                                     </FormItem>
                                 )}
@@ -162,8 +163,13 @@ export default function AdminControlsEdit({
                                             )}
                                         </FormLabel>
                                         <FormControl>
-                                            <Textarea {...field} />
+                                            <Textarea
+                                                {...field}
+                                                maxLength={200}
+                                            />
                                         </FormControl>
+
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />

@@ -1,6 +1,6 @@
 'use client'
 
-import NadeCard from '@/app/[locale]/components/nade-card'
+import NadeCard from '@/app/[locale]/components/nade/nade-card'
 import NadeSkeleton from '@/app/[locale]/components/nade-skeleton'
 import UserServerDataBadges from '@/app/[locale]/components/user-server-data-badges'
 import { useNadesData } from '@/hooks/useReduxNadeData'

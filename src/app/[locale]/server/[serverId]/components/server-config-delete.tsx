@@ -75,7 +75,7 @@ export default function ServerConfigDelete({ serverId }: Props) {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter className="mt-4">
-                        <AlertDialogCancel className="hover:bg-dark hover:text-light">
+                        <AlertDialogCancel className="hover:bg-dark/20 hover:text-light">
                             {t('Button.cancel')}
                         </AlertDialogCancel>
                         <AlertDialogAction

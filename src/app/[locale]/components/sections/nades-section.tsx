@@ -1,7 +1,7 @@
 'use client'
 import { NadeAuthorNadeType } from '@/services/getServer'
 import { useTranslations } from 'next-intl'
-import NadeCard from '../nade-card'
+import NadeCard from '@/app/[locale]/components/nade/nade-card'
 import NadeSkeleton from '../nade-skeleton'
 import { useNadesSection } from './hooks/useNadesSection'
 

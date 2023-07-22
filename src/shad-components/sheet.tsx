@@ -68,7 +68,7 @@ const SheetContent = React.forwardRef<
             className={`${cn(
                 sheetVariants({ side }),
                 className
-            )} bg-transparent/70`}
+            )} bg-dark-secondary`}
             {...props}
         >
             {children}

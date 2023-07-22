@@ -64,7 +64,9 @@
     },
     "Server-Profile": {
         "nades": "Nades",
-        "members": "Members"
+        "members": "Members",
+
+        "goto-admin": "Go to Admin page"
     },
     "User-Card": {
         "owner": "Owner",

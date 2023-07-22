@@ -64,7 +64,7 @@ export default function AdminControlsGiveRole({
             <AlertDialogTrigger>
                 <UserCog className="w-6 text-muted-foreground hover:text-accent-dark" />
             </AlertDialogTrigger>
-            <AlertDialogContent className="bg-dark">
+            <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle className="m-0">
                         {isAdmin
@@ -79,7 +79,10 @@ export default function AdminControlsGiveRole({
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>{t('Button.cancel')}</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleConfirm}>
+                    <AlertDialogAction
+                        onClick={handleConfirm}
+                        className="bg-accent-light hover:bg-accent-light/90"
+                    >
                         {t('Button.confirm')}
                     </AlertDialogAction>
                 </AlertDialogFooter>

@@ -12,6 +12,7 @@ export default function Footer() {
                     <GithubIcon className="" />
                 </a>
             </div> */}
+            Footer
         </footer>
     )
 }

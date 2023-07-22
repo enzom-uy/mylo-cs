@@ -37,6 +37,7 @@ export default async function ServerPage({
                 server_icon={server_icon}
                 description={description}
                 serverId={id}
+                userIsAdmin={userIsAdmin}
             />
             <Separator className="mb-4" />
             <ServerNades
