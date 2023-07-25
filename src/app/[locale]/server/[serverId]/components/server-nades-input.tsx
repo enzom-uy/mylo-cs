@@ -82,7 +82,7 @@ export default function ServerNadesInput({
     }
 
     return (
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit} className="w-full lg:max-w-sm">
             <Input
                 onChange={handleSearchChange}
                 value={search}

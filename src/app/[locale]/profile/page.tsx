@@ -11,10 +11,10 @@ export default async function ProfilePage() {
     if (!session) redirect('/')
     const user = await getUser({ id: session.id })
     return (
-        <div className="flex w-full flex-col items-center gap-4 rounded-md">
+        <section className="flex w-full flex-col items-center gap-4 rounded-md">
             <ProfileHeader user={user} session={session} />
             <Separator />
             <ProfileContent user={user} session={session} />
-        </div>
+        </section>
     )
 }

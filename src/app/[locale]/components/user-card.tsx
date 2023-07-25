@@ -38,7 +38,7 @@ export default function UserCard({
     const isOwner = ownerId === user.id
 
     return (
-        <div className="flex flex-wrap items-center gap-2 break-all py-2">
+        <div className="flex flex-wrap items-center gap-2 py-2">
             {user.image ? (
                 <Image
                     src={user.image}
@@ -54,7 +54,9 @@ export default function UserCard({
                     <DiscordPlaceholder />
                 </div>
             )}
-            <p>{user.name}</p>
+            <p className="max-w-[12ch] overflow-hidden text-ellipsis whitespace-nowrap">
+                {user.name}
+            </p>
             <div className="flex flex-wrap items-center gap-2">
                 {isAdmin && !isOwner ? (
                     <Badge className="font-semibold uppercase">

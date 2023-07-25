@@ -84,7 +84,8 @@
         "nades": "Nades",
         "members": "Members",
 
-        "goto-admin": "Go to Admin page"
+        "goto-admin": "View as Admin",
+        "goto-normal": "View as Member"
     },
     "User-Card": {
         "owner": "Owner",

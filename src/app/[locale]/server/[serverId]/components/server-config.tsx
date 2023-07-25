@@ -32,9 +32,11 @@ export default function ServerConfig({ serverId, ownerId, userId }: Props) {
                         {t('Server.server-config.description')}
                     </SheetDescription>
                 </SheetHeader>
-                <div className="mt-4">
-                    <ServerConfigDelete serverId={serverId} />
-                </div>
+                {ownerId === userId && (
+                    <div className="mt-4">
+                        <ServerConfigDelete serverId={serverId} />
+                    </div>
+                )}
             </SheetContent>
         </Sheet>
     )

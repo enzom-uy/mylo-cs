@@ -15,7 +15,7 @@ const NadesSection: React.FC<Props> = ({ nades }) => {
     const { loading } = state
     return (
         <section
-            className={`flex w-full flex-wrap justify-center gap-4 lg:justify-start ${
+            className={`flex w-full max-w-5xl flex-wrap justify-center gap-4 lg:justify-start ${
                 nades.length === 0 && 'lg:justify-center'
             }`}
         >

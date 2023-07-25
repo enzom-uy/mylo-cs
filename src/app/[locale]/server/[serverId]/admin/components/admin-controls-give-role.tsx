@@ -62,7 +62,7 @@ export default function AdminControlsGiveRole({
     return (
         <AlertDialog>
             <AlertDialogTrigger>
-                <UserCog className="w-6 text-muted-foreground hover:text-accent-dark" />
+                <UserCog className="w-6 text-muted-foreground hover:text-accent-light" />
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>

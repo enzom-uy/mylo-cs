@@ -34,7 +34,7 @@ export default function ServerNades({
     }
 
     return (
-        <section className="flex w-full flex-col gap-2">
+        <div className="flex w-full max-w-full flex-col gap-2 pt-4 lg:pt-0">
             <div className="mb-2 flex flex-wrap items-center gap-2">
                 <h2 className="m-0 w-fit text-lg font-semibold uppercase">
                     {t('Server-Profile.nades')}
@@ -68,58 +68,10 @@ export default function ServerNades({
                                 showStatus={showNadeStatus}
                                 userId={userId}
                             />
-                            <NadeCard
-                                nade={nade}
-                                isAdmin={isAdmin}
-                                showStatus={showNadeStatus}
-                                userId={userId}
-                            />
-                            <NadeCard
-                                nade={nade}
-                                isAdmin={isAdmin}
-                                showStatus={showNadeStatus}
-                                userId={userId}
-                            />
-                            <NadeCard
-                                nade={nade}
-                                isAdmin={isAdmin}
-                                showStatus={showNadeStatus}
-                                userId={userId}
-                            />
-                            <NadeCard
-                                nade={nade}
-                                isAdmin={isAdmin}
-                                showStatus={showNadeStatus}
-                                userId={userId}
-                            />
-                            <NadeCard
-                                nade={nade}
-                                isAdmin={isAdmin}
-                                showStatus={showNadeStatus}
-                                userId={userId}
-                            />
-                            <NadeCard
-                                nade={nade}
-                                isAdmin={isAdmin}
-                                showStatus={showNadeStatus}
-                                userId={userId}
-                            />
-                            <NadeCard
-                                nade={nade}
-                                isAdmin={isAdmin}
-                                showStatus={showNadeStatus}
-                                userId={userId}
-                            />
-                            <NadeCard
-                                nade={nade}
-                                isAdmin={isAdmin}
-                                showStatus={showNadeStatus}
-                                userId={userId}
-                            />
                         </div>
                     ))}
                 </div>
             )}
-        </section>
+        </div>
     )
 }

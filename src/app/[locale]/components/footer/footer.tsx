@@ -8,7 +8,7 @@ const FOOTER_SECTION_STYLES =
 export default function Footer() {
     const t = useTranslations()
     return (
-        <footer className="flex w-full max-w-2xl items-start justify-between px-10 py-4 md:max-w-4xl lg:max-w-5xl">
+        <footer className="mt-10 flex w-full items-start justify-between px-3 py-4 md:px-6 lg:px-10 2xl:px-72">
             <div className={FOOTER_SECTION_STYLES}>
                 <FooterAboutSection
                     supportText={t('Support.support')}

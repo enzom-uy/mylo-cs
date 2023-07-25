@@ -2,7 +2,6 @@
 
 import UserCard from '@/app/[locale]/components/user-card'
 import UserServerDataBadges from '@/app/[locale]/components/user-server-data-badges'
-import { sortServerMembers } from '@/utils/sortServerMembers'
 import { User } from '@prisma/client'
 import { useTranslations } from 'next-intl'
 import { useServerMembers } from './hooks/useServerMembers'
@@ -31,7 +30,7 @@ export default function ServerMembers({
     const t = useTranslations()
 
     return (
-        <section>
+        <div className="w-full">
             <div className="mb-2 flex flex-wrap items-center gap-2">
                 <h3 className="m-0 w-fit text-lg font-semibold uppercase">
                     {t('Server-Profile.members')}
@@ -56,6 +55,6 @@ export default function ServerMembers({
                     ))
                 )}
             </div>
-        </section>
+        </div>
     )
 }

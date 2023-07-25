@@ -9,7 +9,7 @@ const LoginDiscordButton = () => {
     const t = useTranslations()
     return (
         <Button
-            className="btn bg-accent-dark hover:bg-accent-dark/90"
+            className="btn bg-accent-light hover:bg-accent-light/90"
             onClick={() => signIn('discord')}
         >
             <BsDiscord className="h-6 w-6" />

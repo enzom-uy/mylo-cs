@@ -83,7 +83,8 @@
     "Server-Profile": {
         "nades": "granadas",
         "members": "miembros",
-        "goto-admin": "Ir a la página de Admin"
+        "goto-admin": "Ver como Admin",
+        "goto-normal": "Ver como Miembro"
     },
     "User-Card": {
         "owner": "dueño",

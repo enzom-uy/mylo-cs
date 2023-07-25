@@ -39,7 +39,7 @@ export default function ServerBannedMembers({
                     members={banned_members.length}
                 />
             </div>
-            <div className="no-scrollbar max-h-96 overflow-x-hidden overflow-y-scroll border-t border-border-dark pt-2">
+            <div className="no-scrollbar max-h-96 overflow-x-hidden overflow-y-scroll">
                 {reduxLoadingMembers ? (
                     <MembersSkeleton />
                 ) : reduxBannedMembers.length === 0 ? (
