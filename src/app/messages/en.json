@@ -188,6 +188,18 @@
         },
         "approve": "Approve nade"
     },
+    "Report": {
+        "report-nade": "Report nade",
+        "report-server": "Report server",
+        "report-reason": "Reason",
+        "report-reason-description": "Explain why you consider it should be reported.",
+        "reason-required-msg": "This is required.",
+        "report-submit": "Report",
+        "api": {
+            "success": "Report created.",
+            "error": "An error ocurred when tried to create the report."
+        }
+    },
     "Footer": {
         "About": {
             "about": "About"

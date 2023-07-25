@@ -20,7 +20,7 @@ const SearchSection = async ({ query, userId }: Props) => {
         <section className="flex w-full flex-col items-center gap-6 pt-6">
             <SearchInput />
             {!query && <Msg />}
-            {query && <NadesSection nades={foundedNades} />}
+            {query && <NadesSection nades={foundedNades} userId={userId} />}
         </section>
     )
 }

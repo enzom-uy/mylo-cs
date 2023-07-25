@@ -7,9 +7,10 @@ import { useNadesSection } from './hooks/useNadesSection'
 
 interface Props {
     nades: NadeAuthorNadeType[]
+    userId: string
 }
 
-const NadesSection: React.FC<Props> = ({ nades }) => {
+const NadesSection: React.FC<Props> = ({ nades, userId }) => {
     const t = useTranslations()
     const { state, reduxIsLoading } = useNadesSection({ nades })
     const { loading } = state
@@ -26,7 +27,9 @@ const NadesSection: React.FC<Props> = ({ nades }) => {
             ) : !loading && nades.length <= 0 ? (
                 <p>{t('Nades-Section.no-nades')}</p>
             ) : (
-                nades.map((nade) => <NadeCard key={nade.id} nade={nade} />)
+                nades.map((nade) => (
+                    <NadeCard key={nade.id} nade={nade} userId={userId} />
+                ))
             )}
         </section>
     )

@@ -8,12 +8,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@shad/card'
 import AdminControlsDropdown from '@/app/[locale]/server/[serverId]/admin/components/admin-controls-dropdown'
 import NadeDialog from './nade-dialog'
 import VideoPlayer from '../video-player'
+import Report from '@/app/[locale]/components/report'
 
 interface Props {
     nade: NadeAuthorNadeType
     isAdmin?: boolean
     showStatus?: boolean
-    userId?: string
+    userId: string
 }
 
 const NadeCard: React.FC<Props> = ({ nade, isAdmin, showStatus, userId }) => {
@@ -31,6 +32,11 @@ const NadeCard: React.FC<Props> = ({ nade, isAdmin, showStatus, userId }) => {
                 <div className="flex items-center">
                     <CardTitle className="m-0 text-light">{title}</CardTitle>
                     <div className="flex items-center gap-2">
+                        <Report
+                            context="NADE"
+                            reportedNadeId={nade.id}
+                            reportAuthorId={userId}
+                        />
                         <NadeDialog nade={nade} />
                         {isAuthor || isAdmin ? (
                             <AdminControlsDropdown

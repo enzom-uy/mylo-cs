@@ -36,7 +36,7 @@ export default async function Layout({
     if (!userIsMember) redirect('/')
 
     return (
-        <div className="flex w-full flex-col lg:flex-row">
+        <div className="flex w-full flex-col lg:max-w-[83.3rem] lg:flex-row">
             <aside className="flex w-full flex-col items-center lg:max-w-xs lg:flex-col">
                 <ServerHeader
                     name={name}

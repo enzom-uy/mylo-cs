@@ -21,7 +21,7 @@ export default function AdminControlsDropdown({
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
-                <MoreHorizontal className="w-5 text-muted-foreground" />
+                <MoreHorizontal className="w-5 text-muted-foreground duration-150 hover:text-accent-light" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="z-10 rounded-md bg-dark-secondary p-1">
                 <AdminControlsNade

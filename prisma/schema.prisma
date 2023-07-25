@@ -47,15 +47,15 @@ model Report {
     author             User          @relation(fields: [author_id], references: [id])
     author_id          String
     target             Report_Target
-    type               Report_Reason
     reported_server    Server?       @relation(fields: [reported_server_id], references: [id])
     reported_server_id String?
-    reported_nade      Nade?         @relation(fields: [nade_id], references: [id])
-    nade_id            String?       @map("nade_id")
+    reported_nade      Nade?         @relation(fields: [reported_nade_id], references: [id])
+    reported_nade_id   String?       @map("nade_id")
+    reason             String        @db.LongText
 
     @@index([author_id])
     @@index([reported_server_id])
-    @@index([nade_id])
+    @@index([reported_nade_id])
 }
 
 model Server {
@@ -135,11 +135,4 @@ enum Nade_status {
 enum Report_Target {
     NADE
     SERVER
-}
-
-enum Report_Reason {
-    NSFW_Content
-    Illegal_Content
-    Spam
-    Offensive_Content
 }

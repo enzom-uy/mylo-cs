@@ -23,7 +23,7 @@ export default function NadeDialog({ nade }: Props) {
     return (
         <Dialog>
             <DialogTrigger>
-                <Maximize2 className="w-5 text-muted-foreground" />
+                <Maximize2 className="w-5 text-muted-foreground duration-150 hover:text-accent-light" />
             </DialogTrigger>
             <DialogContent className="w-full max-w-md p-0 pb-4 sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
                 <AspectRatio

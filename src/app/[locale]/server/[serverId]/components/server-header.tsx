@@ -2,12 +2,8 @@ import DiscordPlaceholder from '@/app/[locale]/components/discord-placeholder-sv
 import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
 import Image from 'next/image'
 import ServerConfig from './server-config'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import ServerMembers from './server-members'
 import { User } from '@prisma/client'
-import { Separator } from '@/shad-components/separator'
-import { useRouter } from 'next/navigation'
 
 interface Props {
     server_icon: string | null
@@ -34,7 +30,6 @@ export default function ServerHeader({
     members,
     admins
 }: Props) {
-    const t = useTranslations()
     return (
         <div className="mb-4 flex w-full flex-col items-center gap-4  md:items-start md:justify-start lg:w-fit lg:max-w-xs lg:flex-col">
             <div className="flex w-full flex-col items-center gap-4 md:flex-row md:items-start">
@@ -59,7 +54,7 @@ export default function ServerHeader({
                 )}
 
                 <div className="flex w-full flex-col items-center gap-1  md:items-start">
-                    <div className="flex w-full items-start justify-between gap-8 lg:flex-col lg:gap-2">
+                    <div className="flex w-full items-center justify-center gap-8 md:justify-between lg:gap-2">
                         <h1 className="m-0 w-fit max-w-[30ch] text-center md:text-start">
                             {name}
                         </h1>

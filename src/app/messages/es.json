@@ -187,6 +187,18 @@
         },
         "approve": "Aprobar granada"
     },
+    "Report": {
+        "report-nade": "Reportar granada",
+        "report-server": "Reportar servidor",
+        "report-reason": "Razón",
+        "report-reason-description": "Explica por qué consideras que debe ser reportado.",
+        "reason-required-msg": "This is required.",
+        "report-submit": "Reportar",
+        "api": {
+            "success": "Reporte creado.",
+            "error": "Ha ocurrido un error al intentar crear el reporte."
+        }
+    },
     "Footer": {
         "About": {
             "about": "Acerca de"
