@@ -26,6 +26,24 @@
         "do-query-to-search": "Haz una búsqueda para ver las granadas.",
         "no-nades": "No se encontraron granadas."
     },
+    "Support": {
+        "support": "Discord"
+    },
+    "FAQ": {
+        "faq": "Preguntas frecuentes",
+        "item-1": {
+            "title": "¿Qué es Mylo/cs?",
+            "content-1": "Mylo/cs es una plataforma en la que puedes conectar tus propios servidores de Discord con nosotros, tener acceso a nuestro Bot y empezar a guardar tus granadas más útiles. Fue creado como una forma de almacenar y recuperar rápidamente las granadas incluso en medio de una partida, sin tener que pedir a tus compañeros por una pausa.",
+            "content-2": "Fue creado como una forma de almacenar y recuperar rápidamente las granadas incluso en medio de una partida, sin pedirle una pausa a tus compañeros."
+        },
+        "item-2": {
+            "title": "¿Cómo funciona?",
+            "content-1": "Tienes que iniciar sesión en nuestra página así podemos saber que tu cuenta existe.",
+            "content-2": "Ya sea desde aquí o desde el Bot de Discord, tienes que conectar tu servidor de Discord con nosotros. Si deseas hacerlo por la página verás la opcion \"Conectar servidor\" si presionas en tu perfil arriba a la derecha, en cambio si deseas hacerlo por el Bot solo tienes que utilizar el comando \"/conectar\"",
+            "content-3": "Desde el servidor que acabas de conectar, con el comando \"/crear\" puedes crear una nueva granada. Desde la página de administrador puedes aprobarla, editarla o eliminarla antes de hacerla pública.",
+            "content-4": "Finalmente puedes buscar entre tus granadas ya sea desde la página o con el comando \"/buscar\". Siempre desde tu servidor conectado."
+        }
+    },
     "Terms": {
         "terms": "Términos y condiciones",
         "item-1": {
@@ -167,6 +185,15 @@
             "error": "Ha ocurrido un error al intentar aprobar la granada."
         },
         "approve": "Aprobar granada"
+    },
+    "Footer": {
+        "About": {
+            "about": "Acerca de"
+        },
+        "Project": {
+            "project": "Proyecto",
+            "contribute": "Contribuir"
+        }
     },
     "Edit-Nade": {
         "edit-nade": "Editar granada",

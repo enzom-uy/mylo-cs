@@ -18,6 +18,24 @@
         "search-msg": "Type something to search for a nade.",
         "must-login": "You have to be logged in and be in a server to search nades."
     },
+    "Support": {
+        "support": "Discord"
+    },
+    "FAQ": {
+        "faq": "Frequently asked questions",
+        "item-1": {
+            "title": "What is Mylo/cs?",
+            "content-1": "Mylo/cs is a platform where you can connect your own discord servers to us, have access to our discord bot, and start saving your most useful nades.",
+            "content-2": "It was created as a way to store and quickly retrieve nades even in-game without asking your teammates to pause."
+        },
+        "item-2": {
+            "title": "How does it work?",
+            "content-1": "You have to login to our page so we can know that your account exists.",
+            "content-2": "Either from here or from the Discord Bot, you have to connect your Discord server with us. If you want to do it through the page you will see the option \"Connect server\" if you click on your profile on the top right, on the other hand if you want to do it through the Bot you only have to use the commando \"/connect\"",
+            "content-3": "From the server you just connected, with the commando \"/create\" you can create a new nade. From the administrator page you can approve, edit or delete it before making it public.",
+            "content-4": "Finally you can search among your nades either from the website or with the command \"/search\". Always from your connected server."
+        }
+    },
     "Terms": {
         "terms": "Terms and conditions",
         "item-1": {
@@ -168,6 +186,15 @@
             "error": "An error ocurred when tried to approve the nade."
         },
         "approve": "Approve nade"
+    },
+    "Footer": {
+        "About": {
+            "about": "About"
+        },
+        "Project": {
+            "project": "Project",
+            "contribute": "Contribute"
+        }
     },
     "Edit-Nade": {
         "edit-nade": "Edit nade",

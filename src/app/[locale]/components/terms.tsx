@@ -46,7 +46,7 @@ export default function Terms() {
     ]
 
     return (
-        <>
+        <article className="w-full">
             <Accordion type="single" collapsible className="w-full">
                 {accordion.map((item) => (
                     <AccordionItem
@@ -54,10 +54,10 @@ export default function Terms() {
                         value={item.value}
                         className="m-0"
                     >
-                        <AccordionTrigger className="p-1 text-start text-sm">
+                        <AccordionTrigger className="p-1 text-start text-lg">
                             {item.trigger}
                         </AccordionTrigger>
-                        <AccordionContent>
+                        <AccordionContent className="text-md">
                             <ul className="flex flex-col gap-3">
                                 {item.content.map((content) => (
                                     <li key={content}>{content}</li>
@@ -67,6 +67,6 @@ export default function Terms() {
                     </AccordionItem>
                 ))}
             </Accordion>
-        </>
+        </article>
     )
 }

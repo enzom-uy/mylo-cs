@@ -1,4 +1,4 @@
-import Footer from '@/app/[locale]/components/footer'
+import Footer from '@/app/[locale]/components/footer/footer'
 import Header from '@/app/[locale]/components/header'
 import Main from '@/app/[locale]/components/main'
 import '@/app/globals.css'

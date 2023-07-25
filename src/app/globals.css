@@ -144,6 +144,10 @@ video {
     .admin-ctrl-dialog-item {
         @apply flex w-full items-center justify-center rounded-sm px-2 py-1 text-muted-foreground hover:bg-border-dark;
     }
+
+    .footer-link {
+        @apply hover:underline hover:underline-offset-4;
+    }
 }
 
 @layer utilities {

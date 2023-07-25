@@ -31,8 +31,9 @@ export default async function ServerAdminPage({
     } = server!
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
     if (!userIsAdmin) redirect(`/server/${params.serverId}`)
+    const userIsMember = members.some((member) => member.id === session?.id)
+    if (!userIsMember) redirect('/')
     const pendingNadesFirst = sortNadesPendingFirst(nades)
-    console.log(session)
 
     return (
         <>

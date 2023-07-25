@@ -30,6 +30,9 @@ export default async function ServerPage({
     } = server
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
 
+    const userIsMember = members.some((member) => member.id === session?.id)
+    if (!userIsMember) redirect('/')
+
     return (
         <>
             <ServerHeader
