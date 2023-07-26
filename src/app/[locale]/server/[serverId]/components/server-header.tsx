@@ -4,6 +4,7 @@ import Image from 'next/image'
 import ServerConfig from './server-config'
 import { useTranslations } from 'next-intl'
 import { User } from '@prisma/client'
+import Report from '@/app/[locale]/components/report'
 
 interface Props {
     server_icon: string | null
@@ -58,18 +59,28 @@ export default function ServerHeader({
                         <h1 className="m-0 w-fit max-w-[30ch] text-center md:text-start">
                             {name}
                         </h1>
-                        {ownerId === userId || userIsAdmin ? (
-                            <ServerConfig
-                                serverId={serverId}
-                                ownerId={ownerId!}
-                                userId={userId!}
-                            />
-                        ) : null}
                     </div>
                     {description && (
                         <p className=" text-start">{description}</p>
                     )}
                 </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+                {ownerId === userId || userIsAdmin ? (
+                    <ServerConfig
+                        serverId={serverId}
+                        ownerId={ownerId!}
+                        userId={userId!}
+                    />
+                ) : null}
+                {ownerId !== userId && (
+                    <Report
+                        context="SERVER"
+                        reportAuthorId={userId}
+                        reportedServerId={serverId}
+                    />
+                )}
             </div>
         </div>
     )
