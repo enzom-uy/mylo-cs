@@ -10,7 +10,7 @@ export const FooterProjectSection = ({ contributeText }: Props) => {
             <ul className="flex flex-col gap-2 text-sm md:flex-row">
                 <li>
                     <Link
-                        href="https://github.com/enzom-uy/new-mylo"
+                        href="https://github.com/enzom-uy/mylo-cs"
                         target="_blank"
                         className="footer-link"
                     >
@@ -19,7 +19,7 @@ export const FooterProjectSection = ({ contributeText }: Props) => {
                 </li>
                 <li>
                     <Link
-                        href="https://github.com/enzom-uy/new-mylo#contributing"
+                        href="https://github.com/enzom-uy/mylo-cs#contributing"
                         target="_blank"
                         className="footer-link"
                     >

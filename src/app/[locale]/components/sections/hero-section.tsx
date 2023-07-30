@@ -8,8 +8,10 @@ const HeroContent = ({ session }: { session: Session | null }) => {
     const t = useTranslations('Hero')
     return (
         <>
-            <h1 className="m-0 text-3xl font-semibold">{t('title')}</h1>
-            <div className="max-w-md font-semibold text-muted-foreground">
+            <h1 className="m-0 text-center text-3xl font-semibold lg:text-start">
+                {t('title')}
+            </h1>
+            <div className="text-center font-semibold text-muted-foreground md:max-w-[58ch] lg:text-start">
                 <p>
                     {t('share-learn')}
                     <span className="csgo"> {t('counter-strike')}</span>.
@@ -21,7 +23,7 @@ const HeroContent = ({ session }: { session: Session | null }) => {
                     {t('rest')}
                 </p>
             </div>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-4 lg:justify-start">
                 {!session && <LoginDiscordButton />}
                 <InviteBot />
             </div>
@@ -32,8 +34,8 @@ const HeroContent = ({ session }: { session: Session | null }) => {
 const Hero = async () => {
     const session = await getServerSession(authOptions)
     return (
-        <section className="flex w-full justify-center border-b border-b-border-dark px-10 pb-6">
-            <div className="flex flex-col gap-4">
+        <section className="flex w-full justify-center border-b border-b-border-dark pb-6 lg:justify-start">
+            <div className="flex flex-col gap-2 p-4">
                 <HeroContent session={session} />
             </div>
         </section>

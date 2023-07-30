@@ -51,7 +51,7 @@ export default async function LocaleLayout({
     return (
         <html lang="en">
             <body
-                className={`${inter.className} flex min-h-screen flex-col items-center text-light`}
+                className={`${inter.className} flex min-h-screen flex-col items-center px-3 py-[0.4rem] text-light md:px-6 lg:px-24 xl:px-44 2xl:px-96`}
             >
                 <Provider>
                     <NextIntlClientProvider locale={locale} messages={messages}>

@@ -64,7 +64,7 @@
     },
     "Search-Input": {
         "required-field": "This field is required.",
-        "placeholder": "Molo Banana from Site."
+        "placeholder": "Molo Banana from Site"
     },
     "Nades-Section": {
         "do-query-to-search": "Type something to search for a nade.",

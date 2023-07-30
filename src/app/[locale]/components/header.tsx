@@ -13,7 +13,7 @@ const Header = async () => {
     const userName = session?.user?.name as string
     return (
         <header className="sticky top-0 z-10 w-full bg-transparent backdrop-blur-[3px]">
-            <nav className="flex items-center justify-between px-3 py-[0.4rem] md:px-6 lg:px-10 2xl:px-72">
+            <nav className="flex items-center justify-between">
                 <Link
                     href="/"
                     className="flex items-center text-lg font-bold text-accent-light"

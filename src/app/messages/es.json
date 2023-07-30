@@ -20,7 +20,7 @@
     },
     "Search-Input": {
         "required-field": "Este campo es obligatorio.",
-        "placeholder": "Molo Banana desde Site."
+        "placeholder": "Molo Banana desde Site"
     },
     "Nades-Section": {
         "do-query-to-search": "Haz una búsqueda para ver las granadas.",
