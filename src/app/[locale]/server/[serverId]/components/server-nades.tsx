@@ -1,7 +1,7 @@
 'use client'
 
-import NadeCard from '@/app/[locale]/components/nade/nade-card'
 import NadeSkeleton from '@/app/[locale]/components/nade-skeleton'
+import NadeCard from '@/app/[locale]/components/nade/nade-card'
 import UserServerDataBadges from '@/app/[locale]/components/user-server-data-badges'
 import { useNadesData } from '@/hooks/useReduxNadeData'
 import { loadNades } from '@/redux/features/nadesSlice'
@@ -58,17 +58,13 @@ export default function ServerNades({
             {!reduxIsLoading && !!reduxNades.length && (
                 <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
                     {reduxNades?.map((nade) => (
-                        <div
+                        <NadeCard
                             key={nade.id}
-                            className="flex w-full flex-wrap justify-center gap-2 md:justify-normal"
-                        >
-                            <NadeCard
-                                nade={nade}
-                                isAdmin={isAdmin}
-                                showStatus={showNadeStatus}
-                                userId={userId}
-                            />
-                        </div>
+                            nade={nade}
+                            isAdmin={isAdmin}
+                            showStatus={showNadeStatus}
+                            userId={userId}
+                        />
                     ))}
                 </div>
             )}
