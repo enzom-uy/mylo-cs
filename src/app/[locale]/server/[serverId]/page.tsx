@@ -14,21 +14,23 @@ export default async function ServerPage({
     const { nades, id, admins } = server!
     const userIsAdmin = admins.some((a) => a.id === session?.id)
     return (
-        <section className="flex max-w-full flex-col gap-4 border-t border-border-dark lg:ml-4 lg:flex-col lg:border-l lg:border-t-0 lg:pl-4">
-            {userIsAdmin && (
-                <GoAdminButton
-                    userIsAdmin={userIsAdmin}
-                    id={id}
-                    isAdminPage={false}
-                />
-            )}
-            <div>
-                <ServerNades
-                    nades={nades}
-                    serverId={server!.id}
-                    userId={session!.id}
-                />
-            </div>
-        </section>
+        <>
+            <section className="flex max-w-full flex-col gap-4 border-t border-border-dark lg:ml-4 lg:flex-col lg:border-l lg:border-t-0 lg:pl-4">
+                {userIsAdmin && (
+                    <GoAdminButton
+                        userIsAdmin={userIsAdmin}
+                        id={id}
+                        isAdminPage={false}
+                    />
+                )}
+                <div>
+                    <ServerNades
+                        nades={nades}
+                        serverId={server!.id}
+                        userId={session!.id}
+                    />
+                </div>
+            </section>
+        </>
     )
 }

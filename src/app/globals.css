@@ -25,10 +25,6 @@ body {
     min-height: 100vh;
 }
 
-section {
-    max-width: 64rem;
-}
-
 video {
     height: -webkit-fill-available;
     object-fit: fill;

@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 export default function UserLastNade({ url }: { url: string }) {
     const t = useTranslations()
     return (
-        <div className="transparent-card flex w-full max-w-md border-none">
+        <div className="transparent-card flex w-full max-w-md flex-1 border-none">
             <span className="text-sm font-bold uppercase">
                 {t('User-Profile.last-nade')}
             </span>

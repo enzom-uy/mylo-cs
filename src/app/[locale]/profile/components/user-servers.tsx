@@ -17,7 +17,7 @@ export default function UserServers({
     const router = useRouter()
     const t = useTranslations()
     return (
-        <div className="transparent-card max-h-full w-fit flex-grow overflow-hidden border-none">
+        <div className="transparent-card max-h-full w-fit flex-1 overflow-hidden border-none">
             <div className="flex w-full items-center justify-between">
                 <span className="text-sm font-bold uppercase">
                     {t('User-Profile.servers')}

@@ -3,10 +3,8 @@
 import Terms from '@/app/[locale]/components/terms'
 import { NewServerData, ServerApiResponse } from '@/app/api/create-server/route'
 import {
-    errorMessage,
     serverIdMinLength,
-    serverNameMinLength,
-    successMessage
+    serverNameMinLength
 } from '@/app/api/create-server/utils'
 import { Button } from '@/shad-components/button'
 import { Checkbox } from '@/shad-components/checkbox'
@@ -184,7 +182,7 @@ export default function CreateServerForm() {
                         control={form.control}
                         name="terms"
                         render={({ field }) => (
-                            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                            <FormItem className="flex flex-row items-center space-x-3 space-y-0">
                                 <FormControl>
                                     <Checkbox
                                         checked={field.value}

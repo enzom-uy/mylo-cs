@@ -1,6 +1,3 @@
-import { getServerSession } from 'next-auth'
-import { useTranslations } from 'next-intl'
-import { authOptions } from '../api/auth/[...nextauth]/route'
 import Hero from './components/sections/hero-section'
 import SearchSection from './components/sections/search-section'
 

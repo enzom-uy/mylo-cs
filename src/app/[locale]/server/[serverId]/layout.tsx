@@ -6,6 +6,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import ServerMembers from './components/server-members'
+import { Suspense } from 'react'
 
 export default async function Layout({
     children,

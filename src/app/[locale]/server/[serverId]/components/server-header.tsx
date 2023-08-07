@@ -2,7 +2,6 @@ import DiscordPlaceholder from '@/app/[locale]/components/discord-placeholder-sv
 import { randomDiscordPlaceholderColor } from '@/utils/getRandomColorForPlaceholder'
 import Image from 'next/image'
 import ServerConfig from './server-config'
-import { useTranslations } from 'next-intl'
 import { User } from '@prisma/client'
 import Report from '@/app/[locale]/components/report'
 
@@ -23,13 +22,10 @@ export default function ServerHeader({
     server_icon,
     name,
     description,
-    isAdmin,
     serverId,
     ownerId,
     userId,
-    userIsAdmin,
-    members,
-    admins
+    userIsAdmin
 }: Props) {
     return (
         <div className="mb-4 flex w-full flex-col items-center gap-4  md:items-start md:justify-start lg:w-fit lg:max-w-xs lg:flex-col">
