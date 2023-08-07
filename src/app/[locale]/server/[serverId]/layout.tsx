@@ -3,10 +3,7 @@ import ServerHeader from './components/server-header'
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import Link from 'next/link'
-import { useTranslations } from 'next-intl'
 import ServerMembers from './components/server-members'
-import { Suspense } from 'react'
 
 export default async function Layout({
     children,
@@ -21,16 +18,8 @@ export default async function Layout({
     const session = await getServerSession(authOptions)
     if (!session) redirect('/')
 
-    const {
-        name,
-        server_icon,
-        id,
-        admins,
-        members,
-        nades,
-        description,
-        owner_id
-    } = server
+    const { name, server_icon, id, admins, members, description, owner_id } =
+        server
     const userIsAdmin = admins.some((admin) => admin.id === session?.id)
 
     const userIsMember = members.some((member) => member.id === session?.id)
@@ -38,7 +27,7 @@ export default async function Layout({
 
     return (
         <div className="flex w-full flex-col lg:max-w-[83.3rem] lg:flex-row">
-            <aside className="flex w-full flex-col items-center lg:max-w-xs lg:flex-col">
+            <aside className="flex w-full flex-col items-center lg:max-w-xs lg:items-start">
                 <ServerHeader
                     name={name}
                     server_icon={server_icon}
